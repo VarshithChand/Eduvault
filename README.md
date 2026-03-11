@@ -1,37 +1,37 @@
-
 ---
 
 # 📚 EduVault
 
-EduVault is a **web-based education resource management platform** where users can upload, manage, and share educational documents securely. The system allows students and administrators to manage study materials in a centralized platform, improving accessibility and collaboration. Educational resource vault platforms help users organize and share study materials efficiently. ([GitHub][1])
+EduVault is a **web-based education resource management platform** that allows users to upload, manage, and share educational documents securely. It helps students and administrators organize study materials in one centralized platform.
 
 ---
 
 # 🚀 Features
 
-* 👤 User Authentication (Login & Registration)
-* 📁 Upload and manage documents
-* 📂 Organized document storage
-* 🔐 Secure access control
-* 📊 Simple dashboard interface
-* 🐳 Docker container support
-* ⚙️ CI/CD pipeline using Jenkins
+* 👤 User Authentication
+* 📁 Document Upload & Management
+* 📂 Organized File Storage
+* 🔐 Secure Access Control
+* 📊 Simple Dashboard
+* 🐳 Docker Containerization
+* ⚙️ Jenkins CI/CD Pipeline
+* 🔗 GitHub Webhook Integration
 
 ---
 
-# 🛠️ Tech Stack
+# 🛠 Tech Stack
 
-**Backend**
+### Backend
 
 * Python
 * Flask
 
-**Frontend**
+### Frontend
 
 * HTML
 * CSS
 
-**DevOps Tools**
+### DevOps Tools
 
 * Docker
 * Jenkins
@@ -58,7 +58,7 @@ EduVault
 
 # ⚙️ Installation
 
-### 1️⃣ Clone the Repository
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/VarshithChand/Eduvault.git
@@ -91,7 +91,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open browser:
+Open in browser:
 
 ```
 http://localhost:5000
@@ -101,14 +101,14 @@ http://localhost:5000
 
 # 👤 Demo Credentials
 
-Superuser
+### Superuser
 
 ```
 Username: superuser
 Password: 1234
 ```
 
-User
+### User
 
 ```
 Username: aa
@@ -119,7 +119,7 @@ Password: 1234
 
 # 🐳 Docker Setup
 
-### Build Docker Image
+### Build Image
 
 ```bash
 docker build -t eduvault .
@@ -131,7 +131,7 @@ docker build -t eduvault .
 docker run -d -p 5000:5000 --name eduvault eduvault
 ```
 
-Now open:
+Application will run at
 
 ```
 http://localhost:5000
@@ -139,9 +139,9 @@ http://localhost:5000
 
 ---
 
-# 🐳 Docker Hub Image
+# 🐳 Run Using Docker Hub Image
 
-Pull and run directly from Docker Hub.
+Pull image
 
 ```bash
 docker pull varshithchand/eduvault
@@ -163,29 +163,28 @@ https://hub.docker.com/r/varshithchand/eduvault
 
 # ⚙️ Jenkins CI/CD Pipeline
 
-This project includes a **Jenkins pipeline** that automates:
+This project uses **Jenkins Pipeline** to automate the deployment process.
 
-1️⃣ Cloning the GitHub repository
-2️⃣ Building the Docker image
-3️⃣ Running the Docker container
+Pipeline stages:
 
-Example pipeline stages:
+1️⃣ Clone GitHub repository
+2️⃣ Build Docker image
+3️⃣ Run Docker container
 
-```
-Clone Repository
-Build Docker Image
-Run Docker Container
-```
-
-### Jenkins Pipeline Example
+### Jenkinsfile
 
 ```groovy
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "varshithchand/eduvault"
+        CONTAINER_NAME = "eduvault"
+    }
+
     stages {
 
-        stage('Clone Repo') {
+        stage('Clone Repository') {
             steps {
                 git 'https://github.com/VarshithChand/Eduvault.git'
             }
@@ -193,38 +192,123 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t eduvault .'
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 5000:5000 eduvault'
+                sh '''
+                docker stop $CONTAINER_NAME || true
+                docker rm $CONTAINER_NAME || true
+                docker run -d -p 5000:5000 --name $CONTAINER_NAME $IMAGE_NAME
+                '''
             }
         }
-
     }
 }
 ```
 
 ---
 
-# 📸 Application Workflow
+# 🔗 GitHub Webhook Integration
 
-1️⃣ User logs into the system
-2️⃣ Uploads educational documents
-3️⃣ Documents are stored securely
-4️⃣ Other users can access and download resources
+GitHub Webhooks automatically trigger Jenkins builds whenever code is pushed to the repository.
+
+### Step 1 — Configure Jenkins
+
+1. Open Jenkins
+2. Go to **Manage Jenkins**
+3. Install plugin:
+
+```
+GitHub Integration Plugin
+```
+
+4. Open your Jenkins job
+5. Enable
+
+```
+GitHub hook trigger for GITScm polling
+```
+
+---
+
+### Step 2 — Configure GitHub Webhook
+
+Open your repository:
+
+```
+https://github.com/VarshithChand/Eduvault
+```
+
+Go to
+
+```
+Settings → Webhooks → Add Webhook
+```
+
+Payload URL
+
+```
+http://<your-jenkins-server>:8080/github-webhook/
+```
+
+Example
+
+```
+http://13.201.xxx.xxx:8080/github-webhook/
+```
+
+Content type
+
+```
+application/json
+```
+
+Trigger
+
+```
+Just the push event
+```
+
+Save webhook.
+
+---
+
+# 🔄 CI/CD Workflow
+
+```
+Developer Push Code
+        │
+        ▼
+GitHub Repository
+        │
+        ▼
+GitHub Webhook Trigger
+        │
+        ▼
+Jenkins Pipeline
+        │
+        ▼
+Build Docker Image
+        │
+        ▼
+Run Container
+        │
+        ▼
+Application Deployed
+```
 
 ---
 
 # 🎯 Future Improvements
 
-* Role-based access control
-* File sharing between users
-* Cloud storage integration
-* Analytics dashboard
-* Search functionality
+* Role-Based Access Control
+* File Sharing System
+* Search Functionality
+* Cloud Storage Integration
+* Monitoring with Prometheus & Grafana
 
 ---
 
@@ -250,7 +334,12 @@ If you like this project:
 
 ---
 
-✅ This README is **GitHub + DevOps portfolio ready**, which helps when applying for **DevOps internships** (which you recently applied for).
+✅ This README now clearly shows **DevOps skills**:
 
----
-[1]: https://github.com/sabbirosa/eduvault?utm_source=chatgpt.com "sabbirosa/eduvault"
+* Docker containerization
+* Jenkins pipeline
+* GitHub Webhooks
+* CI/CD automation
+
+This is **exactly what recruiters look for in DevOps portfolios**.
+
