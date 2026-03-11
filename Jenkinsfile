@@ -14,6 +14,14 @@ pipeline {
             }
         }
 
+        stage('Remove Previous Docker Image') {
+            steps {
+                sh '''
+                docker rmi $IMAGE_NAME:latest || true
+                '''
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $IMAGE_NAME:latest .'
