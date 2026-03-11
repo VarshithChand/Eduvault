@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - EDUVAULT{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+    <div class="flex-between">
+        <div>
+            <h1 class="page-title">
+                <i class="fas fa-tachometer-alt"></i>
+                Admin Dashboard
+            </h1>
+            <p class="page-description">Manage users, courses, and platform settings.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<!-- Statistics Section -->
+<div class="grid grid-4 mb-lg">
+    <div class="card text-center">
+        <div style="padding: 1.5rem 0;">
+            <i class="fas fa-users" style="font-size: 2rem; color: #2563eb; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">{{ users|length }}</h3>
+            <p class="text-muted">Total Users</p>
+        </div>
+    </div>
+
+    <div class="card text-center">
+        <div style="padding: 1.5rem 0;">
+            <i class="fas fa-book" style="font-size: 2rem; color: #7c3aed; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">{{ courses|length }}</h3>
+            <p class="text-muted">Available Courses</p>
+        </div>
+    </div>
+
+    <div class="card text-center">
+        <div style="padding: 1.5rem 0;">
+            <i class="fas fa-file" style="font-size: 2rem; color: #10b981; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">{{ user_files|length }}</h3>
+            <p class="text-muted">Total Files</p>
+        </div>
+    </div>
+
+    <div class="card text-center">
+        <div style="padding: 1.5rem 0;">
+            <i class="fas fa-graduation-cap" style="font-size: 2rem; color: #f59e0b; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">{{ user_courses|length }}</h3>
+            <p class="text-muted">Course Assignments</p>
+        </div>
+    </div>
+</div>
+
+<!-- User Management Section -->
+<div class="grid grid-2 mb-lg">
+    <!-- Add/Delete Users Card -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-user-plus"></i>
+            <h2>User Management</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('manage_users') }}">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                        Username
+                    </label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                        Password
+                    </label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" name="action" value="add" class="btn btn-success">
+                        <i class="fas fa-plus"></i>
+                        Add User
+                    </button>
+                    <button type="submit" name="action" value="delete" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+                        <i class="fas fa-trash"></i>
+                        Delete User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Existing Users Card -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-list"></i>
+            <h2>Registered Users</h2>
+        </div>
+        <div class="card-body">
+            <div style="max-height: 300px; overflow-y: auto;">
+                {% if users %}
+                    {% for user in users %}
+                        <div style="padding: 0.75rem; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-user-circle" style="color: #2563eb;"></i>
+                            <span style="font-weight: 500;">{{ user }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted p-lg">
+                        <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
+                        No users registered
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Course Management Section -->
+<div class="grid grid-2 mb-lg">
+    <!-- Assign Course Card -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-plus-circle"></i>
+            <h2>Assign Course</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('assign_course') }}">
+                <div class="form-group">
+                    <label for="assign_username">
+                        <i class="fas fa-user"></i>
+                        Select User
+                    </label>
+                    <select id="assign_username" name="username" required>
+                        <option value="">-- Choose a User --</option>
+                        {% for user in users %}
+                            <option value="{{ user }}">{{ user }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="assign_course">
+                        <i class="fas fa-book"></i>
+                        Select Course
+                    </label>
+                    <select id="assign_course" name="course" required>
+                        <option value="">-- Choose a Course --</option>
+                        {% for course in courses %}
+                            <option value="{{ course }}">{{ course }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success" style="width: 100%;">
+                    <i class="fas fa-plus"></i>
+                    Assign Course
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Remove Course Card -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-minus-circle"></i>
+            <h2>Remove Course</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('remove_course') }}">
+                <div class="form-group">
+                    <label for="remove_username">
+                        <i class="fas fa-user"></i>
+                        Select User
+                    </label>
+                    <select id="remove_username" name="username" required>
+                        <option value="">-- Choose a User --</option>
+                        {% for user in users %}
+                            <option value="{{ user }}">{{ user }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="remove_course">
+                        <i class="fas fa-book"></i>
+                        Select Course
+                    </label>
+                    <select id="remove_course" name="course" required>
+                        <option value="">-- Choose a Course --</option>
+                        {% for course in courses %}
+                            <option value="{{ course }}">{{ course }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-danger" style="width: 100%;" onclick="return confirm('Remove this course?');">
+                    <i class="fas fa-minus"></i>
+                    Remove Course
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- User Course Assignments Section -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-assignment"></i>
+        <h2>User Course Assignments</h2>
+    </div>
+    <div class="card-body">
+        {% if user_courses %}
+            <div class="grid grid-3" style="gap: 1.5rem;">
+                {% for user, courses in user_courses.items() %}
+                    <div style="padding: 1.5rem; border: 2px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 2px solid #e2e8f0;">
+                            <i class="fas fa-user-circle" style="font-size: 1.5rem; color: #2563eb;"></i>
+                            <span style="font-weight: 600;">{{ user }}</span>
+                        </div>
+                        {% if courses %}
+                            <ul style="list-style: none;">
+                                {% for course in courses %}
+                                    <li style="padding: 0.5rem 0.75rem; margin-bottom: 0.5rem; background: rgba(37, 99, 235, 0.1); border-radius: 6px; color: #2563eb; font-weight: 500; display: flex; align-items: center; gap: 0.5rem;">
+                                        <i class="fas fa-check"></i>
+                                        {{ course }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="text-muted" style="font-style: italic;">
+                                <i class="fas fa-info-circle"></i>
+                                No courses assigned
+                            </p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="flex-center p-lg" style="min-height: 200px; background: #f8fafc; border-radius: 8px; border: 2px dashed #e2e8f0;">
+                <div style="text-align: center;">
+                    <i class="fas fa-inbox" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem; display: block;"></i>
+                    <p class="text-muted">No course assignments yet.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

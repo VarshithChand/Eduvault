@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EDUVAULT - Learning Management System{% endblock %}</title>
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    
+    <!-- Additional page-specific styles -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header/Navbar -->
+        <header class="navbar">
+            <div class="navbar-container">
+                <!-- Logo -->
+                <div class="navbar-logo">
+                    <a href="{{ url_for('welcome') if not session.get('is_superuser') else url_for('superuser_dashboard') }}">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>EDUVAULT</span>
+                    </a>
+                </div>
+
+                <!-- User Info (Right Side) -->
+                <div class="navbar-user">
+                    {% if session.get('username') %}
+                        <div class="user-info">
+                            <i class="fas fa-user-circle"></i>
+                            <span class="username">{{ session.get('username') }}</span>
+                            {% if session.get('is_superuser') %}
+                                <span class="badge badge-admin">Admin</span>
+                            {% else %}
+                                <span class="badge badge-student">Student</span>
+                            {% endif %}
+                        </div>
+                        <a href="{{ url_for('logout') }}" class="btn-logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <h3 class="nav-title">
+                            <i class="fas fa-home"></i>
+                            Main
+                        </h3>
+                        <ul class="nav-list">
+                            {% if session.get('is_superuser') %}
+                                <li class="nav-item {% if request.path == url_for('superuser_dashboard') %}active{% endif %}">
+                                    <a href="{{ url_for('superuser_dashboard') }}">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item {% if request.path == url_for('welcome') %}active{% endif %}">
+                                    <a href="{{ url_for('welcome') }}">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <div class="nav-section">
+                        <h3 class="nav-title">
+                            <i class="fas fa-book"></i>
+                            Learning
+                        </h3>
+                        <ul class="nav-list">
+                            <li class="nav-item {% if request.path == url_for('courses') %}active{% endif %}">
+                                <a href="{{ url_for('courses') }}">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Courses</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {% if request.path == url_for('uploads') %}active{% endif %}">
+                                <a href="{{ url_for('uploads') }}">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Uploads</span>
+                                </a>
+                            </li>
+                            {% if not session.get('is_superuser') %}
+                                <li class="nav-item {% if request.path == url_for('custom_timetable') %}active{% endif %}">
+                                    <a href="{{ url_for('custom_timetable') }}">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>My Timetable</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    {% if session.get('is_superuser') %}
+                        <div class="nav-section">
+                            <h3 class="nav-title">
+                                <i class="fas fa-cog"></i>
+                                Administration
+                            </h3>
+                            <ul class="nav-list">
+                                <li class="nav-item">
+                                    <a href="{{ url_for('superuser_dashboard') }}">
+                                        <i class="fas fa-users"></i>
+                                        <span>Manage Users</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Page Header (Optional) -->
+                {% block page_header %}{% endblock %}
+
+                <!-- Page Content -->
+                <div class="content-wrapper">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>EDUVAULT</h4>
+                    <p>A modern Learning Management System for digital education</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('courses') }}">Courses</a></li>
+                        <li><a href="{{ url_for('uploads') }}">Uploads</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 EDUVAULT. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Close sidebar when a link is clicked on mobile
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.sidebar').classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

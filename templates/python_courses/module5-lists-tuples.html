@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lists & Tuples - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Lists & Tuples</h1>
+      <p>Work with ordered collections. Learn list methods, indexing, slicing, and tuple immutability.</p>
+    </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+      
+      <div class="topic-section">
+        <h2>1. List Creation and Indexing</h2>
+        <p>Lists are mutable, ordered collections that can store multiple items of any type.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Creating Lists</h3>
+          <pre><code># Empty list
+empty_list = []
+print(empty_list)  # Output: []
+
+# List with items
+fruits = ["apple", "banana", "cherry"]
+print(fruits)  # Output: ['apple', 'banana', 'cherry']
+
+# Mixed data types
+mixed = [1, "hello", 3.14, True, None]
+print(mixed)  # Output: [1, 'hello', 3.14, True, None]
+
+# List with numbers
+numbers = [10, 20, 30, 40, 50]
+print(numbers)  # Output: [10, 20, 30, 40, 50]
+
+# Nested list (2D list)
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+print(matrix)
+
+# Using list() constructor
+chars = list("Python")
+print(chars)  # Output: ['P', 'y', 't', 'h', 'o', 'n']
+
+# Range to list
+range_list = list(range(1, 6))
+print(range_list)  # Output: [1, 2, 3, 4, 5]</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Positive Indexing</h3>
+          <pre><code># Accessing elements by index (0-based)
+colors = ["red", "green", "blue", "yellow", "purple"]
+
+first = colors[0]
+print(f"First color: {first}")  # Output: First color: red
+
+second = colors[1]
+print(f"Second color: {second}")  # Output: Second color: green
+
+last = colors[4]
+print(f"Last color: {last}")  # Output: Last color: purple
+
+# Index diagram:
+#   Index:  0      1       2       3         4
+#   Value: "red" "green" "blue" "yellow" "purple"
+
+# Access and modify
+grades = [85, 92, 78, 90, 88]
+print(f"First grade: {grades[0]}")  # 85
+
+grades[0] = 95  # Modify first element
+print(f"Updated grades: {grades}")
+# Output: Updated grades: [95, 92, 78, 90, 88]</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Negative Indexing</h3>
+          <pre><code># Negative indices count from the end
+numbers = [10, 20, 30, 40, 50]
+
+last = numbers[-1]
+print(f"Last: {last}")  # Output: Last: 50
+
+second_last = numbers[-2]
+print(f"Second last: {second_last}")  # Output: Second last: 40
+
+first_from_end = numbers[-5]
+print(f"First: {first_from_end}")  # Output: First: 10
+
+# Negative index diagram:
+#   Negative: -5   -4   -3   -2   -1
+#   Positive:  0    1    2    3    4
+#   Value:    10   20   30   40   50
+
+# Practical use
+names = ["Alice", "Bob", "Charlie", "David"]
+print(f"Last person: {names[-1]}")  # David
+print(f"Second to last: {names[-2]}")  # Charlie</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Nested List Indexing</h3>
+          <pre><code># Access elements in nested lists
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Access first row
+first_row = matrix[0]
+print(f"First row: {first_row}")  # [1, 2, 3]
+
+# Access specific element
+element = matrix[1][2]  # Row 1, Column 2
+print(f"Element at [1][2]: {element}")  # 6
+
+# Access and modify
+matrix[0][0] = 10
+print(f"Modified matrix: {matrix}")
+
+# Student records
+students = [
+    ["Alice", 85, "A"],
+    ["Bob", 92, "A+"],
+    ["Charlie", 78, "B"]
+]
+
+# Get Bob's grade
+bobs_grade = students[1][2]
+print(f"Bob's grade: {bobs_grade}")  # A+
+
+# Get all names
+print("Student names:")
+for student in students:
+    print(f"- {student[0]}")</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. List Methods</h2>
+        <p>Python provides many built-in methods to manipulate lists.</p>
+
+        <div class="example-box">
+          <h3>Example 1: append() - Add Single Item</h3>
+          <pre><code># Add item to end of list
+fruits = ["apple", "banana"]
+print(f"Before: {fruits}")
+
+fruits.append("cherry")
+print(f"After append: {fruits}")
+# Output: ['apple', 'banana', 'cherry']
+
+# Append different types
+numbers = [1, 2, 3]
+numbers.append(4)
+numbers.append(5)
+print(numbers)  # [1, 2, 3, 4, 5]
+
+# Building a list dynamically
+shopping_cart = []
+shopping_cart.append("Milk")
+shopping_cart.append("Bread")
+shopping_cart.append("Eggs")
+print(f"Cart: {shopping_cart}")
+# Output: Cart: ['Milk', 'Bread', 'Eggs']
+
+# Append in loop
+squares = []
+for i in range(1, 6):
+    squares.append(i ** 2)
+print(f"Squares: {squares}")
+# Output: Squares: [1, 4, 9, 16, 25]</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: extend() - Add Multiple Items</h3>
+          <pre><code># Extend list with another list
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+
+list1.extend(list2)
+print(list1)  # Output: [1, 2, 3, 4, 5, 6]
+print(list2)  # Output: [4, 5, 6] (unchanged)
+
+# Extend vs append
+fruits = ["apple", "banana"]
+more_fruits = ["cherry", "date"]
+
+# Using extend
+fruits_ext = ["apple", "banana"]
+fruits_ext.extend(more_fruits)
+print(f"Extend: {fruits_ext}")
+# Output: ['apple', 'banana', 'cherry', 'date']
+
+# Using append (adds list as single element)
+fruits_app = ["apple", "banana"]
+fruits_app.append(more_fruits)
+print(f"Append: {fruits_app}")
+# Output: ['apple', 'banana', ['cherry', 'date']]
+
+# Extend with string (adds each character)
+letters = ['a', 'b']
+letters.extend('cd')
+print(letters)  # ['a', 'b', 'c', 'd']</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: insert() - Add at Specific Position</h3>
+          <pre><code># Insert at specific index
+colors = ["red", "blue", "yellow"]
+colors.insert(1, "green")  # Insert at index 1
+print(colors)
+# Output: ['red', 'green', 'blue', 'yellow']
+
+# Insert at beginning
+numbers = [2, 3, 4]
+numbers.insert(0, 1)
+print(numbers)  # [1, 2, 3, 4]
+
+# Insert at end (like append)
+fruits = ["apple", "banana"]
+fruits.insert(len(fruits), "cherry")
+print(fruits)  # ['apple', 'banana', 'cherry']
+
+# Priority task list
+tasks = ["Email", "Meeting", "Report"]
+tasks.insert(0, "URGENT: Call client")
+print("Updated tasks:")
+for i, task in enumerate(tasks, 1):
+    print(f"{i}. {task}")
+
+# Output:
+# 1. URGENT: Call client
+# 2. Email
+# 3. Meeting
+# 4. Report</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: remove(), pop(), clear()</h3>
+          <pre><code># remove() - Remove first occurrence of value
+fruits = ["apple", "banana", "cherry", "banana"]
+fruits.remove("banana")  # Removes first "banana"
+print(fruits)  # ['apple', 'cherry', 'banana']
+
+# pop() - Remove and return item at index
+numbers = [10, 20, 30, 40, 50]
+removed = numbers.pop(2)  # Remove index 2
+print(f"Removed: {removed}")  # 30
+print(f"List: {numbers}")  # [10, 20, 40, 50]
+
+# pop() without index removes last item
+last = numbers.pop()
+print(f"Last item: {last}")  # 50
+print(f"List: {numbers}")  # [10, 20, 40]
+
+# clear() - Remove all items
+colors = ["red", "green", "blue"]
+colors.clear()
+print(colors)  # []
+
+# Stack operations (LIFO)
+stack = []
+stack.append(1)  # Push
+stack.append(2)
+stack.append(3)
+print(f"Stack: {stack}")  # [1, 2, 3]
+
+top = stack.pop()  # Pop
+print(f"Popped: {top}")  # 3
+print(f"Stack: {stack}")  # [1, 2]</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 5: sort(), reverse(), count(), index()</h3>
+          <pre><code># sort() - Sort list in place
+numbers = [3, 1, 4, 1, 5, 9, 2]
+numbers.sort()
+print(f"Sorted: {numbers}")  # [1, 1, 2, 3, 4, 5, 9]
+
+# Sort descending
+numbers.sort(reverse=True)
+print(f"Descending: {numbers}")  # [9, 5, 4, 3, 2, 1, 1]
+
+# Sort strings
+names = ["Charlie", "Alice", "Bob"]
+names.sort()
+print(names)  # ['Alice', 'Bob', 'Charlie']
+
+# reverse() - Reverse list in place
+colors = ["red", "green", "blue"]
+colors.reverse()
+print(colors)  # ['blue', 'green', 'red']
+
+# count() - Count occurrences
+numbers = [1, 2, 3, 2, 4, 2, 5]
+count_2 = numbers.count(2)
+print(f"Count of 2: {count_2}")  # 3
+
+# index() - Find first index of value
+fruits = ["apple", "banana", "cherry"]
+pos = fruits.index("banana")
+print(f"Index of banana: {pos}")  # 1
+
+# Check before index to avoid error
+item = "date"
+if item in fruits:
+    print(fruits.index(item))
+else:
+    print(f"{item} not in list")</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Slicing and List Comprehension</h2>
+        <p>Extract portions of lists and create new lists efficiently.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Basic Slicing</h3>
+          <pre><code># Slice syntax: list[start:stop:step]
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Get first 5 items
+first_five = numbers[0:5]
+print(first_five)  # [0, 1, 2, 3, 4]
+
+# Simplified (start from beginning)
+first_five = numbers[:5]
+print(first_five)  # [0, 1, 2, 3, 4]
+
+# Get last 3 items
+last_three = numbers[7:]
+print(last_three)  # [7, 8, 9]
+
+# Or using negative index
+last_three = numbers[-3:]
+print(last_three)  # [7, 8, 9]
+
+# Get middle items
+middle = numbers[3:7]
+print(middle)  # [3, 4, 5, 6]
+
+# Every other item
+evens = numbers[::2]
+print(evens)  # [0, 2, 4, 6, 8]
+
+# Reverse list using slicing
+reversed_nums = numbers[::-1]
+print(reversed_nums)  # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Advanced Slicing</h3>
+          <pre><code># Extract every 3rd element
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+every_third = numbers[::3]
+print(every_third)  # [0, 3, 6, 9]
+
+# Slice with negative step
+countdown = numbers[9:2:-1]
+print(countdown)  # [9, 8, 7, 6, 5, 4, 3]
+
+# Copy a list
+original = [1, 2, 3, 4, 5]
+copy = original[:]
+copy[0] = 99
+print(f"Original: {original}")  # [1, 2, 3, 4, 5]
+print(f"Copy: {copy}")  # [99, 2, 3, 4, 5]
+
+# String slicing
+text = "Python Programming"
+print(text[:6])  # Python
+print(text[7:])  # Programming
+print(text[::2])  # Pto rgamn
+
+# Practical: Get file extension
+filename = "document.pdf"
+extension = filename[-3:]
+print(f"Extension: {extension}")  # pdf</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: List Comprehension Basics</h3>
+          <pre><code># Traditional way to create list
+squares = []
+for i in range(1, 6):
+    squares.append(i ** 2)
+print(squares)  # [1, 4, 9, 16, 25]
+
+# List comprehension (more concise)
+squares = [i ** 2 for i in range(1, 6)]
+print(squares)  # [1, 4, 9, 16, 25]
+
+# Create list of even numbers
+evens = [i for i in range(20) if i % 2 == 0]
+print(evens)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+# Transform strings
+fruits = ["apple", "banana", "cherry"]
+uppercase = [fruit.upper() for fruit in fruits]
+print(uppercase)  # ['APPLE', 'BANANA', 'CHERRY']
+
+# Get lengths
+lengths = [len(fruit) for fruit in fruits]
+print(lengths)  # [5, 6, 6]
+
+# Filter and transform
+numbers = [1, -2, 3, -4, 5, -6]
+positive_squares = [n ** 2 for n in numbers if n > 0]
+print(positive_squares)  # [1, 9, 25]</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Advanced List Comprehension</h3>
+          <pre><code># Nested list comprehension
+matrix = [[i * j for j in range(1, 4)] for i in range(1, 4)]
+print(matrix)
+# Output: [[1, 2, 3], [2, 4, 6], [3, 6, 9]]
+
+# Flatten nested list
+nested = [[1, 2], [3, 4], [5, 6]]
+flat = [num for row in nested for num in row]
+print(flat)  # [1, 2, 3, 4, 5, 6]
+
+# Conditional expressions
+numbers = [1, 2, 3, 4, 5]
+labels = ["Even" if n % 2 == 0 else "Odd" for n in numbers]
+print(labels)  # ['Odd', 'Even', 'Odd', 'Even', 'Odd']
+
+# Multiple conditions
+data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+filtered = [x for x in data if x % 2 == 0 if x > 5]
+print(filtered)  # [6, 8, 10]
+
+# Practical: Extract prices
+products = [
+    {"name": "Laptop", "price": 999},
+    {"name": "Mouse", "price": 25},
+    {"name": "Keyboard", "price": 75}
+]
+prices = [p["price"] for p in products]
+print(f"Prices: {prices}")  # [999, 25, 75]
+print(f"Total: ${sum(prices)}")  # Total: $1099</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Tuples and Immutability</h2>
+        <p>Tuples are immutable ordered collections - they cannot be modified after creation.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Creating Tuples</h3>
+          <pre><code># Tuple with parentheses
+coordinates = (10, 20)
+print(coordinates)  # (10, 20)
+print(type(coordinates))  # <class 'tuple'>
+
+# Tuple without parentheses (packing)
+point = 5, 10, 15
+print(point)  # (5, 10, 15)
+
+# Single element tuple (comma required!)
+single = (42,)  # Note the comma
+print(single)  # (42,)
+print(type(single))  # <class 'tuple'>
+
+not_tuple = (42)  # This is just an int!
+print(type(not_tuple))  # <class 'int'>
+
+# Empty tuple
+empty = ()
+print(empty)  # ()
+
+# Mixed types
+person = ("Alice", 25, "Engineer", True)
+print(person)  # ('Alice', 25, 'Engineer', True)
+
+# tuple() constructor
+nums_tuple = tuple([1, 2, 3, 4, 5])
+print(nums_tuple)  # (1, 2, 3, 4, 5)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Tuple Indexing and Slicing</h3>
+          <pre><code># Accessing tuple elements (like lists)
+colors = ("red", "green", "blue", "yellow")
+
+print(colors[0])  # red
+print(colors[-1])  # yellow
+print(colors[1:3])  # ('green', 'blue')
+
+# Tuple unpacking
+person = ("Bob", 30, "Developer")
+name, age, job = person
+print(f"{name} is {age} years old")
+# Output: Bob is 30 years old
+
+# Swap variables using tuples
+a = 5
+b = 10
+a, b = b, a  # Swap
+print(f"a={a}, b={b}")  # a=10, b=5
+
+# Multiple return values
+def get_user():
+    return "Alice", 25, "alice@email.com"
+
+name, age, email = get_user()
+print(f"User: {name}, Age: {age}")
+
+# Ignore values with underscore
+x, _, z = (1, 2, 3)
+print(f"x={x}, z={z}")  # x=1, z=3</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Tuple Immutability</h3>
+          <pre><code># Tuples cannot be modified
+coordinates = (10, 20, 30)
+
+# This will cause an error:
+# coordinates[0] = 15  # TypeError!
+
+# Can't append, remove, or modify
+# coordinates.append(40)  # AttributeError!
+
+# But you can create new tuple
+new_coords = coordinates + (40, 50)
+print(new_coords)  # (10, 20, 30, 40, 50)
+
+# Original unchanged
+print(coordinates)  # (10, 20, 30)
+
+# Concatenation
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+combined = tuple1 + tuple2
+print(combined)  # (1, 2, 3, 4, 5, 6)
+
+# Repetition
+repeated = (1, 2) * 3
+print(repeated)  # (1, 2, 1, 2, 1, 2)
+
+# Tuple with mutable objects
+person = ("Alice", [85, 90, 92])
+person[1].append(88)  # Can modify the list inside!
+print(person)  # ('Alice', [85, 90, 92, 88])</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: When to Use Tuples vs Lists</h3>
+          <pre><code># Use tuples for fixed data
+# RGB color (never changes number of values)
+color = (255, 128, 0)
+
+# Date (day, month, year)
+date = (5, 11, 2025)
+
+# Geographic coordinates
+location = (40.7128, -74.0060)  # NYC
+
+# Use tuples as dictionary keys (lists can't be keys)
+locations = {
+    (40.7128, -74.0060): "New York",
+    (51.5074, -0.1278): "London",
+    (35.6762, 139.6503): "Tokyo"
+}
+print(locations[(40.7128, -74.0060)])  # New York
+
+# Tuple methods (only 2: count and index)
+numbers = (1, 2, 3, 2, 4, 2, 5)
+print(numbers.count(2))  # 3
+print(numbers.index(3))  # 2
+
+# Performance comparison
+import sys
+
+list_data = [1, 2, 3, 4, 5]
+tuple_data = (1, 2, 3, 4, 5)
+
+print(f"List size: {sys.getsizeof(list_data)} bytes")
+print(f"Tuple size: {sys.getsizeof(tuple_data)} bytes")
+# Tuples use less memory!
+
+# Return multiple values from function
+def calculate(a, b):
+    return a + b, a - b, a * b, a / b
+
+add, sub, mul, div = calculate(10, 5)
+print(f"Sum: {add}, Diff: {sub}")
+# Output: Sum: 15, Diff: 5</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Shopping List Manager</h3>
+          <p>Create a shopping list program that can:</p>
+          <ul>
+            <li>Add items using append()</li>
+            <li>Remove items using remove()</li>
+            <li>Display all items with their index numbers</li>
+            <li>Sort the list alphabetically</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Grade Analyzer</h3>
+          <p>Given: <code>grades = [85, 92, 78, 90, 88, 76, 95, 89]</code></p>
+          <ul>
+            <li>Find highest and lowest grades</li>
+            <li>Calculate average</li>
+            <li>Count grades above 85</li>
+            <li>Create new list with only passing grades (≥75)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: List Comprehension Challenge</h3>
+          <p>Use list comprehension to create:</p>
+          <ul>
+            <li>List of squares of odd numbers from 1-20</li>
+            <li>List of words longer than 4 characters from: ["cat", "elephant", "dog", "butterfly"]</li>
+            <li>Celsius to Fahrenheit conversion for [0, 10, 20, 30, 40]</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Tuple Coordinates</h3>
+          <p>Create tuples for 3 city coordinates (lat, lon). Calculate the distance between first and second city using the formula: distance = √((x2-x1)² + (y2-y1)²)</p>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module4-loops') }}" class="nav-button">← Previous: Loops</a>
+        <a href="{{ url_for('python_module', module='module6-strings') }}" class="nav-button">Next: Strings →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+  <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    // Create copy button
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    // Copy functionality
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>

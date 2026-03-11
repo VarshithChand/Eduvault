@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operators & Expressions - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Operators & Expressions</h1>
+      <p>Master arithmetic, comparison, logical, and assignment operators for building expressions.</p>
+    </div>
+  </section>
+
+  <!-- Module Content -->
+  <section class="module-content">
+    <div class="container">
+      
+      <!-- Topic 1 -->
+      <div class="topic-section">
+        <h2>1. Arithmetic Operators</h2>
+        <p>Arithmetic operators perform mathematical operations on numeric values.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Basic Arithmetic (+, -, *, /)</h3>
+          <pre><code># Addition
+sum_result = 10 + 5
+print(f"10 + 5 = {sum_result}")  # Output: 10 + 5 = 15
+
+# Subtraction
+difference = 20 - 8
+print(f"20 - 8 = {difference}")  # Output: 20 - 8 = 12
+
+# Multiplication
+product = 6 * 7
+print(f"6 * 7 = {product}")  # Output: 6 * 7 = 42
+
+# Division (always returns float)
+quotient = 15 / 3
+print(f"15 / 3 = {quotient}")  # Output: 15 / 3 = 5.0
+
+# Division with decimals
+decimal_div = 7 / 2
+print(f"7 / 2 = {decimal_div}")  # Output: 7 / 2 = 3.5</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Floor Division (//)</h3>
+          <pre><code># Floor division - returns integer part only
+result1 = 17 // 5
+print(f"17 // 5 = {result1}")  # Output: 17 // 5 = 3
+
+result2 = 20 // 6
+print(f"20 // 6 = {result2}")  # Output: 20 // 6 = 3
+
+# With negative numbers
+result3 = -17 // 5
+print(f"-17 // 5 = {result3}")  # Output: -17 // 5 = -4
+
+# Practical example: Finding how many dozens
+eggs = 37
+dozens = eggs // 12
+print(f"{eggs} eggs = {dozens} dozens")  # 37 eggs = 3 dozens</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Modulus (%) - Remainder</h3>
+          <pre><code># Modulus operator returns the remainder
+remainder1 = 17 % 5
+print(f"17 % 5 = {remainder1}")  # Output: 17 % 5 = 2
+
+remainder2 = 20 % 6
+print(f"20 % 6 = {remainder2}")  # Output: 20 % 6 = 2
+
+# Check if number is even or odd
+num = 7
+if num % 2 == 0:
+    print(f"{num} is even")
+else:
+    print(f"{num} is odd")  # Output: 7 is odd
+
+# Finding leftover items
+total_cookies = 37
+per_person = 5
+leftover = total_cookies % per_person
+print(f"Leftover cookies: {leftover}")  # Output: Leftover cookies: 2</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Exponentiation (**)</h3>
+          <pre><code># Power/Exponentiation operator
+square = 5 ** 2
+print(f"5 squared = {square}")  # Output: 5 squared = 25
+
+cube = 3 ** 3
+print(f"3 cubed = {cube}")  # Output: 3 cubed = 27
+
+# Calculate compound interest
+principal = 1000
+rate = 1.05  # 5% interest
+years = 3
+amount = principal * (rate ** years)
+print(f"Amount after {years} years: ${amount:.2f}")
+# Output: Amount after 3 years: $1157.63
+
+# Square root (power of 0.5)
+sqrt_16 = 16 ** 0.5
+print(f"Square root of 16 = {sqrt_16}")  # Output: 4.0</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 5: Operator Precedence</h3>
+          <pre><code># PEMDAS/BODMAS: Parentheses, Exponents, Multiply/Divide, Add/Subtract
+result1 = 2 + 3 * 4
+print(result1)  # Output: 14 (not 20)
+
+result2 = (2 + 3) * 4
+print(result2)  # Output: 20
+
+result3 = 10 + 2 ** 3 * 4
+print(result3)  # Output: 42 (10 + 8*4 = 10 + 32)
+
+# Complex expression
+result4 = (10 + 5) * 2 ** 2 / 3 - 1
+print(f"Result: {result4}")  # Output: Result: 19.0
+
+# Real-world example: Calculate total price
+price = 50
+quantity = 3
+tax_rate = 0.08
+total = price * quantity * (1 + tax_rate)
+print(f"Total with tax: ${total:.2f}")  # Output: Total with tax: $162.00</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-section">
+        <h2>2. Comparison Operators</h2>
+        <p>Comparison operators compare values and return True or False.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Equal (==) and Not Equal (!=)</h3>
+          <pre><code># Equal to operator
+result1 = 5 == 5
+print(f"5 == 5: {result1}")  # Output: 5 == 5: True
+
+result2 = 5 == 3
+print(f"5 == 3: {result2}")  # Output: 5 == 3: False
+
+# Not equal to operator
+result3 = 5 != 3
+print(f"5 != 3: {result3}")  # Output: 5 != 3: True
+
+result4 = 5 != 5
+print(f"5 != 5: {result4}")  # Output: 5 != 5: False
+
+# String comparison
+name1 = "Alice"
+name2 = "Bob"
+print(f"name1 == name2: {name1 == name2}")  # False
+print(f"name1 != name2: {name1 != name2}")  # True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Greater Than (>) and Less Than (<)</h3>
+          <pre><code># Greater than
+age = 25
+is_adult = age > 18
+print(f"Age {age} > 18: {is_adult}")  # Output: Age 25 > 18: True
+
+# Less than
+score = 45
+failed = score < 50
+print(f"Score {score} < 50: {failed}")  # Output: Score 45 < 50: True
+
+# Compare strings (lexicographic order)
+print(f"'apple' < 'banana': {'apple' < 'banana'}")  # True
+print(f"'Z' < 'a': {'Z' < 'a'}")  # True (uppercase comes before lowercase)
+
+# Real-world example: Speed limit check
+speed = 75
+speed_limit = 65
+is_speeding = speed > speed_limit
+print(f"Speeding: {is_speeding}")  # Output: Speeding: True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Greater/Less Than or Equal (>=, <=)</h3>
+          <pre><code># Greater than or equal to
+age = 18
+can_vote = age >= 18
+print(f"Can vote (age {age}): {can_vote}")  # True
+
+# Less than or equal to
+score = 50
+passed = score >= 50
+print(f"Passed (score {score}): {passed}")  # True
+
+# Range checking
+temperature = 72
+comfortable = temperature >= 68 and temperature <= 78
+print(f"Temperature {temperature}°F is comfortable: {comfortable}")
+
+# Grade boundary example
+marks = 85
+if marks >= 90:
+    grade = 'A'
+elif marks >= 80:
+    grade = 'B'
+elif marks >= 70:
+    grade = 'C'
+else:
+    grade = 'F'
+print(f"Marks: {marks}, Grade: {grade}")  # Output: Marks: 85, Grade: B</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Chaining Comparisons</h3>
+          <pre><code># Python allows chaining comparisons
+x = 5
+result1 = 1 < x < 10
+print(f"1 < {x} < 10: {result1}")  # Output: True
+
+# Equivalent to:
+result2 = 1 < x and x < 10
+print(f"Using 'and': {result2}")  # Output: True
+
+# Multiple chaining
+age = 25
+result3 = 18 <= age <= 65
+print(f"Working age (18-65): {result3}")  # True
+
+# Range validation
+score = 85
+valid = 0 <= score <= 100
+print(f"Valid score (0-100): {valid}")  # True
+
+# Complex chain
+a, b, c = 5, 10, 15
+ascending = a < b < c
+print(f"{a} < {b} < {c}: {ascending}")  # True</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-section">
+        <h2>3. Logical Operators</h2>
+        <p>Logical operators combine boolean values and return True or False.</p>
+
+        <div class="example-box">
+          <h3>Example 1: AND Operator</h3>
+          <pre><code># 'and' returns True if BOTH conditions are True
+age = 25
+has_license = True
+can_drive = age >= 18 and has_license
+print(f"Can drive: {can_drive}")  # Output: Can drive: True
+
+# Multiple conditions with 'and'
+score = 85
+attendance = 90
+honors = score >= 80 and attendance >= 85
+print(f"Honors student: {honors}")  # Output: Honors student: True
+
+# Login validation
+username = "admin"
+password = "secret123"
+is_valid = username == "admin" and password == "secret123"
+print(f"Login valid: {is_valid}")  # Output: Login valid: True
+
+# All conditions must be True
+is_weekday = True
+is_morning = True
+has_coffee = False
+ready_to_work = is_weekday and is_morning and has_coffee
+print(f"Ready to work: {ready_to_work}")  # Output: Ready to work: False</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: OR Operator</h3>
+          <pre><code># 'or' returns True if AT LEAST ONE condition is True
+is_weekend = True
+is_holiday = False
+can_relax = is_weekend or is_holiday
+print(f"Can relax: {can_relax}")  # Output: Can relax: True
+
+# Payment methods
+has_cash = False
+has_card = True
+can_pay = has_cash or has_card
+print(f"Can pay: {can_pay}")  # Output: Can pay: True
+
+# Emergency contact
+has_phone = False
+has_email = False
+has_address = True
+can_contact = has_phone or has_email or has_address
+print(f"Can contact: {can_contact}")  # Output: Can contact: True
+
+# Discount eligibility
+is_student = True
+is_senior = False
+age = 20
+gets_discount = is_student or is_senior or age < 12
+print(f"Gets discount: {gets_discount}")  # Output: Gets discount: True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: NOT Operator</h3>
+          <pre><code># 'not' reverses the boolean value
+is_raining = False
+should_go_out = not is_raining
+print(f"Should go out: {should_go_out}")  # Output: Should go out: True
+
+# Account status
+is_suspended = False
+can_login = not is_suspended
+print(f"Can login: {can_login}")  # Output: Can login: True
+
+# Negating comparisons
+age = 15
+is_not_adult = not (age >= 18)
+print(f"Is not adult: {is_not_adult}")  # Output: Is not adult: True
+
+# Double negative (returns to original)
+value = True
+result = not not value
+print(f"Double not: {result}")  # Output: Double not: True
+
+# Complex expression
+is_blocked = False
+has_permission = True
+can_access = not is_blocked and has_permission
+print(f"Can access: {can_access}")  # Output: Can access: True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Combining Logical Operators</h3>
+          <pre><code># Complex conditions with parentheses
+age = 25
+income = 50000
+credit_score = 720
+
+# Loan approval logic
+loan_approved = (age >= 21 and age <= 65) and \
+                (income >= 30000 or credit_score >= 700)
+print(f"Loan approved: {loan_approved}")  # Output: Loan approved: True
+
+# Access control system
+is_employee = True
+is_manager = False
+is_admin = False
+has_badge = True
+
+can_enter = (is_employee and has_badge) or is_manager or is_admin
+print(f"Can enter building: {can_enter}")  # Output: Can enter building: True
+
+# Ticket pricing
+age = 8
+is_student = True
+is_senior = False
+
+child_price = age < 12
+adult_price = not (child_price or is_student or is_senior)
+print(f"Child price: {child_price}")    # True
+print(f"Adult price: {adult_price}")    # False
+
+# Weather decision
+is_sunny = True
+is_warm = True
+has_time = True
+is_tired = False
+
+go_to_beach = is_sunny and is_warm and has_time and not is_tired
+print(f"Go to beach: {go_to_beach}")  # Output: Go to beach: True</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 4 -->
+      <div class="topic-section">
+        <h2>4. Identity and Membership Operators</h2>
+        <p>Identity operators check object identity, and membership operators check if a value exists in a sequence.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Identity Operators (is, is not)</h3>
+          <pre><code># 'is' checks if two variables refer to the same object
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+print(f"a is b: {a is b}")    # False (different objects)
+print(f"a is c: {a is c}")    # True (same object)
+print(f"a == b: {a == b}")    # True (same value)
+
+# Using 'is not'
+x = 10
+y = 20
+print(f"x is not y: {x is not y}")  # True
+
+# Checking for None
+user_input = None
+if user_input is None:
+    print("No input provided")
+
+# Singleton objects (None, True, False)
+value = None
+is_empty = value is None
+print(f"Is empty: {is_empty}")  # Output: Is empty: True
+
+# Boolean identity
+flag = True
+print(f"flag is True: {flag is True}")  # True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Membership Operators (in, not in)</h3>
+          <pre><code># 'in' checks if value exists in sequence
+fruits = ["apple", "banana", "cherry"]
+has_apple = "apple" in fruits
+print(f"Has apple: {has_apple}")  # Output: Has apple: True
+
+has_orange = "orange" in fruits
+print(f"Has orange: {has_orange}")  # Output: Has orange: False
+
+# String membership
+sentence = "Python is awesome"
+contains_python = "Python" in sentence
+print(f"Contains 'Python': {contains_python}")  # True
+
+# Using 'not in'
+forbidden_words = ["bad", "ugly", "hate"]
+comment = "This is a great product"
+is_appropriate = not any(word in comment for word in forbidden_words)
+print(f"Comment appropriate: {is_appropriate}")  # True
+
+# Checking user permissions
+admin_users = ["alice", "bob", "charlie"]
+current_user = "alice"
+is_admin = current_user in admin_users
+print(f"Is admin: {is_admin}")  # True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Dictionary Membership</h3>
+          <pre><code># Check if key exists in dictionary
+student_grades = {
+    "Alice": 85,
+    "Bob": 92,
+    "Charlie": 78
+}
+
+# Check for key
+has_alice = "Alice" in student_grades
+print(f"Has Alice: {has_alice}")  # True
+
+has_david = "David" in student_grades
+print(f"Has David: {has_david}")  # False
+
+# Safe dictionary access
+student_name = "Alice"
+if student_name in student_grades:
+    grade = student_grades[student_name]
+    print(f"{student_name}'s grade: {grade}")
+else:
+    print(f"{student_name} not found")
+
+# Check if value exists (slower)
+has_grade_92 = 92 in student_grades.values()
+print(f"Someone scored 92: {has_grade_92}")  # True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Practical Examples</h3>
+          <pre><code># Email validation
+email = "user@example.com"
+is_valid_email = "@" in email and "." in email
+print(f"Valid email format: {is_valid_email}")  # True
+
+# Password strength checker
+password = "MyPass123"
+has_digit = any(char.isdigit() for char in password)
+has_upper = any(char.isupper() for char in password)
+has_lower = any(char.islower() for char in password)
+is_strong = has_digit and has_upper and has_lower and len(password) >= 8
+print(f"Strong password: {is_strong}")  # True
+
+# Role-based access
+user_role = "editor"
+allowed_roles = ["admin", "editor", "moderator"]
+can_edit = user_role in allowed_roles
+print(f"Can edit: {can_edit}")  # True
+
+# Shopping cart validation
+cart_items = ["laptop", "mouse", "keyboard"]
+restricted_items = ["weapons", "alcohol", "tobacco"]
+has_restricted = any(item in restricted_items for item in cart_items)
+print(f"Has restricted items: {has_restricted}")  # False
+
+# File extension check
+filename = "document.pdf"
+allowed_extensions = [".pdf", ".doc", ".docx"]
+is_allowed = any(filename.endswith(ext) for ext in allowed_extensions)
+print(f"Allowed file type: {is_allowed}")  # True</code></pre>
+        </div>
+      </div>
+
+      <!-- Practice Exercises -->
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Calculator</h3>
+          <p>Create variables for two numbers and perform all arithmetic operations (+, -, *, /, //, %, **) on them. Print the results with proper labels.</p>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Age Validator</h3>
+          <p>Write code to check if a person can:</p>
+          <ul>
+            <li>Vote (age >= 18)</li>
+            <li>Drive (age >= 16)</li>
+            <li>Drink alcohol (age >= 21)</li>
+          </ul>
+          <p>Use comparison operators and print the results.</p>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Login System</h3>
+          <p>Create a simple login checker that validates:</p>
+          <ul>
+            <li>Username must be in allowed users list</li>
+            <li>Password length must be >= 8</li>
+            <li>User is not blocked</li>
+          </ul>
+          <p>Use logical operators (and, or, not) and print whether login is successful.</p>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Discount Calculator</h3>
+          <p>Calculate discount based on:</p>
+          <ul>
+            <li>10% off if purchase > $100</li>
+            <li>Additional 5% if customer is member</li>
+            <li>Use comparison and logical operators to calculate final price</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module1-variables') }}" class="nav-button">← Previous: Variables</a>
+        <a href="{{ url_for('python_module', module='module3-control-flow') }}" class="nav-button">Next: Control Flow →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+    <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    // Create copy button
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    // Copy functionality
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>

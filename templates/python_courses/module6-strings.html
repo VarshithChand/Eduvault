@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Strings</h1>
+      <p>Master string manipulation, formatting, and common string methods for text processing.</p>
+    </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+      
+      <div class="topic-section">
+        <h2>1. String Indexing and Slicing</h2>
+        <p>Strings are sequences of characters that can be accessed using indices, similar to lists.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: String Creation and Basic Indexing</h3>
+          <pre><code># String creation
+message = "Hello, World!"
+print(message)  # Output: Hello, World!
+
+# Single character access
+first_char = message[0]
+print(f"First character: {first_char}")  # H
+
+last_char = message[-1]
+print(f"Last character: {last_char}")  # !
+
+# String length
+length = len(message)
+print(f"Length: {length}")  # 13
+
+# Empty string
+empty = ""
+print(f"Empty string length: {len(empty)}")  # 0
+
+# Multi-line string
+poem = """Roses are red,
+Violets are blue,
+Python is fun,
+And so are you!"""
+print(poem)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: String Slicing</h3>
+          <pre><code># Basic slicing
+text = "Python Programming"
+
+# First 6 characters
+first_six = text[:6]
+print(first_six)  # Python
+
+# From index 7 to end
+programming = text[7:]
+print(programming)  # Programming
+
+# Middle slice
+middle = text[2:10]
+print(middle)  # thon Pro
+
+# Every other character
+every_other = text[::2]
+print(every_other)  # Pto rgamn
+
+# Reverse string
+reversed_text = text[::-1]
+print(reversed_text)  # gnimmargorP nohtyP
+
+# Negative slicing
+last_five = text[-5:]
+print(last_five)  # amming
+
+# Practical: Extract domain from email
+email = "user@example.com"
+domain = email[email.index('@') + 1:]
+print(f"Domain: {domain}")  # example.com</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: String Immutability</h3>
+          <pre><code># Strings are immutable - cannot modify in place
+word = "Python"
+
+# This will cause an error:
+# word[0] = "J"  # TypeError!
+
+# Instead, create new string
+new_word = "J" + word[1:]
+print(new_word)  # Jython
+
+# Concatenation
+greeting = "Hello" + " " + "World"
+print(greeting)  # Hello World
+
+# Repetition
+laugh = "Ha" * 3
+print(laugh)  # HaHaHa
+
+# Membership testing
+sentence = "The quick brown fox"
+print("fox" in sentence)  # True
+print("cat" not in sentence)  # True
+
+# String comparison
+print("apple" < "banana")  # True (lexicographical order)
+print("Apple" < "apple")  # True (ASCII: 'A' < 'a')</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. String Methods</h2>
+        <p>Python provides many built-in methods for string manipulation.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Case Conversion Methods</h3>
+          <pre><code># upper() and lower()
+text = "Hello World"
+print(text.upper())  # HELLO WORLD
+print(text.lower())  # hello world
+
+# title() and capitalize()
+print(text.title())  # Hello World
+print(text.capitalize())  # Hello world
+
+# swapcase()
+mixed = "PyThOn PrOgRaMmInG"
+print(mixed.swapcase())  # pYtHoN pRoGrAmMiNg
+
+# Practical: Normalize user input
+user_input = "  YES  "
+normalized = user_input.strip().lower()
+print(f"User said: '{normalized}'")  # User said: 'yes'</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Search and Replace Methods</h3>
+          <pre><code># find() and index()
+text = "Python is awesome"
+print(text.find("is"))  # 7
+print(text.find("not"))  # -1 (not found)
+
+# index() raises error if not found
+try:
+    print(text.index("not"))
+except ValueError as e:
+    print(f"Error: {e}")
+
+# replace()
+message = "I like cats"
+new_message = message.replace("cats", "dogs")
+print(new_message)  # I like dogs
+
+# Replace multiple occurrences
+text = "one two one three one"
+print(text.replace("one", "1", 2))  # 1 two 1 three one
+
+# count()
+print(text.count("one"))  # 3
+
+# startswith() and endswith()
+filename = "document.pdf"
+print(filename.endswith(".pdf"))  # True
+print(filename.startswith("doc"))  # True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Split and Join Methods</h3>
+          <pre><code># split() - string to list
+sentence = "The quick brown fox jumps over the lazy dog"
+words = sentence.split()
+print(words)  # ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']
+
+# Split with delimiter
+csv_data = "Alice,25,Engineer"
+fields = csv_data.split(",")
+print(fields)  # ['Alice', '25', 'Engineer']
+
+# Split with max splits
+text = "a,b,c,d,e"
+print(text.split(",", 2))  # ['a', 'b', 'c,d,e']
+
+# join() - list to string
+words = ["Hello", "world", "from", "Python"]
+sentence = " ".join(words)
+print(sentence)  # Hello world from Python
+
+# Join with different separator
+path = ["home", "user", "documents", "file.txt"]
+full_path = "/".join(path)
+print(full_path)  # home/user/documents/file.txt
+
+# Practical: Parse CSV-like data
+data = "Name:Age:City\nAlice:25:NYC\nBob:30:LA"
+lines = data.split("\n")
+for line in lines[1:]:  # Skip header
+    name, age, city = line.split(":")
+    print(f"{name} is {age} years old in {city}")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Strip and Padding Methods</h3>
+          <pre><code># strip(), lstrip(), rstrip()
+text = "   Hello World   "
+print(f"'{text.strip()}'")   # 'Hello World'
+print(f"'{text.lstrip()}'")  # 'Hello World   '
+print(f"'{text.rstrip()}'")  # '   Hello World'
+
+# Strip specific characters
+filename = "file.txt.pdf"
+print(filename.strip(".pdf"))  # file.txt
+
+# center(), ljust(), rjust()
+word = "Python"
+print(f"'{word.center(10)}'")  # '  Python  '
+print(f"'{word.ljust(10)}'")   # 'Python    '
+print(f"'{word.rjust(10)}'")   # '    Python'
+
+# zfill() for numbers
+number = "42"
+print(number.zfill(5))  # 00042
+
+# Practical: Format table
+names = ["Alice", "Bob", "Charlie"]
+for name in names:
+    print(f"{name.ljust(10)} | {len(name)}")</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. String Formatting</h2>
+        <p>Format strings with variables using f-strings, format method, and % formatting.</p>
+
+        <div class="example-box">
+          <h3>Example 1: F-Strings (Python 3.6+)</h3>
+          <pre><code># Basic f-string
+name = "Alice"
+age = 25
+print(f"My name is {name} and I am {age} years old.")
+# Output: My name is Alice and I am 25 years old.
+
+# Expressions in f-strings
+x, y = 10, 3
+print(f"Sum: {x + y}, Product: {x * y}")
+# Output: Sum: 13, Product: 30
+
+# Formatting numbers
+pi = 3.14159265359
+print(f"Pi to 2 decimals: {pi:.2f}")
+print(f"Pi to 4 decimals: {pi:.4f}")
+
+# Formatting with width
+for i in range(1, 4):
+    print(f"Number {i:2d}: {'*' * i}")
+
+# Output:
+# Number  1: *
+# Number  2: **
+# Number  3: ***
+
+# Dictionary access
+person = {"name": "Bob", "age": 30}
+print(f"Name: {person['name']}, Age: {person['age']}")
+
+# Multi-line f-strings
+message = f"""
+Dear {name},
+
+Thank you for your interest in Python.
+Your age is {age}.
+
+Best regards,
+Eduvalt Team
+"""
+print(message)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: format() Method</h3>
+          <pre><code># Positional arguments
+print("Hello, {}! You are {} years old.".format("Alice", 25))
+# Output: Hello, Alice! You are 25 years old.
+
+# Named arguments
+print("Hello, {name}! You are {age} years old.".format(name="Bob", age=30))
+
+# Reuse arguments
+print("{0} {1} {0}".format("abra", "cadabra"))
+# Output: abra cadabra abra
+
+# Formatting numbers
+price = 49.99
+print("Price: ${:.2f}".format(price))  # Price: $49.99
+
+# Align text
+names = ["Alice", "Bob", "Charlie"]
+for name in names:
+    print("{:<10} | {:>5}".format(name, len(name)))
+
+# Output:
+# Alice      |     5
+# Bob        |     3
+# Charlie    |     7
+
+# Format with thousands separator
+large_number = 1234567
+print("{:,}".format(large_number))  # 1,234,567
+
+# Scientific notation
+small_number = 0.000123
+print("{:.2e}".format(small_number))  # 1.23e-04</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Old-Style % Formatting</h3>
+          <pre><code># % formatting (older style)
+name = "Charlie"
+age = 35
+print("Hello, %s! You are %d years old." % (name, age))
+# Output: Hello, Charlie! You are 35 years old.
+
+# Formatting numbers
+pi = 3.14159
+print("Pi is approximately %.2f" % pi)  # Pi is approximately 3.14
+
+# Multiple values
+x, y = 5, 10
+print("x = %d, y = %d, sum = %d" % (x, y, x + y))
+
+# Width and alignment
+print("%10s" % "right")   # '     right'
+print("%-10s" % "left")   # 'left      '
+
+# Note: f-strings and .format() are preferred over % formatting</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Escape Characters</h2>
+        <p>Use escape sequences to include special characters in strings.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Common Escape Sequences</h3>
+          <pre><code># Newline \n
+print("Line 1\nLine 2")
+# Output:
+# Line 1
+# Line 2
+
+# Tab \t
+print("Name:\tAlice")
+print("Age:\t25")
+
+# Backslash \\
+path = "C:\\Users\\Documents\\file.txt"
+print(path)  # C:\Users\Documents\file.txt
+
+# Single quote \' and double quote \"
+print('He said, \'Hello!\'')
+print("She said, \"Hi there!\"")
+
+# Raw strings (ignore escapes)
+raw_path = r"C:\Users\Documents\file.txt"
+print(raw_path)  # C:\Users\Documents\file.txt
+
+# Unicode characters
+print("Greek: \u03A9 (Omega)")
+print("Emoji: \U0001F600 (Grinning face)")
+
+# Bell \a (makes sound on some systems)
+print("Beep!\a")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Multi-line Strings and Escapes</h3>
+          <pre><code># Triple quotes for multi-line
+menu = """Breakfast Menu:
+\t- Pancakes
+\t- Eggs
+\t- Coffee
+
+Lunch Menu:
+\t- Sandwich
+\t- Salad
+\t- Soup"""
+
+print(menu)
+
+# Escape in f-strings
+name = "Alice"
+message = f"Dear {name},\n\nThank you for your order.\n\nBest,\nEduvalt"
+print(message)
+
+# Practical: Generate HTML
+html = """<html>
+<head><title>My Page</title></head>
+<body>
+<h1>Hello World</h1>
+<p>This is a paragraph.</p>
+</body>
+</html>"""
+
+print(html)
+
+# Escape quotes in strings
+sql = 'SELECT * FROM users WHERE name = \'Alice\''
+print(sql)
+
+# Or use different quotes
+sql2 = "SELECT * FROM users WHERE name = 'Alice'"
+print(sql2)</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Text Analyzer</h3>
+          <p>Create a program that analyzes a given text string:</p>
+          <ul>
+            <li>Count total characters and words</li>
+            <li>Find the most frequent word</li>
+            <li>Convert to title case</li>
+            <li>Replace all vowels with asterisks</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Email Validator</h3>
+          <p>Write a function that checks if an email address is valid:</p>
+          <ul>
+            <li>Contains exactly one '@' symbol</li>
+            <li>Has a domain (part after '@')</li>
+            <li>Domain contains at least one dot</li>
+            <li>Use string methods to validate</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: String Formatter</h3>
+          <p>Use different formatting techniques to display:</p>
+          <ul>
+            <li>Product information in a table format</li>
+            <li>Temperature conversion (Celsius to Fahrenheit)</li>
+            <li>Progress bar using string repetition</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Password Generator</h3>
+          <p>Create a simple password generator that:</p>
+          <ul>
+            <li>Combines letters, numbers, and symbols</li>
+            <li>Allows user to specify length</li>
+            <li>Uses string methods and random module</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module5-lists-tuples') }}" class="nav-button">← Previous: Lists & Tuples</a>
+        <a href="{{ url_for('python_module', module='module7-dictionaries') }}" class="nav-button">Next: Dictionaries →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+  <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    // Create copy button
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    // Copy functionality
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>
