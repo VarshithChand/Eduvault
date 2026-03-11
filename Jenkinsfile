@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "varshithchand/eduvault"
+        IMAGE_NAME = "varshithchand/eduvault.2"
         CONTAINER_NAME = "eduvault"
     }
 
