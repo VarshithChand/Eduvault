@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dictionaries - Eduvalt</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+     <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Dictionaries</h1>
+      <p>Store and retrieve data using key-value pairs. Learn dictionary methods and operations.</p>
+    </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+      
+      <div class="topic-section">
+        <h2>1. Dictionary Creation and Access</h2>
+        <p>Dictionaries are unordered collections of key-value pairs. Keys must be immutable, values can be any type.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Creating Dictionaries</h3>
+          <pre><code># Empty dictionary
+empty_dict = {}
+print(empty_dict)  # {}
+
+# Dictionary with items
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "New York"
+}
+print(person)
+# Output: {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# Using dict() constructor
+student = dict(name="Bob", grade="A", subject="Math")
+print(student)  # {'name': 'Bob', 'grade': 'A', 'subject': 'Math'}
+
+# From list of tuples
+pairs = [("x", 10), ("y", 20), ("z", 30)]
+coordinates = dict(pairs)
+print(coordinates)  # {'x': 10, 'y': 20, 'z': 30}
+
+# Mixed data types
+mixed = {
+    "string": "hello",
+    "number": 42,
+    "list": [1, 2, 3],
+    "boolean": True,
+    123: "numeric key"
+}
+print(mixed)
+
+# Nested dictionary
+company = {
+    "name": "TechCorp",
+    "employees": {
+        "Alice": {"role": "Developer", "salary": 75000},
+        "Bob": {"role": "Designer", "salary": 65000}
+    }
+}
+print(company)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Accessing Dictionary Values</h3>
+          <pre><code># Access by key
+person = {"name": "Alice", "age": 25, "city": "New York"}
+
+print(person["name"])  # Alice
+print(person["age"])   # 25
+
+# Using get() method (safer)
+print(person.get("city"))  # New York
+print(person.get("country", "Not found"))  # Not found
+
+# Nested access
+company = {
+    "employees": {
+        "Alice": {"salary": 75000},
+        "Bob": {"salary": 65000}
+    }
+}
+alice_salary = company["employees"]["Alice"]["salary"]
+print(f"Alice's salary: ${alice_salary}")  # Alice's salary: $75000
+
+# Check if key exists
+if "age" in person:
+    print(f"Age: {person['age']}")
+
+# Dictionary length
+print(f"Person dict has {len(person)} items")  # 3
+
+# Keys and values
+print("Keys:", list(person.keys()))     # ['name', 'age', 'city']
+print("Values:", list(person.values())) # ['Alice', 25, 'New York']</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Dictionary Keys and Immutability</h3>
+          <pre><code># Keys must be immutable (strings, numbers, tuples)
+valid_dict = {
+    "string_key": "value",
+    42: "number key",
+    (1, 2): "tuple key"
+}
+print(valid_dict)
+
+# Lists cannot be keys (mutable)
+# invalid_dict = {[1, 2]: "list key"}  # TypeError!
+
+# But lists can be values
+dict_with_list = {
+    "numbers": [1, 2, 3, 4, 5],
+    "names": ["Alice", "Bob"]
+}
+print(dict_with_list["numbers"][2])  # 3
+
+# Tuples as keys for coordinates
+locations = {
+    (40.7128, -74.0060): "New York",
+    (51.5074, -0.1278): "London",
+    (35.6762, 139.6503): "Tokyo"
+}
+print(locations[(40.7128, -74.0060)])  # New York
+
+# Dictionary as value
+student_grades = {
+    "Alice": {"math": 95, "english": 88},
+    "Bob": {"math": 87, "english": 92}
+}
+print(student_grades["Alice"]["math"])  # 95</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. Adding and Removing Items</h2>
+        <p>Dictionaries are mutable - you can add, modify, and remove key-value pairs.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Adding and Modifying Items</h3>
+          <pre><code># Add new key-value pair
+person = {"name": "Alice", "age": 25}
+person["city"] = "New York"
+print(person)  # {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# Modify existing value
+person["age"] = 26
+print(person)  # {'name': 'Alice', 'age': 26, 'city': 'New York'}
+
+# Add multiple items using update()
+person.update({"job": "Engineer", "salary": 75000})
+print(person)
+
+# Or merge two dictionaries
+more_info = {"hobbies": ["reading", "coding"], "married": False}
+person.update(more_info)
+print(person)
+
+# Using setdefault() - only adds if key doesn't exist
+person.setdefault("country", "USA")
+person.setdefault("name", "Default")  # Won't change existing name
+print(person)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Removing Items</h3>
+          <pre><code># Remove with del
+person = {"name": "Alice", "age": 25, "city": "New York", "job": "Engineer"}
+
+del person["job"]
+print(person)  # {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# Remove with pop() - returns the value
+removed_city = person.pop("city")
+print(f"Removed city: {removed_city}")  # New York
+print(person)  # {'name': 'Alice', 'age': 25}
+
+# pop() with default value
+removed_hobby = person.pop("hobby", "Not found")
+print(removed_hobby)  # Not found
+
+# Remove last item with popitem() (Python 3.7+ - maintains insertion order)
+last_item = person.popitem()
+print(f"Last item: {last_item}")  # ('age', 25)
+print(person)  # {'name': 'Alice'}
+
+# Clear all items
+person.clear()
+print(person)  # {}
+
+# Practical: Inventory management
+inventory = {"apples": 10, "bananas": 5, "oranges": 8}
+
+# Add new item
+inventory["grapes"] = 12
+
+# Update quantity
+inventory["apples"] += 5
+
+# Remove sold out item
+if "bananas" in inventory:
+    del inventory["bananas"]
+
+print(f"Updated inventory: {inventory}")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Dictionary Comprehensions</h3>
+          <pre><code># Create dictionary from iterable
+numbers = [1, 2, 3, 4, 5]
+squares = {x: x**2 for x in numbers}
+print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# With condition
+even_squares = {x: x**2 for x in numbers if x % 2 == 0}
+print(even_squares)  # {2: 4, 4: 16}
+
+# Transform existing dictionary
+prices = {"apple": 1.50, "banana": 0.75, "orange": 2.00}
+discounted = {fruit: price * 0.9 for fruit, price in prices.items()}
+print(discounted)
+
+# Swap keys and values
+original = {"a": 1, "b": 2, "c": 3}
+swapped = {value: key for key, value in original.items()}
+print(swapped)  # {1: 'a', 2: 'b', 3: 'c'}
+
+# From two lists
+keys = ["name", "age", "city"]
+values = ["Alice", 25, "New York"]
+person = {keys[i]: values[i] for i in range(len(keys))}
+print(person)  # {'name': 'Alice', 'age': 25, 'city': 'New York'}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Dictionary Methods</h2>
+        <p>Essential methods for working with dictionaries: keys(), values(), items(), and more.</p>
+
+        <div class="example-box">
+          <h3>Example 1: keys(), values(), and items()</h3>
+          <pre><code># Get all keys
+person = {"name": "Alice", "age": 25, "city": "New York"}
+
+keys = person.keys()
+print(f"Keys: {list(keys)}")  # ['name', 'age', 'city']
+
+# Get all values
+values = person.values()
+print(f"Values: {list(values)}")  # ['Alice', 25, 'New York']
+
+# Get all key-value pairs
+items = person.items()
+print(f"Items: {list(items)}")  # [('name', 'Alice'), ('age', 25), ('city', 'New York')]
+
+# These return dict views (dynamic)
+person["job"] = "Engineer"
+print(f"Updated keys: {list(keys)}")  # Includes 'job'
+
+# Convert to lists if needed
+keys_list = list(person.keys())
+values_list = list(person.values())
+items_list = list(person.items())
+
+# Check membership
+print("name" in person)      # True
+print("Alice" in person)     # False (checks keys, not values)
+print("Alice" in values)     # True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: copy() and Dictionary Operations</h3>
+          <pre><code># Shallow copy
+original = {"a": [1, 2, 3], "b": 42}
+copy_dict = original.copy()
+
+copy_dict["b"] = 100
+copy_dict["a"].append(4)
+
+print(f"Original: {original}")  # {'a': [1, 2, 3, 4], 'b': 42}
+print(f"Copy: {copy_dict}")     # {'a': [1, 2, 3, 4], 'b': 100}
+
+# Deep copy for nested structures
+import copy
+deep_copy = copy.deepcopy(original)
+deep_copy["a"].append(5)
+print(f"Original after deep copy: {original}")  # Unchanged
+print(f"Deep copy: {deep_copy}")
+
+# Dictionary equality
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 2, "a": 1}
+print(dict1 == dict2)  # True (order doesn't matter)
+
+# Merge dictionaries (Python 3.9+)
+dict_a = {"x": 1, "y": 2}
+dict_b = {"y": 3, "z": 4}
+merged = dict_a | dict_b
+print(merged)  # {'x': 1, 'y': 3, 'z': 4}
+
+# Or use update
+dict_a.update(dict_b)
+print(dict_a)  # {'x': 1, 'y': 3, 'z': 4}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Iterating Through Dictionaries</h2>
+        <p>Loop through dictionaries using various methods to access keys, values, or both.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Iterating Over Keys</h3>
+          <pre><code># Iterate over keys (default)
+person = {"name": "Alice", "age": 25, "city": "New York"}
+
+for key in person:
+    print(f"{key}: {person[key]}")
+
+# Or explicitly
+for key in person.keys():
+    print(f"Key: {key}")
+
+# Practical: Check conditions
+grades = {"math": 95, "english": 88, "science": 92}
+
+passing_subjects = []
+for subject, grade in grades.items():
+    if grade >= 90:
+        passing_subjects.append(subject)
+
+print(f"Subjects with A: {passing_subjects}")  # ['math', 'science']</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Iterating Over Values and Items</h3>
+          <pre><code># Iterate over values
+scores = {"Alice": 95, "Bob": 87, "Charlie": 92}
+
+total = 0
+for score in scores.values():
+    total += score
+
+average = total / len(scores)
+print(f"Average score: {average:.1f}")  # 91.3
+
+# Iterate over items (key-value pairs)
+student_grades = {
+    "Alice": {"math": 95, "english": 88},
+    "Bob": {"math": 87, "english": 92}
+}
+
+for student, subjects in student_grades.items():
+    print(f"{student}'s grades:")
+    for subject, grade in subjects.items():
+        print(f"  {subject}: {grade}")
+    print()
+
+# Enumerate with items
+inventory = {"apples": 10, "bananas": 5, "oranges": 8}
+for i, (item, quantity) in enumerate(inventory.items(), 1):
+    print(f"{i}. {item}: {quantity}")
+
+# Output:
+# 1. apples: 10
+# 2. bananas: 5
+# 3. oranges: 8</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Advanced Iteration Techniques</h3>
+          <pre><code># Sort while iterating
+grades = {"math": 95, "english": 88, "science": 92}
+
+# Sort by keys
+for subject in sorted(grades.keys()):
+    print(f"{subject}: {grades[subject]}")
+
+# Sort by values
+for subject in sorted(grades.keys(), key=lambda x: grades[x], reverse=True):
+    print(f"{subject}: {grades[subject]}")
+
+# Filter while iterating
+high_scores = {k: v for k, v in grades.items() if v >= 90}
+print(f"High scores: {high_scores}")  # {'math': 95, 'science': 92}
+
+# Nested dictionary iteration
+company = {
+    "Engineering": {"Alice": 75000, "Bob": 70000},
+    "Design": {"Charlie": 65000, "Diana": 68000}
+}
+
+for department, employees in company.items():
+    print(f"{department} Department:")
+    total_salary = 0
+    for name, salary in employees.items():
+        print(f"  {name}: ${salary}")
+        total_salary += salary
+    print(f"  Total: ${total_salary}\n")
+
+# Dictionary of lists
+classes = {
+    "Math": ["Alice", "Bob", "Charlie"],
+    "English": ["Diana", "Eve", "Frank"]
+}
+
+for subject, students in classes.items():
+    print(f"{subject} class has {len(students)} students:")
+    for student in students:
+        print(f"  - {student}")
+    print()</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Student Grade Book</h3>
+          <p>Create a dictionary-based grade book system:</p>
+          <ul>
+            <li>Store student names as keys, grades as values (dictionaries)</li>
+            <li>Calculate average grade for each student</li>
+            <li>Find the student with the highest average</li>
+            <li>Add new students and grades</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Word Frequency Counter</h3>
+          <p>Write a program that:</p>
+          <ul>
+            <li>Takes a text string and counts word frequency</li>
+            <li>Ignores case sensitivity</li>
+            <li>Displays the top 5 most frequent words</li>
+            <li>Uses dictionary to store counts</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Phone Book Application</h3>
+          <p>Implement a simple phone book:</p>
+          <ul>
+            <li>Add, update, and delete contacts</li>
+            <li>Search by name or phone number</li>
+            <li>Display all contacts sorted by name</li>
+            <li>Handle duplicate names with multiple numbers</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Inventory Management</h3>
+          <p>Create an inventory system using dictionaries:</p>
+          <ul>
+            <li>Store items with quantities and prices</li>
+            <li>Calculate total inventory value</li>
+            <li>Find items below minimum stock level</li>
+            <li>Generate sales reports</li>
+          </ul>
+        </div>
+      </div>
+        <!-- Navigation -->
+        <div class="module-navigation">
+          <a href="{{ url_for('python_module', module='module6-strings') }}" class="nav-button">← Previous: Strings</a>
+            <a href="{{ url_for('python_module', module='module8-functions') }}" class="nav-button">Next: Functions →</a>
+            </div>
+        </div>
+    </section>
+    
+  <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    // Create copy button
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    // Copy functionality
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+ <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+</body>
+</html>

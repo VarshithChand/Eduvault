@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variables & Data Types - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Variables & Data Types</h1>
+      <p>Learn about integers, floats, strings, and booleans. Understand type conversion and variable naming conventions.</p>
+    </div>
+  </section>
+
+  <!-- Module Content -->
+  <section class="module-content">
+    <div class="container">
+      
+      <!-- Topic 1 -->
+      <div class="topic-section">
+        <h2>1. Variable Assignment and Naming</h2>
+        <p>Variables are containers for storing data values. In Python, you don't need to declare variable types explicitly.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Basic Variable Assignment</h3>
+          <pre><code># Assigning values to variables
+name = "Alice"
+age = 25
+height = 5.6
+is_student = True
+
+print(name)        # Output: Alice
+print(age)         # Output: 25
+print(height)      # Output: 5.6
+print(is_student)  # Output: True</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Multiple Assignment</h3>
+          <pre><code># Assign multiple variables in one line
+x, y, z = 10, 20, 30
+print(x, y, z)  # Output: 10 20 30
+
+# Assign same value to multiple variables
+a = b = c = 100
+print(a, b, c)  # Output: 100 100 100</code></pre>
+        </div>
+
+        <div class="naming-rules">
+          <h3>Variable Naming Rules:</h3>
+          <ul>
+            <li>✓ Must start with a letter or underscore (_)</li>
+            <li>✓ Can contain letters, numbers, and underscores</li>
+            <li>✓ Case-sensitive (age, Age, and AGE are different)</li>
+            <li>✗ Cannot start with a number</li>
+            <li>✗ Cannot contain spaces or special characters (!@#$%)</li>
+            <li>✗ Cannot be Python keywords (if, for, while, etc.)</li>
+          </ul>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Valid and Invalid Variable Names</h3>
+          <pre><code># Valid variable names
+student_name = "John"
+_age = 30
+name2 = "Bob"
+MY_CONSTANT = 100
+
+# Invalid variable names (will cause errors)
+# 2name = "Error"        # Cannot start with number
+# student-name = "Error"  # Cannot use hyphen
+# class = "Error"         # Cannot use keywords</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-section">
+        <h2>2. Basic Data Types</h2>
+        <p>Python has four basic built-in data types: integers, floats, strings, and booleans.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Integer (int)</h3>
+          <pre><code># Integers are whole numbers
+count = 42
+negative_num = -17
+large_number = 1000000
+
+print(type(count))  # Output: &lt;class 'int'&gt;
+
+# Arithmetic with integers
+sum_result = 10 + 5      # 15
+difference = 20 - 8      # 12
+product = 6 * 7          # 42
+quotient = 15 // 3       # 5 (integer division)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Float (float)</h3>
+          <pre><code># Floats are decimal numbers
+price = 19.99
+temperature = -5.5
+scientific = 3.14e2  # 314.0 (scientific notation)
+
+print(type(price))  # Output: &lt;class 'float'&gt;
+
+# Arithmetic with floats
+total = 10.5 + 4.3   # 14.8
+result = 7.0 / 2.0   # 3.5</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: String (str)</h3>
+          <pre><code># Strings are text data
+message = "Hello, World!"
+single_quotes = 'Python is awesome'
+multiline = """This is a
+multiline string"""
+
+print(type(message))  # Output: &lt;class 'str'&gt;
+
+# String operations
+greeting = "Hello" + " " + "World"  # Concatenation
+repeated = "Ha" * 3                  # HaHaHa
+length = len(message)                # 13</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Boolean (bool)</h3>
+          <pre><code># Booleans represent True or False
+is_active = True
+has_permission = False
+
+print(type(is_active))  # Output: &lt;class 'bool'&gt;
+
+# Boolean operations
+result1 = True and False   # False
+result2 = True or False    # True
+result3 = not True         # False
+
+# Comparison results are booleans
+is_greater = 10 > 5        # True
+is_equal = 5 == 5          # True</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-section">
+        <h2>3. Type Casting and Conversion</h2>
+        <p>Convert between different data types using type casting functions.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Converting to Integer</h3>
+          <pre><code># Convert to integer using int()
+float_num = 7.8
+string_num = "42"
+
+int_from_float = int(float_num)  # 7 (truncates decimal)
+int_from_string = int(string_num)  # 42
+
+print(int_from_float)   # Output: 7
+print(int_from_string)  # Output: 42
+
+# Boolean to integer
+bool_to_int = int(True)   # 1
+bool_to_int2 = int(False)  # 0</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Converting to Float</h3>
+          <pre><code># Convert to float using float()
+integer_num = 10
+string_float = "3.14"
+
+float_from_int = float(integer_num)     # 10.0
+float_from_string = float(string_float)  # 3.14
+
+print(float_from_int)     # Output: 10.0
+print(float_from_string)  # Output: 3.14</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Converting to String</h3>
+          <pre><code># Convert to string using str()
+number = 100
+float_value = 3.14159
+bool_value = True
+
+str_from_int = str(number)        # "100"
+str_from_float = str(float_value)  # "3.14159"
+str_from_bool = str(bool_value)    # "True"
+
+# Useful for concatenation
+age = 25
+message = "I am " + str(age) + " years old"
+print(message)  # Output: I am 25 years old</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Converting to Boolean</h3>
+          <pre><code># Convert to boolean using bool()
+# Empty/zero values are False, non-empty/non-zero are True
+
+bool(0)         # False
+bool(1)         # True
+bool("")        # False (empty string)
+bool("Hello")   # True
+bool([])        # False (empty list)
+bool([1, 2])    # True
+
+# Practical example
+user_input = "yes"
+is_confirmed = bool(user_input)  # True</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 4 -->
+      <div class="topic-section">
+        <h2>4. Print Statements and Formatting</h2>
+        <p>Display output and format strings in various ways.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Basic Print</h3>
+          <pre><code># Simple print statements
+print("Hello, World!")
+print(42)
+print(3.14)
+
+# Print multiple items
+name = "Alice"
+age = 25
+print("Name:", name, "Age:", age)
+# Output: Name: Alice Age: 25
+
+# Print with separator
+print("A", "B", "C", sep="-")  # Output: A-B-C</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: F-strings (Modern Way)</h3>
+          <pre><code># F-strings - most readable and modern
+name = "Bob"
+age = 30
+height = 5.9
+
+# Basic f-string
+print(f"My name is {name}")
+# Output: My name is Bob
+
+# Multiple variables
+print(f"{name} is {age} years old and {height} feet tall")
+# Output: Bob is 30 years old and 5.9 feet tall
+
+# Expressions inside f-strings
+x = 10
+y = 5
+print(f"The sum of {x} and {y} is {x + y}")
+# Output: The sum of 10 and 5 is 15</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Format Method</h3>
+          <pre><code># Using .format() method
+name = "Charlie"
+score = 95
+
+message = "Student {} scored {} points".format(name, score)
+print(message)
+# Output: Student Charlie scored 95 points
+
+# With positional arguments
+text = "{0} likes {1} and {2}".format("Alice", "Python", "Coffee")
+print(text)
+# Output: Alice likes Python and Coffee
+
+# With named arguments
+info = "{name} is {age} years old".format(name="David", age=28)
+print(info)
+# Output: David is 28 years old</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Formatting Numbers</h3>
+          <pre><code># Format decimal places
+pi = 3.14159265359
+
+print(f"{pi:.2f}")   # 3.14 (2 decimal places)
+print(f"{pi:.4f}")   # 3.1416 (4 decimal places)
+
+# Format as percentage
+ratio = 0.75
+print(f"{ratio:.1%}")  # 75.0%
+
+# Format large numbers with commas
+big_number = 1000000
+print(f"{big_number:,}")  # 1,000,000
+
+# Padding and alignment
+num = 42
+print(f"{num:05}")   # 00042 (pad with zeros)
+print(f"{num:>10}")  # "        42" (right align)
+print(f"{num:<10}")  # "42        " (left align)</code></pre>
+        </div>
+      </div>
+
+      <!-- Practice Exercises -->
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Variable Creation</h3>
+          <p>Create variables to store:</p>
+          <ul>
+            <li>Your full name (string)</li>
+            <li>Your age (integer)</li>
+            <li>Your height in meters (float)</li>
+            <li>Whether you're a student (boolean)</li>
+          </ul>
+          <p>Print all variables using an f-string.</p>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Type Conversion</h3>
+          <p>Given: <code>num_string = "100"</code> and <code>decimal_string = "3.14"</code></p>
+          <p>Convert them to appropriate numeric types and calculate their sum.</p>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Temperature Converter</h3>
+          <p>Create a variable for Celsius temperature. Convert it to Fahrenheit using the formula: F = (C × 9/5) + 32</p>
+          <p>Display the result with 1 decimal place using f-string formatting.</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="module-navigation">
+        <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+        <a href="{{ url_for('python_module', module='module2-operators') }}" class="nav-button">Next: Operators & Expressions →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+    <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    // Create copy button
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    // Copy functionality
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduvalt - Master Python Programming</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    /* keep any lightweight page-specific CSS here if needed */
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#beginner">Beginner</a></li>
+        <li><a href="#intermediate">Intermediate</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Master Python Programming</h1>
+        <p class="hero-subtitle">From Beginner to Advanced - Your Complete Learning Journey</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('beginner')">Start Learning</button>
+          <button class="btn btn-secondary" onclick="scrollToSection('about')">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beginner Level -->
+  <section id="beginner" class="level-section beginner-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge beginner">Beginner</span>
+        <h2>Foundation Concepts</h2>
+        <p>Start your Python journey with the fundamentals</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div class="module-icon">📝</div>
+          <h3>Variables & Data Types</h3>
+          <p>Learn about integers, floats, strings, and booleans. Understand type conversion and variable naming
+            conventions.</p>
+          <ul class="topic-list">
+            <li>Variable assignment and naming</li>
+            <li>Basic data types (int, float, str, bool)</li>
+            <li>Type casting and conversion</li>
+            <li>Print statements and formatting</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module1-variables') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div class="module-icon">➕</div>
+          <h3>Operators & Expressions</h3>
+          <p>Master arithmetic, comparison, logical, and assignment operators for building expressions.</p>
+          <ul class="topic-list">
+            <li>Arithmetic operators (+, -, *, /, //, %, **)</li>
+            <li>Comparison operators (==, !=, <,>, <=,>=)</li>
+            <li>Logical operators (and, or, not)</li>
+            <li>Identity and membership operators</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module2-operators') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div class="module-icon">🔀</div>
+          <h3>Control Flow</h3>
+          <p>Control program execution with if-elif-else statements and understand conditional logic.</p>
+          <ul class="topic-list">
+            <li>If-else statements</li>
+            <li>Elif chains for multiple conditions</li>
+            <li>Nested conditionals</li>
+            <li>Ternary operators</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module3-control-flow') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card">
+          <div class="module-icon">🔄</div>
+          <h3>Loops</h3>
+          <p>Iterate through data using for and while loops. Master loop control with break and continue.</p>
+          <ul class="topic-list">
+            <li>For loops and range function</li>
+            <li>While loops and conditions</li>
+            <li>Break and continue statements</li>
+            <li>Nested loops</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module4-loops') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module-card">
+          <div class="module-icon">📚</div>
+          <h3>Lists & Tuples</h3>
+          <p>Work with ordered collections. Learn list methods, indexing, slicing, and tuple immutability.</p>
+          <ul class="topic-list">
+            <li>List creation and indexing</li>
+            <li>List methods (append, extend, insert, remove)</li>
+            <li>Slicing and list comprehension basics</li>
+            <li>Tuples and immutability</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module5-lists-tuples') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="module-card">
+          <div class="module-icon">🔤</div>
+          <h3>Strings</h3>
+          <p>Master string manipulation, formatting, and common string methods for text processing.</p>
+          <ul class="topic-list">
+            <li>String indexing and slicing</li>
+            <li>String methods (upper, lower, split, join)</li>
+            <li>String formatting (f-strings, format method)</li>
+            <li>Escape characters</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module6-strings') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 7 -->
+        <div class="module-card">
+          <div class="module-icon">📖</div>
+          <h3>Dictionaries</h3>
+          <p>Store and retrieve data using key-value pairs. Learn dictionary methods and operations.</p>
+          <ul class="topic-list">
+            <li>Dictionary creation and access</li>
+            <li>Adding and removing items</li>
+            <li>Dictionary methods (keys, values, items)</li>
+            <li>Iterating through dictionaries</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module7-dictionaries') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 8 -->
+        <div class="module-card">
+          <div class="module-icon">⚙️</div>
+          <h3>Functions</h3>
+          <p>Create reusable code blocks with functions. Understand parameters, return values, and scope.</p>
+          <ul class="topic-list">
+            <li>Function definition and calling</li>
+            <li>Parameters and arguments</li>
+            <li>Return statements</li>
+            <li>Local and global scope</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module8-functions') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intermediate Level -->
+  <section id="intermediate" class="level-section intermediate-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge intermediate">Intermediate</span>
+        <h2>Advanced Techniques</h2>
+        <p>Deepen your Python knowledge with advanced concepts</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">📦</div>
+          <h3>Sets & Advanced Collections</h3>
+          <p>Work with unordered collections and perform set operations like union, intersection, and difference.</p>
+          <ul class="topic-list">
+            <li>Set creation and operations</li>
+            <li>Set methods (add, remove, union, intersection)</li>
+            <li>Frozen sets</li>
+            <li>Set comprehensions</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module9-sets') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📄</div>
+          <h3>File Handling</h3>
+          <p>Read from and write to files. Handle different file formats and use context managers.</p>
+          <ul class="topic-list">
+            <li>Opening and closing files</li>
+            <li>Reading methods (read, readline, readlines)</li>
+            <li>Writing to files</li>
+            <li>With statement and context managers</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module10-file-handling') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">⚠️</div>
+          <h3>Exception Handling</h3>
+          <p>Handle errors gracefully with try-except blocks. Create custom exceptions and use finally.</p>
+          <ul class="topic-list">
+            <li>Try-except blocks</li>
+            <li>Multiple exception handling</li>
+            <li>Finally and else clauses</li>
+            <li>Raising exceptions</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module11-exception-handling') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📦</div>
+          <h3>Modules & Packages</h3>
+          <p>Organize code with modules and packages. Import and use standard library modules.</p>
+          <ul class="topic-list">
+            <li>Creating and importing modules</li>
+            <li>Standard library modules (math, random, datetime)</li>
+            <li>Package structure</li>
+            <li>__init__.py and namespace</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module12-modules-packages') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🎯</div>
+          <h3>Lambda & Higher-Order Functions</h3>
+          <p>Write concise anonymous functions and use map, filter, and reduce for functional programming.</p>
+          <ul class="topic-list">
+            <li>Lambda function syntax</li>
+            <li>Map function for transformations</li>
+            <li>Filter for conditional selection</li>
+            <li>Reduce for aggregation</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module13-lambda') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔧</div>
+          <h3>Comprehensions</h3>
+          <p>Write elegant one-liners for creating lists, dictionaries, and sets with comprehensions.</p>
+          <ul class="topic-list">
+            <li>List comprehensions with conditions</li>
+            <li>Dictionary comprehensions</li>
+            <li>Set comprehensions</li>
+            <li>Nested comprehensions</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module14-comprehensions') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏛️</div>
+          <h3>Object-Oriented Programming</h3>
+          <p>Design programs using classes and objects. Understand encapsulation and inheritance.</p>
+          <ul class="topic-list">
+            <li>Classes and objects</li>
+            <li>__init__ constructor method</li>
+            <li>Instance and class variables</li>
+            <li>Methods and self parameter</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module15-oop') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔗</div>
+          <h3>Inheritance & Polymorphism</h3>
+          <p>Reuse code through inheritance and implement polymorphism for flexible designs.</p>
+          <ul class="topic-list">
+            <li>Single and multiple inheritance</li>
+            <li>Method overriding</li>
+            <li>Super function</li>
+            <li>Polymorphism concepts</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module16-inheritance') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📝</div>
+          <h3>Regular Expressions</h3>
+          <p>Pattern matching and text processing with the re module for advanced string operations.</p>
+          <ul class="topic-list">
+            <li>Pattern syntax and metacharacters</li>
+            <li>Search and match functions</li>
+            <li>Groups and capturing</li>
+            <li>Common regex patterns</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module17-regex') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📊</div>
+          <h3>Working with JSON & CSV</h3>
+          <p>Parse and create JSON data. Read and write CSV files for data interchange.</p>
+          <ul class="topic-list">
+            <li>JSON parsing (loads, dumps)</li>
+            <li>JSON file operations</li>
+            <li>CSV reader and writer</li>
+            <li>DictReader and DictWriter</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module18-json-csv') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Level -->
+  <section id="advanced" class="level-section advanced-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge advanced">Advanced</span>
+        <h2>Expert Level Topics</h2>
+        <p>Master advanced Python concepts for professional development</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">🎨</div>
+          <h3>Decorators</h3>
+          <p>Modify function behavior with decorators. Create custom decorators and understand closures.</p>
+          <ul class="topic-list">
+            <li>Function decorators basics</li>
+            <li>Decorators with arguments</li>
+            <li>Class decorators</li>
+            <li>Built-in decorators (@staticmethod, @classmethod)</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module19-decorators') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔄</div>
+          <h3>Iterators & Generators</h3>
+          <p>Create memory-efficient iterators and generators. Use yield for lazy evaluation.</p>
+          <ul class="topic-list">
+            <li>Iterator protocol (__iter__, __next__)</li>
+            <li>Generator functions with yield</li>
+            <li>Generator expressions</li>
+            <li>itertools module</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module20-iterators-generators') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🎯</div>
+          <h3>Context Managers</h3>
+          <p>Manage resources efficiently with context managers. Implement __enter__ and __exit__ methods.</p>
+          <ul class="topic-list">
+            <li>With statement mechanics</li>
+            <li>Creating custom context managers</li>
+            <li>Contextlib module</li>
+            <li>@contextmanager decorator</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module21-context-managers') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔍</div>
+          <h3>Magic Methods & Operator Overloading</h3>
+          <p>Customize class behavior with dunder methods. Overload operators for custom types.</p>
+          <ul class="topic-list">
+            <li>__str__ and __repr__ methods</li>
+            <li>Arithmetic operator overloading</li>
+            <li>Comparison operators</li>
+            <li>Container methods (__getitem__, __setitem__)</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module22-magic-methods') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📌</div>
+          <h3>Type Hinting & Annotations</h3>
+          <p>Add type hints for better code documentation and IDE support with typing module.</p>
+          <ul class="topic-list">
+            <li>Basic type hints</li>
+            <li>Complex types (List, Dict, Tuple, Optional)</li>
+            <li>Type aliases and NewType</li>
+            <li>Protocol and abstract base classes</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module23-type-hinting') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">⚡</div>
+          <h3>Asyncio & Concurrency</h3>
+          <p>Write asynchronous code with async/await. Handle concurrent operations efficiently.</p>
+          <ul class="topic-list">
+            <li>Async and await keywords</li>
+            <li>Event loop and tasks</li>
+            <li>Asyncio gather and wait</li>
+            <li>Async context managers and iterators</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module24-asyncio') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🧵</div>
+          <h3>Multithreading & Multiprocessing</h3>
+          <p>Parallelize tasks with threads and processes. Understand GIL and concurrent execution.</p>
+          <ul class="topic-list">
+            <li>Threading module and Thread class</li>
+            <li>Process class and multiprocessing</li>
+            <li>Locks and synchronization</li>
+            <li>Pool for parallel execution</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module25-multithreading') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🗂️</div>
+          <h3>Advanced File & Path Operations</h3>
+          <p>Work with file systems using pathlib and os modules. Handle complex file operations.</p>
+          <ul class="topic-list">
+            <li>Pathlib for modern path handling</li>
+            <li>OS module for system operations</li>
+            <li>Directory traversal</li>
+            <li>File metadata and permissions</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module26-path-ops') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🕐</div>
+          <h3>Date, Time & Timezone Handling</h3>
+          <p>Master datetime module for temporal operations. Work with timezones and time arithmetic.</p>
+          <ul class="topic-list">
+            <li>Datetime and timedelta objects</li>
+            <li>Formatting and parsing dates</li>
+            <li>Timezone handling with pytz</li>
+            <li>Calendar operations</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module27-datetime') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔌</div>
+          <h3>Working with APIs</h3>
+          <p>Consume REST APIs using requests library. Handle authentication and API responses.</p>
+          <ul class="topic-list">
+            <li>GET and POST requests</li>
+            <li>Headers and authentication</li>
+            <li>Response handling and JSON parsing</li>
+            <li>Error handling in API calls</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module28-apis') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔐</div>
+          <h3>Testing & Debugging</h3>
+          <p>Write unit tests with unittest and pytest. Debug code effectively with pdb.</p>
+          <ul class="topic-list">
+            <li>Unittest framework basics</li>
+            <li>Pytest fixtures and parametrize</li>
+            <li>Mocking and patching</li>
+            <li>Debugger (pdb) usage</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module29-testing') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📦</div>
+          <h3>Virtual Environments & Package Management</h3>
+          <p>Manage project dependencies with venv and pip. Create isolated Python environments.</p>
+          <ul class="topic-list">
+            <li>Creating virtual environments</li>
+            <li>Installing packages with pip</li>
+            <li>Requirements.txt file</li>
+            <li>Package distribution basics</li>
+          </ul>
+          <a href="{{ url_for('python_module', module='module30-venv') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <h2>About Eduvalt</h2>
+        <p>Eduvalt is your comprehensive learning platform for mastering Python programming. We provide structured,
+          high-quality content that takes you from complete beginner to advanced Python developer.</p>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Comprehensive Content</h3>
+            <p>Detailed explanations with practical examples for every concept</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Structured Learning</h3>
+            <p>Progressive curriculum designed for optimal learning outcomes</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">💡</div>
+            <h3>Hands-on Practice</h3>
+            <p>Real-world examples and coding exercises to reinforce learning</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🚀</div>
+            <h3>Career Ready</h3>
+            <p>Industry-relevant skills to prepare you for professional development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+      <p>Master Python Programming - From Beginner to Advanced</p>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Add smooth scrolling to nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Add navbar shadow on scroll
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

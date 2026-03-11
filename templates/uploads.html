@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploads - File Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='uploads.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">
+                <i class="fas fa-cloud-upload-alt"></i>
+                File Management Center
+            </h1>
+            <a href="{{ dashboard_url }}" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <div class="upload-card">
+                <div class="upload-header">
+                    <i class="fas fa-upload upload-icon"></i>
+                    <h2>Upload Your Files</h2>
+                    <p>Drag and drop files here or click to browse</p>
+                </div>
+                
+                <form method="POST" enctype="multipart/form-data" action="{{ url_for('uploads') }}" id="uploadForm">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-cloud"></i>
+                            <p class="upload-text">Drop files here or <span class="browse-link">browse</span></p>
+                            <div class="file-types">
+                                <span>PDF</span><span>DOC</span><span>TXT</span><span>IMAGE</span>
+                            </div>
+                        </div>
+                        <input type="file" name="file" id="fileInput" required>
+                    </div>
+                    <div class="upload-progress" id="uploadProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text">Uploading...</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- User Files Section -->
+        <div class="files-section">
+            <div class="files-card">
+                <div class="section-header">
+                    <h2><i class="fas fa-folder-open"></i> Your Files</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+
+                {% if files %}
+                <form method="POST" action="{{ url_for('delete_files') }}" id="deleteForm">
+                    <div class="files-container" id="filesContainer">
+                        {% for file in files %}
+                        <div class="file-item" data-file="{{ file }}">
+                            <div class="file-checkbox">
+                                <input type="checkbox" name="selected_files" value="{{ file }}" id="file_{{ loop.index }}">
+                                <label for="file_{{ loop.index }}"></label>
+                            </div>
+                            <div class="file-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="file-info">
+                                <h3 class="file-name">{{ file }}</h3>
+                                <p class="file-size">2.5 MB</p>
+                            </div>
+                            <div class="file-actions">
+                                <a href="{{ url_for('serve_file', username=session['username'], filename=file) }}" 
+                                   target="_blank" class="action-btn view-btn-action">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ url_for('serve_file', username=session['username'], filename=file) }}" 
+                                   download class="action-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <input type="hidden" name="target_user" value="{{ session['username'] }}">
+                    <div class="bulk-actions" id="bulkActions">
+                        <span class="selected-count">0 files selected</span>
+                        <button type="submit" class="delete-selected-btn">
+                            <i class="fas fa-trash"></i>
+                            Delete Selected
+                        </button>
+                    </div>
+                </form>
+                {% else %}
+                <div class="empty-state">
+                    <i class="fas fa-folder-open empty-icon"></i>
+                    <h3>No files uploaded yet</h3>
+                    <p>Upload your first file to get started!</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Superuser Shared Files Section -->
+        {% if superuser_files %}
+        <div class="shared-section">
+            <div class="shared-card">
+                <div class="section-header">
+                    <h2><i class="fas fa-share-alt"></i> Shared by Admin</h2>
+                    <span class="file-count">{{ superuser_files|length }} files</span>
+                </div>
+                
+                <div class="shared-files-container">
+                    {% for file in superuser_files %}
+                    <div class="shared-file-item">
+                        <div class="shared-file-icon">
+                            <i class="fas fa-file-download"></i>
+                        </div>
+                        <div class="shared-file-info">
+                            <h3>{{ file }}</h3>
+                            <p>Shared by Administrator</p>
+                        </div>
+                        <a href="{{ url_for('serve_file', username='superuser', filename=file) }}" 
+                           target="_blank" download class="download-shared-btn">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+    <!-- File Preview Modal -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                
+            </div>
+            <div class="modal-body">
+                <div class="preview-content" id="previewContent">
+                    <!-- Preview content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // File upload functionality
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const uploadForm = document.getElementById('uploadForm');
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                handleFileUpload();
+            }
+        });
+
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', handleFileUpload);
+
+        function handleFileUpload() {
+            if (fileInput.files.length > 0) {
+                uploadProgress.style.display = 'block';
+                
+                // Simulate upload progress
+                const progressFill = document.querySelector('.progress-fill');
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 20;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            uploadForm.submit();
+                        }, 500);
+                    }
+                    progressFill.style.width = progress + '%';
+                }, 200);
+            }
+        }
+
+        // View toggle functionality
+        const viewButtons = document.querySelectorAll('.view-btn');
+        const filesContainer = document.getElementById('filesContainer');
+
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const view = btn.dataset.view;
+                filesContainer.className = `files-container ${view}-view`;
+            });
+        });
+
+        // File selection functionality
+        const checkboxes = document.querySelectorAll('input[name="selected_files"]');
+        const bulkActions = document.getElementById('bulkActions');
+        const selectedCount = document.querySelector('.selected-count');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateBulkActions);
+        });
+
+        function updateBulkActions() {
+            const selectedFiles = document.querySelectorAll('input[name="selected_files"]:checked');
+            const count = selectedFiles.length;
+            
+            selectedCount.textContent = `${count} file${count !== 1 ? 's' : ''} selected`;
+            bulkActions.style.display = count > 0 ? 'flex' : 'none';
+        }
+
+        // Delete confirmation
+        document.getElementById('deleteForm')?.addEventListener('submit', (e) => {
+            const selectedFiles = document.querySelectorAll('input[name="selected_files"]:checked');
+            if (selectedFiles.length === 0) {
+                e.preventDefault();
+                alert('Please select files to delete.');
+                return;
+            }
+            
+            if (!confirm(`Are you sure you want to delete ${selectedFiles.length} file(s)?`)) {
+                e.preventDefault();
+            }
+        });
+
+        // Add smooth animations
+        const cards = document.querySelectorAll('.upload-card, .files-card, .shared-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

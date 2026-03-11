@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Flow - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+     <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Control Flow</h1>
+      <p>Control program execution with if-elif-else statements and understand conditional logic.</p>
+    </div>
+  </section>
+
+  <!-- Module Content -->
+  <section class="module-content">
+    <div class="container">
+      
+      <!-- Topic 1 -->
+      <div class="topic-section">
+        <h2>1. If-Else Statements</h2>
+        <p>If-else statements allow your program to make decisions and execute different code based on conditions.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Basic If Statement</h3>
+          <pre><code># Simple if statement
+age = 20
+
+if age >= 18:
+    print("You are an adult")
+    print("You can vote")
+
+# Output:
+# You are an adult
+# You can vote
+
+# If condition is False, code block is skipped
+age = 15
+
+if age >= 18:
+    print("You are an adult")  # This won't execute
+
+print("Program continues...")  # This executes</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: If-Else Statement</h3>
+          <pre><code># If-else provides alternative execution path
+temperature = 75
+
+if temperature > 80:
+    print("It's hot outside!")
+else:
+    print("The weather is pleasant")
+
+# Output: The weather is pleasant
+
+# Account balance check
+balance = 50
+withdrawal = 75
+
+if withdrawal <= balance:
+    balance = balance - withdrawal
+    print(f"Withdrawal successful. New balance: ${balance}")
+else:
+    print("Insufficient funds!")
+    print(f"Your balance: ${balance}")
+
+# Output: Insufficient funds!
+#         Your balance: $50</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Multiple Conditions with Logical Operators</h3>
+          <pre><code># Using 'and' operator
+age = 25
+has_license = True
+
+if age >= 18 and has_license:
+    print("You can drive a car")
+else:
+    print("You cannot drive")
+
+# Output: You can drive a car
+
+# Using 'or' operator
+day = "Saturday"
+is_holiday = False
+
+if day == "Saturday" or day == "Sunday" or is_holiday:
+    print("It's a day off!")
+else:
+    print("It's a working day")
+
+# Output: It's a day off!
+
+# Complex condition
+score = 85
+attendance = 90
+
+if score >= 80 and attendance >= 85:
+    print("Congratulations! You qualify for honors")
+else:
+    print("Keep working hard!")
+
+# Output: Congratulations! You qualify for honors</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Password Validator</h3>
+          <pre><code># Real-world example: Password validation
+password = "SecurePass123"
+
+# Check multiple conditions
+has_length = len(password) >= 8
+has_digit = any(char.isdigit() for char in password)
+has_upper = any(char.isupper() for char in password)
+
+if has_length and has_digit and has_upper:
+    print("Strong password!")
+    print("Password accepted")
+else:
+    print("Weak password!")
+    if not has_length:
+        print("- Password must be at least 8 characters")
+    if not has_digit:
+        print("- Password must contain at least one digit")
+    if not has_upper:
+        print("- Password must contain at least one uppercase letter")
+
+# Output: Strong password!
+#         Password accepted</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-section">
+        <h2>2. Elif Chains for Multiple Conditions</h2>
+        <p>Use elif (else if) to check multiple conditions in sequence.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Grade Calculator</h3>
+          <pre><code># Determine letter grade based on score
+score = 87
+
+if score >= 90:
+    grade = 'A'
+    print(f"Excellent! Grade: {grade}")
+elif score >= 80:
+    grade = 'B'
+    print(f"Good job! Grade: {grade}")
+elif score >= 70:
+    grade = 'C'
+    print(f"Fair. Grade: {grade}")
+elif score >= 60:
+    grade = 'D'
+    print(f"Needs improvement. Grade: {grade}")
+else:
+    grade = 'F'
+    print(f"Failed. Grade: {grade}")
+
+# Output: Good job! Grade: B
+
+# Only ONE block executes (the first True condition)
+# Remaining conditions are not checked</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Ticket Pricing System</h3>
+          <pre><code># Calculate ticket price based on age
+age = 8
+
+if age < 3:
+    price = 0
+    category = "Free (Infant)"
+elif age < 12:
+    price = 10
+    category = "Child"
+elif age < 18:
+    price = 15
+    category = "Teen"
+elif age < 65:
+    price = 20
+    category = "Adult"
+else:
+    price = 12
+    category = "Senior"
+
+print(f"Age: {age}")
+print(f"Category: {category}")
+print(f"Ticket Price: ${price}")
+
+# Output:
+# Age: 8
+# Category: Child
+# Ticket Price: $10</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: BMI Calculator with Categories</h3>
+          <pre><code># Calculate BMI and determine category
+weight = 70  # kg
+height = 1.75  # meters
+
+bmi = weight / (height ** 2)
+
+print(f"Your BMI: {bmi:.1f}")
+
+if bmi < 18.5:
+    category = "Underweight"
+    advice = "Consider consulting a nutritionist"
+elif bmi < 25:
+    category = "Normal weight"
+    advice = "Keep up the healthy lifestyle!"
+elif bmi < 30:
+    category = "Overweight"
+    advice = "Consider regular exercise"
+else:
+    category = "Obese"
+    advice = "Consult a healthcare professional"
+
+print(f"Category: {category}")
+print(f"Advice: {advice}")
+
+# Output:
+# Your BMI: 22.9
+# Category: Normal weight
+# Advice: Keep up the healthy lifestyle!</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Day of Week Identifier</h3>
+          <pre><code># Identify day type based on day number
+day_number = 3
+
+if day_number == 1:
+    day = "Monday"
+    type_of_day = "Weekday"
+elif day_number == 2:
+    day = "Tuesday"
+    type_of_day = "Weekday"
+elif day_number == 3:
+    day = "Wednesday"
+    type_of_day = "Weekday"
+elif day_number == 4:
+    day = "Thursday"
+    type_of_day = "Weekday"
+elif day_number == 5:
+    day = "Friday"
+    type_of_day = "Weekday"
+elif day_number == 6:
+    day = "Saturday"
+    type_of_day = "Weekend"
+elif day_number == 7:
+    day = "Sunday"
+    type_of_day = "Weekend"
+else:
+    day = "Invalid"
+    type_of_day = "Error"
+
+print(f"Day {day_number}: {day} ({type_of_day})")
+# Output: Day 3: Wednesday (Weekday)</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-section">
+        <h2>3. Nested Conditionals</h2>
+        <p>Place if statements inside other if statements for complex decision-making.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Basic Nested If</h3>
+          <pre><code># Check multiple levels of conditions
+age = 25
+has_ticket = True
+
+if age >= 18:
+    print("You meet the age requirement")
+    
+    if has_ticket:
+        print("You can enter the concert")
+        print("Enjoy the show!")
+    else:
+        print("Please purchase a ticket first")
+else:
+    print("Sorry, you must be 18 or older")
+
+# Output:
+# You meet the age requirement
+# You can enter the concert
+# Enjoy the show!</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Login System</h3>
+          <pre><code># Multi-level authentication check
+username = "admin"
+password = "secret123"
+is_verified = True
+
+if username == "admin":
+    print("Username correct")
+    
+    if password == "secret123":
+        print("Password correct")
+        
+        if is_verified:
+            print("Login successful!")
+            print("Welcome to the admin panel")
+        else:
+            print("Please verify your email first")
+    else:
+        print("Incorrect password")
+        print("Please try again")
+else:
+    print("Username not found")
+
+# Output:
+# Username correct
+# Password correct
+# Login successful!
+# Welcome to the admin panel</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Loan Approval System</h3>
+          <pre><code># Complex nested conditions for loan approval
+age = 30
+income = 55000
+credit_score = 720
+employment_years = 5
+
+print("Loan Application Review")
+print("-" * 30)
+
+if age >= 21 and age <= 65:
+    print("✓ Age requirement met")
+    
+    if income >= 30000:
+        print("✓ Income requirement met")
+        
+        if credit_score >= 650:
+            print("✓ Credit score acceptable")
+            
+            if employment_years >= 2:
+                print("✓ Employment history sufficient")
+                print("\n✅ LOAN APPROVED!")
+                
+                # Determine interest rate
+                if credit_score >= 750:
+                    rate = 3.5
+                elif credit_score >= 700:
+                    rate = 4.5
+                else:
+                    rate = 5.5
+                
+                print(f"Interest Rate: {rate}%")
+            else:
+                print("✗ Need at least 2 years employment")
+                print("\n❌ LOAN DENIED")
+        else:
+            print("✗ Credit score too low")
+            print("\n❌ LOAN DENIED")
+    else:
+        print("✗ Insufficient income")
+        print("\n❌ LOAN DENIED")
+else:
+    print("✗ Age must be between 21 and 65")
+    print("\n❌ LOAN DENIED")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Shipping Cost Calculator</h3>
+          <pre><code># Calculate shipping based on weight and destination
+weight = 5.5  # kg
+destination = "International"
+is_express = True
+
+print(f"Package Weight: {weight}kg")
+print(f"Destination: {destination}")
+
+if destination == "Domestic":
+    if weight <= 1:
+        base_cost = 5
+    elif weight <= 5:
+        base_cost = 10
+    else:
+        base_cost = 15
+    
+    if is_express:
+        total_cost = base_cost * 1.5
+        delivery = "1-2 days"
+    else:
+        total_cost = base_cost
+        delivery = "3-5 days"
+
+elif destination == "International":
+    if weight <= 1:
+        base_cost = 20
+    elif weight <= 5:
+        base_cost = 40
+    else:
+        base_cost = 60
+    
+    if is_express:
+        total_cost = base_cost * 1.8
+        delivery = "3-5 days"
+    else:
+        total_cost = base_cost
+        delivery = "7-14 days"
+else:
+    total_cost = 0
+    delivery = "Unknown"
+
+print(f"Shipping Cost: ${total_cost:.2f}")
+print(f"Estimated Delivery: {delivery}")
+
+# Output:
+# Package Weight: 5.5kg
+# Destination: International
+# Shipping Cost: $108.00
+# Estimated Delivery: 3-5 days</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 4 -->
+      <div class="topic-section">
+        <h2>4. Ternary Operators</h2>
+        <p>Write compact conditional expressions in a single line.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Basic Ternary Operator</h3>
+          <pre><code># Syntax: value_if_true if condition else value_if_false
+
+# Traditional if-else
+age = 20
+if age >= 18:
+    status = "Adult"
+else:
+    status = "Minor"
+print(status)  # Output: Adult
+
+# Using ternary operator (more concise)
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+print(status)  # Output: Adult
+
+# Another example
+score = 85
+result = "Pass" if score >= 50 else "Fail"
+print(f"Result: {result}")  # Output: Result: Pass
+
+# With numbers
+a = 10
+b = 20
+max_value = a if a > b else b
+print(f"Maximum: {max_value}")  # Output: Maximum: 20</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Ternary in Print Statements</h3>
+          <pre><code># Use ternary directly in print
+temperature = 75
+print(f"It's {'hot' if temperature > 80 else 'pleasant'}")
+# Output: It's pleasant
+
+# Even/Odd checker
+number = 7
+print(f"{number} is {'even' if number % 2 == 0 else 'odd'}")
+# Output: 7 is odd
+
+# Price with discount
+price = 100
+has_coupon = True
+final_price = price * 0.9 if has_coupon else price
+print(f"Final price: ${final_price}")
+# Output: Final price: $90.0
+
+# Greeting based on time
+hour = 14
+greeting = "Good morning" if hour < 12 else "Good afternoon" if hour < 18 else "Good evening"
+print(greeting)  # Output: Good afternoon</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Nested Ternary Operators</h3>
+          <pre><code># Multiple conditions in ternary (use carefully!)
+score = 85
+
+# Traditional nested if
+if score >= 90:
+    grade = 'A'
+elif score >= 80:
+    grade = 'B'
+elif score >= 70:
+    grade = 'C'
+else:
+    grade = 'F'
+
+# Using nested ternary (less readable but compact)
+grade = 'A' if score >= 90 else 'B' if score >= 80 else 'C' if score >= 70 else 'F'
+print(f"Grade: {grade}")  # Output: Grade: B
+
+# Tip calculator
+bill = 50
+service = "excellent"  # excellent, good, poor
+
+# Nested ternary for tip percentage
+tip_percent = 0.20 if service == "excellent" else 0.15 if service == "good" else 0.10
+tip = bill * tip_percent
+print(f"Tip: ${tip:.2f}")  # Output: Tip: $10.00</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 4: Practical Ternary Examples</h3>
+          <pre><code># Absolute value
+number = -15
+absolute = number if number >= 0 else -number
+print(f"Absolute value: {absolute}")  # Output: 15
+
+# Pluralization
+count = 1
+print(f"{count} item{'s' if count != 1 else ''}")
+# Output: 1 item
+
+count = 5
+print(f"{count} item{'s' if count != 1 else ''}")
+# Output: 5 items
+
+# User status
+is_online = True
+status_icon = "🟢" if is_online else "🔴"
+status_text = "Online" if is_online else "Offline"
+print(f"{status_icon} {status_text}")
+# Output: 🟢 Online
+
+# Discount eligibility
+purchases = 3
+is_member = True
+discount = 0.15 if is_member and purchases > 2 else 0.10 if is_member else 0
+print(f"Your discount: {discount * 100}%")
+# Output: Your discount: 15.0%
+
+# Safe division
+a = 10
+b = 0
+result = a / b if b != 0 else "Cannot divide by zero"
+print(result)  # Output: Cannot divide by zero</code></pre>
+        </div>
+      </div>
+
+      <!-- Practice Exercises -->
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Temperature Advisor</h3>
+          <p>Write a program that:</p>
+          <ul>
+            <li>Takes a temperature value</li>
+            <li>If temp < 32: print "Freezing! Wear a heavy coat"</li>
+            <li>If 32 ≤ temp < 60: print "Cold! Wear a jacket"</li>
+            <li>If 60 ≤ temp < 80: print "Pleasant! Light clothing"</li>
+            <li>If temp ≥ 80: print "Hot! Stay hydrated"</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Movie Ticket Pricing</h3>
+          <p>Create a ticket pricing system:</p>
+          <ul>
+            <li>Base price: $15</li>
+            <li>50% off for children (age < 12)</li>
+            <li>30% off for seniors (age ≥ 65)</li>
+            <li>Add $5 for 3D movies</li>
+            <li>Use nested if statements to calculate final price</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Login Validator</h3>
+          <p>Build a login system that checks:</p>
+          <ul>
+            <li>Username is in approved list</li>
+            <li>Password is correct</li>
+            <li>Account is not suspended</li>
+            <li>Use nested if-else to provide specific error messages</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Ternary Practice</h3>
+          <p>Convert these if-else statements to ternary operators:</p>
+          <ul>
+            <li>Check if number is positive or negative</li>
+            <li>Determine if year is leap year (divisible by 4)</li>
+            <li>Calculate bonus: 10% if sales > 50000, else 5%</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module2-operators') }}" class="nav-button">← Previous: Operators & Expressions</a>
+       <a href="{{ url_for('python_module', module='module4-loops') }}" class="nav-button">Next: Loops →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+    <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    // Create copy button
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    // Copy functionality
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>

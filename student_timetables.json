@@ -1,0 +1,279 @@
+{
+    "manohar": {
+        "timetable": {
+            "Monday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Tuesday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Wednesday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Thursday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Friday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "C",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ]
+        },
+        "generated_date": "2026-03-11T18:47:54.290646",
+        "courses": [
+            "C",
+            "Python"
+        ]
+    },
+    "aa": {
+        "timetable": {
+            "Monday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Tuesday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Wednesday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Thursday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ],
+            "Friday": [
+                {
+                    "time": "9:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "4:00 PM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                }
+            ]
+        },
+        "generated_date": "2026-03-11T19:01:10.548787",
+        "courses": [
+            "Python"
+        ]
+    }
+}

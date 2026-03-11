@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Welcome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="particles-bg" id="particles"></div>
+
+    <div class="page-wrapper">
+        <header class="enhanced-header">
+            <div class="header-content">
+                <h1>
+                    <span class="welcome-text">Welcome,</span>
+                    <span class="username-highlight">{{ username }}</span>
+                    <div class="typing-cursor"></div>
+                </h1>
+                <div class="header-buttons">
+                    <a href="{{ url_for('uploads') }}">
+                        <button class="upload-button modern-btn">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Upload File</span>
+                        </button>
+                    </a>
+                    <a href="{{ url_for('logout') }}">
+                        <button class="logout-button modern-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="header-wave"></div>
+        </header>
+
+        <div class="main-container">
+            <!-- Profile Section -->
+            <div class="section-container profile-section" data-aos="fade-up">
+                <div class="section-header">
+                    <i class="fas fa-user-circle section-icon"></i>
+                    <h2>Profile</h2>
+                    <div class="section-badge">Personal</div>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <ul class="file-list">
+                        <li class="file-item profile-item">
+                            <i class="fas fa-id-badge"></i>
+                            <div class="item-content">
+                                <strong>Username:</strong>
+                                <span class="username-tag">{{ username }}</span>
+                            </div>
+                        </li>
+                        <li class="file-item profile-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="item-content">
+                                <strong>Role:</strong>
+                                <span class="role-badge {{ 'superuser' if session.get('is_superuser') else 'user' }}">
+                                    {{ 'Superuser' if session.get('is_superuser') else 'User' }}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Courses Section -->
+            <div class="section-container courses-section" data-aos="fade-up" data-aos-delay="100">
+                <div class="section-header">
+                    <i class="fas fa-graduation-cap section-icon"></i>
+                    <h2>Courses</h2>
+                    <div class="section-badge">{{ COURSES|length }} Available</div>
+                </div>
+                <div class="courses-grid">
+                    {# Use the server-side COURSES list if available, otherwise fallback to inline list #}
+                    {% set courses_list = COURSES if (COURSES is defined) else [
+                        {"name": "Python", "icon": "fab fa-python", "color": "#3776ab", "progress": 85},
+                        {"name": "Java", "icon": "fab fa-java", "color": "#f89820", "progress": 72},
+                        {"name": "C", "icon": "fas fa-code", "color": "#00599c", "progress": 68},
+                        {"name": "C++", "icon": "fas fa-code", "color": "#004482", "progress": 75}
+                    ] %}
+                    
+                    {% for c in courses_list %}
+                        {# Normalize course into dict if courses_list contains plain strings #}
+                        {% if c is string %}
+                            {% set course = {"name": c, "icon": "fas fa-laptop-code", "color": "#4f8cff", "progress": (loop.index * 17) % 100} %}
+                        {% else %}
+                            {% set course = c %}
+                        {% endif %}
+
+                        {# Map to route for each course (fallback to courses page) #}
+                        {% set cname = course.name.lower() %}
+                        {% if 'python' in cname %}
+                            {% set target = url_for('python_course') %}
+                        {% elif 'java' in cname %}
+                            {% set target = url_for('java_course') %}
+                        {% elif 'c++' in cname or 'c#' in cname %}
+                            {% set target = url_for('cpp_course') %}
+                        {% elif cname == 'c' %}
+                            {% set target = url_for('c_course') %}
+                        {% else %}
+                            {% set target = url_for('courses') %}
+                        {% endif %}
+
+                        <div class="course-card" data-course="{{ course.name }}">
+                            <a class="course-link-card" href="{{ target }}" aria-label="Open {{ course.name }}">
+                                <div class="course-icon" style="color: {{ course.color }}">
+                                    <i class="{{ course.icon }}"></i>
+                                </div>
+                                <div class="course-info">
+                                    <h3>{{ course.name }}</h3>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: {{ course.progress }}%; background: {{ course.color }}"></div>
+                                    </div>
+                                    <span class="progress-text">{{ course.progress }}% Complete</span>
+                                </div>
+                                <div class="course-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Updates Section -->
+            <div class="section-container updates-section" data-aos="fade-up" data-aos-delay="200">
+                <div class="section-header">
+                    <i class="fas fa-bell section-icon"></i>
+                    <h2>Updates</h2>
+                    <div class="notification-dot"></div>
+                </div>
+                <div class="updates-container">
+                    {% if superuser_files %}
+                        <ul class="file-list updates-list">
+                            {% for file in superuser_files %}
+                                <li class="file-item update-item">
+                                    <div class="update-icon">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="update-content">
+                                        {# link to serve_file for the superuser (varshith) files #}
+                                        <a href="{{ url_for('serve_file', username='varshith', filename=file) }}" target="_blank" rel="noopener noreferrer">
+                                            {{ file }}
+                                        </a>
+                                        <span class="update-time">New</span>
+                                    </div>
+                                    <div class="update-arrow">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="no-updates">
+                            <i class="fas fa-inbox"></i>
+                            <p>No updates from superuser.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Time Table Section -->
+            <div class="section-container timetable-section" data-aos="fade-up" data-aos-delay="300">
+                <div class="section-header">
+                    <i class="fas fa-calendar-alt section-icon"></i>
+                    <h2>Time Table</h2>
+                    <div class="section-badge">Weekly</div>
+                </div>
+                <div class="timetable-grid">
+                    {% for day in [
+                        {"day": "Mon", "subject": "Python", "time": "09:00 AM", "color": "#3776ab"},
+                        {"day": "Tue", "subject": "Java", "time": "10:00 AM", "color": "#f89820"},
+                        {"day": "Wed", "subject": "C++", "time": "11:00 AM", "color": "#004482"},
+                        {"day": "Thu", "subject": "Projects", "time": "02:00 PM", "color": "#28a745"},
+                        {"day": "Fri", "subject": "Assessment", "time": "03:00 PM", "color": "#dc3545"}
+                    ] %}
+                        <div class="timetable-card">
+                            <div class="day-badge" style="background: {{ day.color }}">{{ day.day }}</div>
+                            <div class="timetable-info">
+                                <h4>{{ day.subject }}</h4>
+                                <span class="time-slot">
+                                    <i class="fas fa-clock"></i>
+                                    {{ day.time }}
+                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="section-container results-section" data-aos="fade-up" data-aos-delay="400">
+                <div class="section-header">
+                    <i class="fas fa-chart-line section-icon"></i>
+                    <h2>Results</h2>
+                    <div class="section-badge">Latest</div>
+                </div>
+                <div class="results-grid">
+                    {% for result in [
+                        {"subject": "Python", "score": 92, "grade": "A+", "color": "#3776ab"},
+                        {"subject": "Java", "score": 89, "grade": "A", "color": "#f89820"},
+                        {"subject": "C++", "score": 85, "grade": "A", "color": "#004482"},
+                        {"subject": "DSA", "score": 90, "grade": "A+", "color": "#28a745"}
+                    ] %}
+                        <div class="result-card">
+                            <div class="result-header">
+                                <h4>{{ result.subject }}</h4>
+                                <div class="grade-badge" style="background: {{ result.color }}">{{ result.grade }}</div>
+                            </div>
+                            <div class="score-display">
+                                <div class="score-circle" style="border-color: {{ result.color }}">
+                                    <span class="score-number">{{ result.score }}</span>
+                                    <span class="score-percent">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Chat Bubble -->
+    <div class="chat-bubble" id="chatBubble" aria-label="Open chat assistant" role="button" tabindex="0">
+        <div class="chat-pulse"></div>
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Enhanced Chat Box -->
+    <div class="chat-box" id="chatBox" role="dialog" aria-modal="true" aria-labelledby="chatTitle" tabindex="-1">
+        <div class="chat-header">
+            <div class="chat-title-section">
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chat-title-text">
+                    <span id="chatTitle">AI Assistant</span>
+                    <span class="chat-status">Online</span>
+                </div>
+            </div>
+            <button class="minimize-btn" id="minimizeBtn" aria-label="Close chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages" aria-live="polite" aria-relevant="additions">
+            <div class="message bot">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    Hello! I'm your AI assistant. I can help you with programming questions, course materials, or any other academic support you need. How can I assist you today?
+                </div>
+            </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator" aria-live="assertive" hidden>
+            <div class="typing-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="typing-dots">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <div class="input-container">
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Ask me about Python, Java, C++, or your coursework..."
+                    aria-label="Type your message"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                />
+                <button id="sendBtn" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+
+    <script>
+        // Particle background animation
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const numberOfParticles = 50;
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Intersection Observer for animations
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section-container').forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Course card interactions
+        function initializeCourseCards() {
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        // Chat functionality (same as before)
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            initializeAnimations();
+            initializeCourseCards();
+
+            const chatBubble = document.getElementById('chatBubble');
+            const chatBox = document.getElementById('chatBox');
+            const minimizeBtn = document.getElementById('minimizeBtn');
+            const userInput = document.getElementById('userInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const chatMessages = document.getElementById('chatMessages');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            chatBubble.addEventListener('click', () => {
+                chatBox.classList.add('active');
+                chatBubble.style.display = 'none';
+                userInput.focus();
+                loadChatHistory();
+            });
+
+            chatBubble.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    chatBubble.click();
+                }
+            });
+
+            minimizeBtn.addEventListener('click', () => {
+                chatBox.classList.remove('active');
+                chatBubble.style.display = 'flex';
+                chatBubble.focus();
+            });
+
+            function createCopyButton() {
+                const button = document.createElement('button');
+                button.className = 'copy-button';
+                button.innerHTML = '<i class="fas fa-copy"></i>';
+                button.onclick = (e) => {
+                    const codeBlock = e.target.closest('.code-block').querySelector('code');
+                    navigator.clipboard.writeText(codeBlock.textContent);
+                    button.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-copy"></i>';
+                    }, 2000);
+                };
+                return button;
+            }
+
+            function formatCodeBlock(text) {
+                const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
+                return text.replace(codeBlockRegex, (match, language, code) => {
+                    const div = document.createElement('div');
+                    div.className = 'code-block';
+                    const codeElement = document.createElement('code');
+                    codeElement.className = language ? `language-${language}` : '';
+                    codeElement.textContent = code.trim();
+                    div.appendChild(codeElement);
+                    div.appendChild(createCopyButton());
+                    return div.outerHTML;
+                });
+            }
+
+            function formatMessage(text) {
+                text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+                text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+                text = text.replace(/^\s*[-*]\s+(.*)$/gm, '<li>$1</li>');
+                return text;
+            }
+
+            function addMessage(message, type, save = true) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', type);
+                const messageContent = document.createElement('div');
+                messageContent.classList.add('message-content');
+
+                if (type === 'user') {
+                    const userAvatar = document.createElement('div');
+                    userAvatar.classList.add('message-avatar', 'user-avatar');
+                    userAvatar.innerHTML = '<i class="fas fa-user"></i>';
+                    messageDiv.appendChild(userAvatar);
+                    messageContent.textContent = message;
+                } else {
+                    const botAvatar = document.createElement('div');
+                    botAvatar.classList.add('message-avatar');
+                    botAvatar.innerHTML = '<i class="fas fa-robot"></i>';
+                    messageDiv.appendChild(botAvatar);
+
+                    if (message.includes('```')) {
+                        messageContent.innerHTML = formatCodeBlock(message);
+                    } else {
+                        messageContent.innerHTML = formatMessage(message);
+                    }
+                }
+
+                messageDiv.appendChild(messageContent);
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                if (window.Prism) {
+                    Prism.highlightAllUnder(messageDiv);
+                }
+
+                if (save) saveChatHistory();
+            }
+
+            function showTyping(show = true) {
+                typingIndicator.hidden = !show;
+                if (show) {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+
+            function saveChatHistory() {
+                const messages = [];
+                chatMessages.querySelectorAll('.message').forEach((msg) => {
+                    const content = msg.querySelector('.message-content');
+                    messages.push({
+                        type: msg.classList.contains('user') ? 'user' : 'bot',
+                        content: content.textContent || content.innerText,
+                        html: content.innerHTML.includes('code-block') ? content.innerHTML : null,
+                    });
+                });
+                localStorage.setItem('chatHistory', JSON.stringify(messages));
+            }
+
+            function loadChatHistory() {
+                const history = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+                if (history.length === 0) {
+                    // Keep the initial welcome message
+                } else {
+                    chatMessages.innerHTML = '';
+                    history.forEach((msg) => {
+                        addMessage(msg.html || msg.content, msg.type, false);
+                    });
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (!message) return;
+
+                addMessage(message, 'user');
+
+                userInput.value = '';
+                userInput.disabled = true;
+                sendBtn.disabled = true;
+
+                showTyping(true);
+
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message }),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        showTyping(false);
+                        if (data.response) {
+                            addMessage(data.response, 'bot');
+                        } else {
+                            addMessage('Sorry, something went wrong.', 'bot');
+                        }
+                    })
+                    .catch(() => {
+                        showTyping(false);
+                        addMessage('Sorry, something went wrong.', 'bot');
+                    })
+                    .finally(() => {
+                        userInput.disabled = false;
+                        sendBtn.disabled = false;
+                        userInput.focus();
+                    });
+            }
+
+            sendBtn.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            chatBox.classList.remove('active');
+            chatBubble.style.display = 'flex';
+        });
+    </script>
+</body>
+</html>

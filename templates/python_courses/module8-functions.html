@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functions - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Functions</h1>
+      <p>Create reusable code blocks with functions. Understand parameters, return values, and scope.</p>
+    </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+      
+      <div class="topic-section">
+        <h2>1. Function Definition and Calling</h2>
+        <p>Functions are reusable blocks of code that perform specific tasks. Define with 'def' and call by name.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Basic Function Definition</h3>
+          <pre><code># Define a simple function
+def greet():
+    print("Hello, World!")
+
+# Call the function
+greet()  # Output: Hello, World!
+
+# Function with multiple statements
+def display_info():
+    print("Welcome to Python functions!")
+    print("Functions help organize code.")
+    print("They make code reusable.")
+
+display_info()
+
+# Function that performs calculation
+def calculate_square():
+    number = 5
+    square = number ** 2
+    print(f"Square of {number} is {square}")
+
+calculate_square()  # Output: Square of 5 is 25</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Function Naming and Best Practices</h3>
+          <pre><code># Function names should be descriptive
+def calculate_area():
+    length = 10
+    width = 5
+    area = length * width
+    print(f"Area: {area}")
+
+calculate_area()  # Output: Area: 50
+
+# Functions can be called multiple times
+def say_hello():
+    print("Hello!")
+
+say_hello()
+say_hello()
+say_hello()
+
+# Functions can call other functions
+def morning_routine():
+    say_hello()
+    print("Time for breakfast!")
+
+morning_routine()
+
+# Output:
+# Hello!
+# Time for breakfast!
+
+# Docstrings for documentation
+def greet_user(name):
+    """This function greets a user by name."""
+    print(f"Hello, {name}!")
+
+greet_user("Alice")  # Output: Hello, Alice!</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Function Execution Flow</h3>
+          <pre><code># Code execution jumps to function when called
+print("Before function call")
+
+def my_function():
+    print("Inside the function")
+    print("This executes when function is called")
+
+print("After function definition")
+my_function()  # Function call
+print("After function call")
+
+# Output:
+# Before function call
+# After function definition
+# Inside the function
+# This executes when function is called
+# After function call
+
+# Functions are objects
+def add_numbers():
+    return 5 + 3
+
+result = add_numbers()
+print(f"Result: {result}")  # Result: 8
+
+# Assign function to variable
+calculator = add_numbers
+print(f"Calculator result: {calculator()}")  # Calculator result: 8</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. Parameters and Arguments</h2>
+        <p>Parameters are variables in function definition. Arguments are values passed when calling the function.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Positional Parameters</h3>
+          <pre><code># Function with parameters
+def greet_person(name, age):
+    print(f"Hello, {name}! You are {age} years old.")
+
+# Call with positional arguments
+greet_person("Alice", 25)  # Output: Hello, Alice! You are 25 years old.
+greet_person("Bob", 30)    # Output: Hello, Bob! You are 30 years old.
+
+# Multiple parameters
+def calculate_rectangle_area(length, width):
+    area = length * width
+    print(f"Area: {area}")
+
+calculate_rectangle_area(10, 5)  # Area: 50
+calculate_rectangle_area(7, 3)   # Area: 21
+
+# Order matters with positional arguments
+def divide(a, b):
+    result = a / b
+    print(f"{a} divided by {b} is {result}")
+
+divide(10, 2)  # 10 divided by 2 is 5.0
+divide(2, 10)  # 2 divided by 10 is 0.2</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Default Parameters and Keyword Arguments</h3>
+          <pre><code># Default parameter values
+def greet_with_default(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet_with_default("Alice")          # Hello, Alice!
+greet_with_default("Bob", "Hi")      # Hi, Bob!
+
+# Keyword arguments
+def create_profile(name, age, city):
+    print(f"Name: {name}, Age: {age}, City: {city}")
+
+create_profile(age=25, name="Charlie", city="NYC")
+# Output: Name: Charlie, Age: 25, City: NYC
+
+# Mix positional and keyword (positional first)
+create_profile("Diana", city="LA", age=28)
+# Output: Name: Diana, Age: 28, City: LA
+
+# Default and keyword combined
+def send_email(to, subject="No Subject", body=""):
+    print(f"To: {to}")
+    print(f"Subject: {subject}")
+    print(f"Body: {body}")
+    print("---")
+
+send_email("user@example.com")
+send_email("admin@test.com", subject="Urgent", body="Check server")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Variable-Length Arguments (*args and **kwargs)</h3>
+          <pre><code># *args for variable positional arguments
+def sum_all(*numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+print(sum_all(1, 2, 3))      # 6
+print(sum_all(10, 20, 30, 40))  # 100
+print(sum_all())             # 0
+
+# **kwargs for variable keyword arguments
+def print_info(**info):
+    for key, value in info.items():
+        print(f"{key}: {value}")
+
+print_info(name="Alice", age=25, city="NYC")
+# Output:
+# name: Alice
+# age: 25
+# city: NYC
+
+# Combine all parameter types
+def flexible_function(required, *args, default="default", **kwargs):
+    print(f"Required: {required}")
+    print(f"Args: {args}")
+    print(f"Default: {default}")
+    print(f"Kwargs: {kwargs}")
+
+flexible_function("test", 1, 2, 3, extra="value")
+# Output:
+# Required: test
+# Args: (1, 2, 3)
+# Default: default
+# Kwargs: {'extra': 'value'}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Return Statements</h2>
+        <p>Functions can return values using the return statement. Return ends function execution.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Returning Values</h3>
+          <pre><code># Function that returns a value
+def add_numbers(a, b):
+    return a + b
+
+result = add_numbers(5, 3)
+print(f"Sum: {result}")  # Sum: 8
+
+# Use return value in expressions
+total = add_numbers(10, 20) + add_numbers(1, 2)
+print(f"Total: {total}")  # Total: 33
+
+# Return different types
+def get_user_info():
+    return "Alice", 25, "Engineer"
+
+name, age, job = get_user_info()
+print(f"{name} is {age} years old and works as {job}")
+
+# Return None implicitly (no return statement)
+def print_message():
+    print("This function doesn't return anything")
+
+result = print_message()
+print(f"Return value: {result}")  # Return value: None</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Multiple Return Points</h3>
+          <pre><code># Return based on conditions
+def check_number(num):
+    if num > 0:
+        return "Positive"
+    elif num < 0:
+        return "Negative"
+    else:
+        return "Zero"
+
+print(check_number(5))   # Positive
+print(check_number(-3))  # Negative
+print(check_number(0))   # Zero
+
+# Early return
+def validate_age(age):
+    if age < 0:
+        return "Invalid age"
+    if age < 18:
+        return "Minor"
+    return "Adult"
+
+print(validate_age(25))  # Adult
+print(validate_age(15))  # Minor
+print(validate_age(-5))  # Invalid age
+
+# Return multiple values as tuple
+def get_min_max(numbers):
+    return min(numbers), max(numbers)
+
+minimum, maximum = get_min_max([3, 1, 7, 2, 9])
+print(f"Min: {minimum}, Max: {maximum}")  # Min: 1, Max: 9</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Return vs Print</h3>
+          <pre><code># Print vs Return
+def print_square(num):
+    print(num ** 2)  # Prints the result
+
+def return_square(num):
+    return num ** 2  # Returns the result
+
+# Using print function
+print_square(4)  # Output: 16
+result = print_square(4)  # Output: 16
+print(f"Returned value: {result}")  # Returned value: None
+
+# Using return function
+result = return_square(4)
+print(f"Square: {result}")  # Square: 16
+
+# Practical example: Calculator
+def calculator(a, b, operation):
+    if operation == "add":
+        return a + b
+    elif operation == "subtract":
+        return a - b
+    elif operation == "multiply":
+        return a * b
+    elif operation == "divide":
+        if b != 0:
+            return a / b
+        else:
+            return "Cannot divide by zero"
+    else:
+        return "Invalid operation"
+
+print(calculator(10, 5, "add"))       # 15
+print(calculator(10, 5, "divide"))    # 2.0
+print(calculator(10, 0, "divide"))    # Cannot divide by zero</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Local and Global Scope</h2>
+        <p>Variables have scope - where they can be accessed. Local variables are inside functions, global outside.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Local Variables</h3>
+          <pre><code># Local variables exist only inside functions
+def my_function():
+    local_var = "I'm local"
+    print(local_var)
+
+my_function()  # Output: I'm local
+
+# This would cause an error:
+# print(local_var)  # NameError: name 'local_var' is not defined
+
+# Different functions can have same local variable names
+def function1():
+    x = 10
+    print(f"function1 x: {x}")
+
+def function2():
+    x = 20
+    print(f"function2 x: {x}")
+
+function1()  # function1 x: 10
+function2()  # function2 x: 20
+
+# Parameters are also local
+def greet(name):
+    greeting = f"Hello, {name}!"
+    print(greeting)
+
+greet("Alice")  # Hello, Alice!
+# print(name)  # NameError
+# print(greeting)  # NameError</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Global Variables</h3>
+          <pre><code># Global variables can be accessed everywhere
+global_var = "I'm global"
+
+def access_global():
+    print(global_var)  # Can read global variable
+
+access_global()  # Output: I'm global
+
+# Modifying global variables inside functions
+count = 0
+
+def increment():
+    global count  # Declare global to modify
+    count += 1
+    print(f"Count: {count}")
+
+increment()  # Count: 1
+increment()  # Count: 2
+print(f"Global count: {count}")  # Global count: 2
+
+# Avoid modifying globals when possible
+def better_increment():
+    # Use return instead of global
+    return count + 1
+
+count = better_increment()
+print(f"New count: {count}")  # New count: 3</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Scope Hierarchy and nonlocal</h3>
+          <pre><code># Nested functions and nonlocal
+def outer_function():
+    outer_var = "outer"
+
+    def inner_function():
+        nonlocal outer_var  # Access outer function's variable
+        outer_var = "modified by inner"
+        inner_var = "inner"
+        print(f"Inner: {outer_var}, {inner_var}")
+
+    inner_function()
+    print(f"Outer after inner: {outer_var}")
+
+outer_function()
+# Output:
+# Inner: modified by inner, inner
+# Outer after inner: modified by inner
+
+# Global in nested functions
+global_counter = 0
+
+def counter_function():
+    def increment():
+        global global_counter
+        global_counter += 1
+        return global_counter
+    return increment
+
+counter = counter_function()
+print(counter())  # 1
+print(counter())  # 2
+
+# Built-in scope (avoid shadowing)
+# Don't do: len = 5  # This would shadow built-in len()
+
+# LEGB Rule: Local, Enclosing, Global, Built-in
+def demonstrate_scope():
+    var = "local"
+    print(var)  # local
+
+    def inner():
+        print(var)  # enclosing (if no local var)
+    
+    inner()
+
+demonstrate_scope()</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Temperature Converter</h3>
+          <p>Create functions to convert between Celsius, Fahrenheit, and Kelvin:</p>
+          <ul>
+            <li>celsius_to_fahrenheit(celsius)</li>
+            <li>fahrenheit_to_celsius(fahrenheit)</li>
+            <li>celsius_to_kelvin(celsius)</li>
+            <li>kelvin_to_celsius(kelvin)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Math Operations</h3>
+          <p>Write a calculator function that takes two numbers and an operation:</p>
+          <ul>
+            <li>Support add, subtract, multiply, divide</li>
+            <li>Handle division by zero</li>
+            <li>Return the result or an error message</li>
+            <li>Use if-elif for different operations</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: List Statistics</h3>
+          <p>Create functions to calculate statistics on a list of numbers:</p>
+          <ul>
+            <li>calculate_mean(numbers)</li>
+            <li>calculate_median(numbers)</li>
+            <li>calculate_mode(numbers)</li>
+            <li>find_min_max(numbers) - return both min and max</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Password Validator</h3>
+          <p>Write a function that validates passwords with these criteria:</p>
+          <ul>
+            <li>At least 8 characters long</li>
+            <li>Contains at least one uppercase letter</li>
+            <li>Contains at least one lowercase letter</li>
+            <li>Contains at least one digit</li>
+            <li>Return True/False and list of failed criteria</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+       <a href="{{ url_for('python_module', module='module7-dictionaries') }}" class="nav-button">Next: Dictionaries →</a>
+        <a href="{{ url_for('python_course') }}" class="nav-button">Back to All Modules  →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+  <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    // Create copy button
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    // Copy functionality
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");   
+        }, 2000);
+        });
+    });
+    });
+});
+    </script>
+</body>
+</html>
