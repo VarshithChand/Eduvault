@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functions in C - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">⚙️</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('c_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Functions in C</h1>
+      <p>Create reusable code blocks with functions. Understand parameters, return values, and scope.</p>
+    </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+      
+      <div class="topic-section">
+        <h2>1. Function Definition and Calling</h2>
+        <p>Functions are reusable blocks of code that perform specific tasks. Every program has at least one function: main().</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Basic Function Definition</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+// Function declaration (prototype)
+void greet();
+
+int main() {
+    // Call the function
+    greet();  // Output: Hello, World!
+    return 0;
+}
+
+// Function definition
+void greet() {
+    printf("Hello, World!\n");
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Function with Multiple Statements</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+void display_info() {
+    printf("Welcome to C functions!\n");
+    printf("Functions help organize code.\n");
+    printf("They make code reusable.\n");
+}
+
+void calculate_square() {
+    int number = 5;
+    int square = number * number;
+    printf("Square of %d is %d\n", number, square);
+}
+
+int main() {
+    display_info();
+    calculate_square();  // Output: Square of 5 is 25
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Function Declaration vs Definition</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+// Function declaration (prototype) - tells compiler about function
+void sayHello();
+void calculateArea();
+
+int main() {
+    sayHello();        // Hello!
+    calculateArea();   // Area: 50
+    return 0;
+}
+
+// Function definitions
+void sayHello() {
+    printf("Hello!\n");
+}
+
+void calculateArea() {
+    int length = 10;
+    int width = 5;
+    int area = length * width;
+    printf("Area: %d\n", area);
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. Parameters and Arguments</h2>
+        <p>Parameters are variables in function definition. Arguments are values passed when calling the function.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Function with Parameters</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+void greet_person(char name[], int age) {
+    printf("Hello, %s! You are %d years old.\n", name, age);
+}
+
+void calculate_rectangle_area(int length, int width) {
+    int area = length * width;
+    printf("Area: %d\n", area);
+}
+
+int main() {
+    greet_person("Alice", 25);
+    // Output: Hello, Alice! You are 25 years old.
+    
+    greet_person("Bob", 30);
+    // Output: Hello, Bob! You are 30 years old.
+    
+    calculate_rectangle_area(10, 5);  // Area: 50
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Parameters by Value vs Pointer</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+// Pass by value - original is not changed
+void increment_by_value(int num) {
+    num++;
+    printf("Inside function: %d\n", num);
+}
+
+// Pass by pointer (reference) - original is changed
+void increment_by_pointer(int *num) {
+    (*num)++;
+    printf("Inside function: %d\n", *num);
+}
+
+int main() {
+    int x = 10;
+    
+    increment_by_value(x);
+    printf("After by value: %d\n", x);  // Still 10
+    
+    increment_by_pointer(&x);
+    printf("After by pointer: %d\n", x);  // Now 11
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Multiple Parameters</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+void divide(double a, double b) {
+    double result = a / b;
+    printf("%.2f divided by %.2f is %.2f\n", a, b, result);
+}
+
+void display_student_info(char name[], int roll, double gpa) {
+    printf("Name: %s\n", name);
+    printf("Roll No: %d\n", roll);
+    printf("GPA: %.2f\n", gpa);
+}
+
+int main() {
+    divide(10, 2);    // 10.00 divided by 2.00 is 5.00
+    divide(2, 10);    // 2.00 divided by 10.00 is 0.20
+    
+    display_student_info("Charlie", 101, 3.8);
+    return 0;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Return Statements</h2>
+        <p>Functions can return values using the return statement. Return ends function execution.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Returning Values</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+int add_numbers(int a, int b) {
+    return a + b;
+}
+
+double calculate_average(double a, double b, double c) {
+    return (a + b + c) / 3;
+}
+
+int main() {
+    int result = add_numbers(5, 3);
+    printf("Sum: %d\n", result);  // Sum: 8
+    
+    double avg = calculate_average(10, 20, 30);
+    printf("Average: %.2f\n", avg);  // Average: 20.00
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Conditional Returns</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+char check_number(int num) {
+    if (num > 0) {
+        return 'P';  // Positive
+    } else if (num < 0) {
+        return 'N';  // Negative
+    } else {
+        return 'Z';  // Zero
+    }
+}
+
+int validate_age(int age) {
+    if (age < 0) {
+        return -1;  // Invalid
+    }
+    if (age < 18) {
+        return 0;  // Minor
+    }
+    return 1;  // Adult
+}
+
+int main() {
+    printf("Check 5: %c\n", check_number(5));     // P
+    printf("Check -3: %c\n", check_number(-3));   // N
+    printf("Check 0: %c\n", check_number(0));     // Z
+    
+    printf("Age 25: %d\n", validate_age(25));     // 1
+    printf("Age 15: %d\n", validate_age(15));     // 0
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Void Functions (No Return)</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+// Void function - doesn't return a value
+void print_square(int num) {
+    printf("%d\n", num * num);
+}
+
+// Returns a value
+int calculate_square(int num) {
+    return num * num;
+}
+
+int main() {
+    print_square(4);  // Output: 16
+    
+    int result = calculate_square(5);
+    printf("Square: %d\n", result);  // Square: 25
+    return 0;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Local and Global Variables</h2>
+        <p>Local variables exist within functions. Global variables exist throughout the program.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Local Variables</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+void my_function() {
+    int local_var = 10;  // Local variable
+    printf("Local: %d\n", local_var);
+}
+
+void function1() {
+    int x = 10;
+    printf("function1 x: %d\n", x);
+}
+
+void function2() {
+    int x = 20;  // Different x in function2
+    printf("function2 x: %d\n", x);
+}
+
+int main() {
+    my_function();    // Local: 10
+    function1();      // function1 x: 10
+    function2();      // function2 x: 20
+    
+    // printf("%d", local_var);  // Error: local_var not defined
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Global Variables</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+// Global variable - accessible throughout the program
+int global_count = 0;
+
+void increment() {
+    global_count++;
+    printf("Count: %d\n", global_count);
+}
+
+void display() {
+    printf("Global count: %d\n", global_count);
+}
+
+int main() {
+    increment();      // Count: 1
+    increment();      // Count: 2
+    display();        // Global count: 2
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Static Variables</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+void counter() {
+    static int count = 0;  // Initialized only once
+    count++;
+    printf("Count: %d\n", count);
+}
+
+int main() {
+    counter();  // Count: 1
+    counter();  // Count: 2
+    counter();  // Count: 3
+    
+    // Static variables retain their values between function calls
+    return 0;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Temperature Converter</h3>
+          <p>Create functions to convert between Celsius, Fahrenheit, and Kelvin:</p>
+          <ul>
+            <li>celsius_to_fahrenheit(double celsius)</li>
+            <li>fahrenheit_to_celsius(double fahrenheit)</li>
+            <li>celsius_to_kelvin(double celsius)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Calculator Functions</h3>
+          <p>Write functions for arithmetic operations:</p>
+          <ul>
+            <li>int add(int a, int b)</li>
+            <li>int subtract(int a, int b)</li>
+            <li>int multiply(int a, int b)</li>
+            <li>double divide(double a, double b)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Array Operations</h3>
+          <p>Create functions for array manipulation:</p>
+          <ul>
+            <li>int find_max(int arr[], int size)</li>
+            <li>int find_min(int arr[], int size)</li>
+            <li>double calculate_average(int arr[], int size)</li>
+            <li>void reverse_array(int arr[], int size)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: String Utilities</h3>
+          <p>Create utility functions for strings:</p>
+          <ul>
+            <li>int string_length(char str[])</li>
+            <li>void reverse_string(char str[])</li>
+            <li>int is_palindrome(char str[])</li>
+            <li>void concatenate_strings(char str1[], char str2[], char result[])</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('c_course') }}" class="nav-button">← Back to All Modules</a>
+        <a href="{{ url_for('c_course') }}" class="nav-button">Next Module →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");   
+        }, 2000);
+      });
+    });
+  });
+});
+  </script>
+</body>
+</html>

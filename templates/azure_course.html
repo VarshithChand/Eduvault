@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduvalt - Master Azure DevOps</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    /* Back to Home Button - Fixed Top Right */
+    .back-home-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .back-home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      opacity: 0.95;
+    }
+
+    .back-home-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+    }
+
+    .back-home-btn .arrow {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Push nav links slightly left so they don't overlap the button */
+    .navbar .container {
+      padding-right: 160px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Back to Home Button (Fixed Top Right) -->
+  <a href="/welcome" class="back-home-btn" title="Go back to Welcome Page">
+    <span class="arrow">←</span> Home
+  </a>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🔷</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#beginner">Beginner</a></li>
+        <li><a href="#intermediate">Intermediate</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Master Azure DevOps</h1>
+        <p class="hero-subtitle">From Beginner to Advanced - Your Complete Learning Journey</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('beginner')">Start Learning</button>
+          <button class="btn btn-secondary" onclick="scrollToSection('about')">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beginner Level -->
+  <section id="beginner" class="level-section beginner-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge beginner">Beginner</span>
+        <h2>Foundation Concepts</h2>
+        <p>Start your Azure DevOps journey with foundational concepts</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div class="module-icon">☁️</div>
+          <h3>Introduction to Cloud Computing</h3>
+          <p>Understand cloud computing fundamentals, service models, and deployment types.</p>
+          <ul class="topic-list">
+            <li>Cloud computing overview</li>
+            <li>IaaS, PaaS, SaaS models</li>
+            <li>Cloud deployment models</li>
+            <li>Cloud benefits &amp; challenges</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='intro-cloud-computing') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div class="module-icon">🔷</div>
+          <h3>Introduction to Microsoft Azure</h3>
+          <p>Get started with Azure services, the Azure ecosystem, and resource management.</p>
+          <ul class="topic-list">
+            <li>Azure overview &amp; services</li>
+            <li>Azure regions &amp; availability</li>
+            <li>Azure account setup</li>
+            <li>Resource groups</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='intro-azure') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div class="module-icon">🖥️</div>
+          <h3>Azure Portal Basics</h3>
+          <p>Navigate and manage Azure resources effectively using the Azure Portal.</p>
+          <ul class="topic-list">
+            <li>Portal navigation</li>
+            <li>Resource management</li>
+            <li>Search &amp; filtering</li>
+            <li>Dashboards &amp; blades</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-portal-basics') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card">
+          <div class="module-icon">⚙️</div>
+          <h3>Azure Virtual Machines</h3>
+          <p>Create and manage virtual machines in Azure with disks, networking, and remote access.</p>
+          <ul class="topic-list">
+            <li>VM creation &amp; sizing</li>
+            <li>Disks &amp; storage</li>
+            <li>Networking setup</li>
+            <li>Remote access</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-vms') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module-card">
+          <div class="module-icon">🗄️</div>
+          <h3>Azure Storage</h3>
+          <p>Store and manage data with Azure Storage services including blobs and file shares.</p>
+          <ul class="topic-list">
+            <li>Storage accounts</li>
+            <li>Blobs &amp; containers</li>
+            <li>File shares</li>
+            <li>Data protection</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-storage') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="module-card">
+          <div class="module-icon">🌐</div>
+          <h3>Azure Networking</h3>
+          <p>Design and configure virtual networks, subnets, and security in Azure.</p>
+          <ul class="topic-list">
+            <li>Virtual networks</li>
+            <li>Subnets &amp; routes</li>
+            <li>Network security groups</li>
+            <li>VPN &amp; connectivity</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-networking') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intermediate Level -->
+  <section id="intermediate" class="level-section intermediate-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge intermediate">Intermediate</span>
+        <h2>Advanced Techniques</h2>
+        <p>Build production-ready DevOps solutions on Azure</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">📋</div>
+          <h3>Azure DevOps Services</h3>
+          <p>Master project management and development tools within the Azure DevOps ecosystem.</p>
+          <ul class="topic-list">
+            <li>DevOps projects</li>
+            <li>Boards &amp; backlogs</li>
+            <li>Work items</li>
+            <li>Dashboards</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-devops-services') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔀</div>
+          <h3>Git Repositories</h3>
+          <p>Version control with Git on Azure — branching, pull requests, and code reviews.</p>
+          <ul class="topic-list">
+            <li>Repository setup</li>
+            <li>Branching strategies</li>
+            <li>Pull requests</li>
+            <li>Code review</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='git-repositories') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔄</div>
+          <h3>Azure Pipelines</h3>
+          <p>Automate build and release pipelines for continuous integration and delivery.</p>
+          <ul class="topic-list">
+            <li>Pipeline creation</li>
+            <li>Build jobs</li>
+            <li>Release stages</li>
+            <li>Approvals &amp; gates</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-pipelines') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🚀</div>
+          <h3>CI/CD with Azure DevOps</h3>
+          <p>Implement continuous integration and deployment strategies using Azure DevOps.</p>
+          <ul class="topic-list">
+            <li>CI concepts &amp; setup</li>
+            <li>CD strategies</li>
+            <li>Testing integration</li>
+            <li>Deployment automation</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='cicd-azure-devops') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📦</div>
+          <h3>Azure Container Registry</h3>
+          <p>Store and manage Docker container images securely with Azure Container Registry.</p>
+          <ul class="topic-list">
+            <li>Registry setup</li>
+            <li>Image management</li>
+            <li>Push &amp; pull operations</li>
+            <li>Webhooks</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-container-registry') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🐳</div>
+          <h3>Docker on Azure</h3>
+          <p>Containerize and deploy applications using Docker on Azure Container Instances.</p>
+          <ul class="topic-list">
+            <li>Docker basics</li>
+            <li>Dockerfile creation</li>
+            <li>Container instances</li>
+            <li>App Service containers</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='docker-azure') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Level -->
+  <section id="advanced" class="level-section advanced-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge advanced">Advanced</span>
+        <h2>Expert Level Topics</h2>
+        <p>Master enterprise-grade DevOps practices on Azure</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">☸️</div>
+          <h3>Kubernetes with AKS</h3>
+          <p>Deploy and manage production Kubernetes clusters on Azure Kubernetes Service.</p>
+          <ul class="topic-list">
+            <li>AKS cluster creation</li>
+            <li>Pod deployments</li>
+            <li>Services &amp; networking</li>
+            <li>Storage &amp; volumes</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='kubernetes-aks') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏗️</div>
+          <h3>Infrastructure as Code with Terraform</h3>
+          <p>Build and version-control Azure infrastructure reliably using Terraform.</p>
+          <ul class="topic-list">
+            <li>Terraform installation</li>
+            <li>Azure provider setup</li>
+            <li>Resource definitions</li>
+            <li>State management</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='terraform-iac') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📊</div>
+          <h3>Azure Monitor</h3>
+          <p>Monitor applications and infrastructure with Azure Monitor, metrics, and alerts.</p>
+          <ul class="topic-list">
+            <li>Metrics &amp; logging</li>
+            <li>Alerts</li>
+            <li>Application Insights</li>
+            <li>Log Analytics</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-monitor') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔐</div>
+          <h3>Azure Security Center</h3>
+          <p>Implement security best practices, threat protection, and compliance management.</p>
+          <ul class="topic-list">
+            <li>Security posture</li>
+            <li>Threat protection</li>
+            <li>Compliance management</li>
+            <li>Incident response</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='azure-security-center') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔄</div>
+          <h3>Automated Deployment Pipelines</h3>
+          <p>Create advanced deployment automation with approval gates and rollback strategies.</p>
+          <ul class="topic-list">
+            <li>Pipeline design patterns</li>
+            <li>Deployment strategies</li>
+            <li>Approval gates</li>
+            <li>Rollback plans</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='automated-deployment') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏆</div>
+          <h3>End-to-End DevOps Project</h3>
+          <p>Implement a complete real-world DevOps project from architecture to monitoring on Azure.</p>
+          <ul class="topic-list">
+            <li>Project architecture</li>
+            <li>Infrastructure setup</li>
+            <li>Complete CI/CD pipeline</li>
+            <li>Security &amp; monitoring</li>
+          </ul>
+          <a href="{{ url_for('azure_module', module='devops-project') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <h2>About Eduvalt</h2>
+        <p>Eduvalt is your comprehensive learning platform for mastering Azure DevOps. We provide structured,
+          high-quality content that takes you from complete beginner to advanced cloud engineer.</p>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Comprehensive Content</h3>
+            <p>Detailed explanations with practical examples for every concept</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Structured Learning</h3>
+            <p>Progressive curriculum designed for optimal learning outcomes</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">💡</div>
+            <h3>Hands-on Practice</h3>
+            <p>Real-world examples and coding exercises to reinforce learning</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🚀</div>
+            <h3>Career Ready</h3>
+            <p>Industry-relevant skills to prepare you for professional development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+      <p>Master Azure DevOps - From Beginner to Advanced</p>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

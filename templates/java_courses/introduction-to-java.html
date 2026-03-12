@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Java - EduVault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-header p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .module-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
+        }
+
+        .module-content h2 {
+            color: #667eea;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+        }
+
+        .module-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .module-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+
+        .coming-soon {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .coming-soon i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-3px);
+        }
+
+        footer {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div style="font-size: 1.5rem; font-weight: 700;">
+                <i class="fas fa-code"></i> EduVault
+            </div>
+            <a href="{{ url_for('java_course') }}">
+                <i class="fas fa-arrow-left"></i> Back to Course
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="{{ url_for('java_course') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Java Course
+        </a>
+
+        <div class="module-header">
+            <h1><i class="fas fa-rocket"></i> Introduction to Java</h1>
+            <p>Learn what Java is, its history, importance, and how to set up your development environment</p>
+        </div>
+
+        <div class="module-content">
+            <h2>Welcome to Java Programming!</h2>
+            <p>
+                Java is one of the most popular and widely-used programming languages in the world. It was created by James Gosling 
+                at Sun Microsystems in 1995 and is known for its philosophy: "Write Once, Run Anywhere" (WORA).
+            </p>
+
+            <h2>What is Java?</h2>
+            <p>
+                Java is a general-purpose, class-based, object-oriented programming language that is designed to have as few 
+                implementation dependencies as possible. It is intended to let application developers write once and run anywhere (WORA), 
+                meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
+            </p>
+
+            <h2>Why Learn Java?</h2>
+            <ul>
+                <li><strong>Platform Independence:</strong> Write once, run anywhere principle</li>
+                <li><strong>Object-Oriented:</strong> Modular and reusable code</li>
+                <li><strong>Strong Community:</strong> Extensive libraries and frameworks</li>
+                <li><strong>High Demand:</strong> One of the most sought-after programming skills</li>
+                <li><strong>Enterprise Solutions:</strong> Used in large-scale applications</li>
+                <li><strong>Rich Ecosystem:</strong> Spring, Hibernate, and many other frameworks</li>
+            </ul>
+
+            <h2>Java Setup Instructions</h2>
+            <p>To get started with Java, you'll need to install the Java Development Kit (JDK). Here are the steps:</p>
+            <ol>
+                <li>Download JDK from <code>oracle.com</code> or <code>openjdk.java.net</code></li>
+                <li>Run the installer and follow the instructions</li>
+                <li>Set up environment variables (JAVA_HOME, PATH)</li>
+                <li>Verify installation using command: <code>java -version</code></li>
+                <li>Choose an IDE: IntelliJ IDEA, Eclipse, or VS Code</li>
+            </ol>
+
+            <div class="code-block">
+// Your First Java Program<br>
+public class HelloWorld {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello, Java!");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+            </div>
+
+            <h2>Key Concepts</h2>
+            <ul>
+                <li><strong>JVM (Java Virtual Machine):</strong> Executes Java bytecode</li>
+                <li><strong>JRE (Java Runtime Environment):</strong> Contains JVM and libraries</li>
+                <li><strong>JDK (Java Development Kit):</strong> Contains JRE + tools for development</li>
+                <li><strong>Bytecode:</strong> Intermediate representation between source code and machine code</li>
+            </ul>
+
+            <div class="coming-soon">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Ready to Learn More?</h3>
+                <p>This module is currently being developed with more detailed content, examples, and exercises coming soon!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 EduVault. All rights reserved.</p>
+    </footer>
+</body>
+</html>

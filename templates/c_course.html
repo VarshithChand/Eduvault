@@ -2,12 +2,412 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>C Programming</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduvalt - Master C Programming</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    /* Back to Home Button - Fixed Top Right */
+    .back-home-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .back-home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      opacity: 0.95;
+    }
+
+    .back-home-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+    }
+
+    .back-home-btn .arrow {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Push nav links slightly left so they don't overlap the button */
+    .navbar .container {
+      padding-right: 160px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>C Programming</h1>
-  <p>Learn the foundations of programming with C 🧩</p>
-  <a href="{{ url_for('courses') }}">⬅ Back to Courses</a>
+
+  <!-- ✅ Back to Home Button (Fixed Top Right) -->
+  <a href="/welcome" class="back-home-btn" title="Go back to Welcome Page">
+    <span class="arrow">←</span> Home
+  </a>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🖥️</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#beginner">Beginner</a></li>
+        <li><a href="#intermediate">Intermediate</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Master C Programming</h1>
+        <p class="hero-subtitle">From Beginner to Advanced - Your Complete Learning Journey</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('beginner')">Start Learning</button>
+          <button class="btn btn-secondary" onclick="scrollToSection('about')">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beginner Level -->
+  <section id="beginner" class="level-section beginner-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge beginner">Beginner</span>
+        <h2>Foundation Concepts</h2>
+        <p>Start your C journey with the fundamentals</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div class="module-icon">🚀</div>
+          <h3>Introduction to C</h3>
+          <p>Learn what C is, its history, importance, and how to set up your development environment.</p>
+          <ul class="topic-list">
+            <li>C Overview &amp; History</li>
+            <li>Compiler setup (GCC)</li>
+            <li>Your first C program</li>
+            <li>Understanding compilation</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='introduction-to-c') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div class="module-icon">📝</div>
+          <h3>Variables & Data Types</h3>
+          <p>Understand C variables, primitive data types, and type conversion fundamentals.</p>
+          <ul class="topic-list">
+            <li>Variable declaration and naming</li>
+            <li>Primitive types (int, float, char)</li>
+            <li>Type casting and conversion</li>
+            <li>Constants and literals</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='variables-data-types') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div class="module-icon">➕</div>
+          <h3>Operators</h3>
+          <p>Master arithmetic, logical, comparison, and bitwise operators in C.</p>
+          <ul class="topic-list">
+            <li>Arithmetic operators (+, -, *, /, %)</li>
+            <li>Comparison operators (==, !=, &lt;, &gt;)</li>
+            <li>Logical operators (&amp;&amp;, ||, !)</li>
+            <li>Bitwise operators</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='operators') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card">
+          <div class="module-icon">🔀</div>
+          <h3>Control Statements</h3>
+          <p>Control program execution with if-else, switch statements and conditional logic in C.</p>
+          <ul class="topic-list">
+            <li>If-else statements</li>
+            <li>Switch cases</li>
+            <li>Ternary operator</li>
+            <li>Nested conditions</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='control-statements') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module-card">
+          <div class="module-icon">🔄</div>
+          <h3>Loops</h3>
+          <p>Iterate through data using for, while, and do-while loops with break and continue.</p>
+          <ul class="topic-list">
+            <li>For loops and range</li>
+            <li>While loops and conditions</li>
+            <li>Do-while loops</li>
+            <li>Break and continue statements</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='loops') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intermediate Level -->
+  <section id="intermediate" class="level-section intermediate-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge intermediate">Intermediate</span>
+        <h2>Advanced Techniques</h2>
+        <p>Deepen your C knowledge with advanced concepts</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">⚙️</div>
+          <h3>Functions</h3>
+          <p>Learn how to create reusable code with functions. Understand parameters, return values, and recursion.</p>
+          <ul class="topic-list">
+            <li>Function declaration and calling</li>
+            <li>Parameters and return types</li>
+            <li>Function pointers</li>
+            <li>Recursion</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='functions') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📚</div>
+          <h3>Arrays</h3>
+          <p>Understand arrays, multi-dimensional arrays, and array operations in C.</p>
+          <ul class="topic-list">
+            <li>1D and 2D arrays</li>
+            <li>3D arrays</li>
+            <li>Array operations and traversal</li>
+            <li>Arrays and functions</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='arrays') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔍</div>
+          <h3>Pointers</h3>
+          <p>Master pointer concepts, address operators, and pointer arithmetic in C.</p>
+          <ul class="topic-list">
+            <li>Pointer declaration</li>
+            <li>Address and dereference operators</li>
+            <li>Pointer arithmetic</li>
+            <li>Pointers and arrays</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='pointers') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔤</div>
+          <h3>Strings</h3>
+          <p>Learn string manipulation, standard string functions, and input/output in C.</p>
+          <ul class="topic-list">
+            <li>String declaration with char arrays</li>
+            <li>Standard string functions (strcpy, strlen)</li>
+            <li>String manipulation</li>
+            <li>String input and output</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='strings') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📦</div>
+          <h3>Structures</h3>
+          <p>Learn to organize data with structures and unions for complex data modelling.</p>
+          <ul class="topic-list">
+            <li>Structure declaration and members</li>
+            <li>Nested structures</li>
+            <li>Unions</li>
+            <li>Arrays of structures</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='structures') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Level -->
+  <section id="advanced" class="level-section advanced-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge advanced">Advanced</span>
+        <h2>Expert Level Topics</h2>
+        <p>Master advanced C concepts for professional development</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">🗂️</div>
+          <h3>Dynamic Memory Allocation</h3>
+          <p>Learn malloc, calloc, realloc, and memory management techniques in C.</p>
+          <ul class="topic-list">
+            <li>malloc() function</li>
+            <li>calloc() function</li>
+            <li>realloc() function</li>
+            <li>Memory deallocation with free()</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='dynamic-memory') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📄</div>
+          <h3>File Handling</h3>
+          <p>Master file operations, reading, writing, and binary file handling in C.</p>
+          <ul class="topic-list">
+            <li>File opening and closing</li>
+            <li>Reading and writing files</li>
+            <li>Binary files</li>
+            <li>File positioning (fseek, ftell)</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='file-handling') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔧</div>
+          <h3>Preprocessor Directives</h3>
+          <p>Learn macros, includes, and conditional compilation for advanced code organization.</p>
+          <ul class="topic-list">
+            <li>#include directive</li>
+            <li>#define macros</li>
+            <li>Conditional compilation (#ifdef)</li>
+            <li>Pragma directives</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='preprocessor') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏛️</div>
+          <h3>Data Structures Basics</h3>
+          <p>Introduction to fundamental data structures implemented in C.</p>
+          <ul class="topic-list">
+            <li>Linked lists</li>
+            <li>Stacks</li>
+            <li>Queues</li>
+            <li>Trees basics</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='data-structures') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔍</div>
+          <h3>Advanced Pointers</h3>
+          <p>Master advanced pointer concepts: pointers to pointers, function pointers, and more.</p>
+          <ul class="topic-list">
+            <li>Pointers to pointers (**)</li>
+            <li>Function pointers</li>
+            <li>Pointer arrays</li>
+            <li>Advanced pointer arithmetic</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='advanced-pointers') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">⚡</div>
+          <h3>Bit Manipulation</h3>
+          <p>Learn advanced bit operations, shifting, masking, and optimization techniques in C.</p>
+          <ul class="topic-list">
+            <li>Bitwise operations (&amp;, |, ^, ~)</li>
+            <li>Bit shifting (&lt;&lt;, &gt;&gt;)</li>
+            <li>Bit masking techniques</li>
+            <li>Bit flags and fields</li>
+          </ul>
+          <a href="{{ url_for('c_module', module='bit-manipulation') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <h2>About Eduvalt</h2>
+        <p>Eduvalt is your comprehensive learning platform for mastering C programming. We provide structured,
+          high-quality content that takes you from complete beginner to advanced C developer.</p>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Comprehensive Content</h3>
+            <p>Detailed explanations with practical examples for every concept</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Structured Learning</h3>
+            <p>Progressive curriculum designed for optimal learning outcomes</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">💡</div>
+            <h3>Hands-on Practice</h3>
+            <p>Real-world examples and coding exercises to reinforce learning</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🚀</div>
+            <h3>Career Ready</h3>
+            <p>Industry-relevant skills to prepare you for professional development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+      <p>Master C Programming - From Beginner to Advanced</p>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Add smooth scrolling to nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Add navbar shadow on scroll
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+  </script>
 </body>
 </html>

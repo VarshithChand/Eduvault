@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables & Data Types - C++ - EduVault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; background: #f8f9fa; min-height: 100vh; }
+        nav { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; padding: 1rem 2rem; }
+        nav .container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .module-header { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
+        .module-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .module-content { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); line-height: 1.8; }
+        .module-content h2 { color: #f5576c; margin-top: 1.5rem; margin-bottom: 0.8rem; border-left: 4px solid #f5576c; padding-left: 1rem; }
+        .module-content p { margin-bottom: 1rem; }
+        .module-content ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .coming-soon { background: rgba(245, 87, 108, 0.1); border: 2px solid #f5576c; padding: 1.5rem; border-radius: 8px; text-align: center; margin: 2rem 0; }
+        .coming-soon i { font-size: 3rem; color: #f5576c; margin-bottom: 1rem; }
+        .coming-soon h3 { color: #f5576c; }
+        .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #f5576c; color: white; padding: 0.8rem 1.5rem; border-radius: 25px; text-decoration: none; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div style="font-size: 1.5rem; font-weight: 700;"><i class="fas fa-code"></i> EduVault</div>
+            <a href="{{ url_for('cpp_course') }}"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+    </nav>
+    <div class="container">
+        <a href="{{ url_for('cpp_course') }}" class="back-btn"><i class="fas fa-arrow-left"></i> Back to C++ Course</a>
+        <div class="module-header">
+            <h1><i class="fas fa-boxes"></i> Variables & Data Types</h1>
+            <p>Master variables and data types in modern C++</p>
+        </div>
+        <div class="module-content">
+            <h2>Variables in C++</h2>
+            <p>C++ provides strong type safety with comprehensive support for various data types. Variables must be declared and can be initialized at the same time.</p>
+            <h2>Fundamental Data Types</h2>
+            <ul>
+                <li><strong>int:</strong> Integer values</li>
+                <li><strong>float/double:</strong> Floating-point numbers</li>
+                <li><strong>char:</strong> Character type</li>
+                <li><strong>bool:</strong> Boolean values (true/false)</li>
+                <li><strong>auto:</strong> Type deduction (C++11)</li>
+            </ul>
+            <div class="coming-soon">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Module Coming Soon</h3>
+                <p>Comprehensive content with examples and exercises</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

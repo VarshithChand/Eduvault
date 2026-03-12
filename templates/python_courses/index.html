@@ -6,11 +6,59 @@
   <title>Eduvalt - Master Python Programming</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <style>
-    /* keep any lightweight page-specific CSS here if needed */
+    /* Back to Home Button - Fixed Top Right */
+    .back-home-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .back-home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      opacity: 0.95;
+    }
+
+    .back-home-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+    }
+
+    .back-home-btn .arrow {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Push nav links slightly left so they don't overlap the button */
+    .navbar .container {
+      padding-right: 160px;
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- ✅ Back to Home Button (Fixed Top Right) -->
+  <a href="/welcome" class="back-home-btn" title="Go back to Welcome Page">
+    <span class="arrow">←</span> Home
+  </a>
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
@@ -56,8 +104,7 @@
         <div class="module-card">
           <div class="module-icon">📝</div>
           <h3>Variables & Data Types</h3>
-          <p>Learn about integers, floats, strings, and booleans. Understand type conversion and variable naming
-            conventions.</p>
+          <p>Learn about integers, floats, strings, and booleans. Understand type conversion and variable naming conventions.</p>
           <ul class="topic-list">
             <li>Variable assignment and naming</li>
             <li>Basic data types (int, float, str, bool)</li>
@@ -74,7 +121,7 @@
           <p>Master arithmetic, comparison, logical, and assignment operators for building expressions.</p>
           <ul class="topic-list">
             <li>Arithmetic operators (+, -, *, /, //, %, **)</li>
-            <li>Comparison operators (==, !=, <,>, <=,>=)</li>
+            <li>Comparison operators (==, !=, &lt;, &gt;, &lt;=, &gt;=)</li>
             <li>Logical operators (and, or, not)</li>
             <li>Identity and membership operators</li>
           </ul>

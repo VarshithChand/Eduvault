@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C Basics - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">⚙️</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('c_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>C Language Fundamentals</h1>
+      <p>Learn C basics, compilation, variables, data types, and write your first C program.</p>
+    </div>
+  </section>
+
+  <!-- Module Content -->
+  <section class="module-content">
+    <div class="container">
+      
+      <!-- Topic 1 -->
+      <div class="topic-section">
+        <h2>1. Setting Up C Environment</h2>
+        <p>C requires a compiler to translate code into machine language. Learn about compilers like GCC.</p>
+        
+        <div class="example-box">
+          <h3>Installing GCC (GNU Compiler Collection):</h3>
+          <pre><code>// Windows: Download MinGW or use TDM-GCC
+// Linux: sudo apt-get install build-essential
+// macOS: Install Xcode Command Line Tools
+
+// Verify installation
+gcc --version
+// Output: gcc (GCC) 9.3.0</code></pre>
+        </div>
+
+        <div class="naming-rules">
+          <h3>C Naming Conventions:</h3>
+          <ul>
+            <li>✓ Variable names: lowercase_with_underscores (my_age, user_name)</li>
+            <li>✓ Constants: UPPER_CASE (MAX_SIZE, PI)</li>
+            <li>✓ Function names: lowercase_with_underscores (print_message)</li>
+            <li>✓ Must start with letter or underscore</li>
+            <li>✗ Cannot start with numbers</li>
+            <li>✗ Cannot use C keywords (int, if, while, etc.)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-section">
+        <h2>2. Your First C Program</h2>
+        <p>Learn the structure of a C program and create "Hello World".</p>
+
+        <div class="example-box">
+          <h3>Example 1: Hello World Program</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+
+// Output: Hello, World!</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Program Structure</h3>
+          <pre><code>#include &lt;stdio.h&gt;  // Include standard I/O library
+
+int main() {  // Main function (entry point)
+    // Your code here
+    printf("C Programming\n");
+    return 0;  // Return 0 for successful execution
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-section">
+        <h2>3. Data Types and Variables</h2>
+        <p>C has several data types including integers, floats, characters, and more.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Basic Data Types</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int age = 25;              // Integer
+    float height = 5.9;        // Single precision float
+    double weight = 65.5;      // Double precision float
+    char grade = 'A';          // Single character
+    
+    printf("Age: %d\n", age);
+    printf("Height: %.1f\n", height);
+    printf("Weight: %.2f\n", weight);
+    printf("Grade: %c\n", grade);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Strings in C</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char name[50] = "Alice";  // Character array (string)
+    
+    printf("Name: %s\n", name);
+    printf("Length: %lu\n", strlen(name));
+    
+    char combined[100];
+    strcpy(combined, "Hello, ");
+    strcat(combined, name);
+    printf("%s\n", combined);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Type Sizes</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Size of int: %lu bytes\n", sizeof(int));
+    printf("Size of float: %lu bytes\n", sizeof(float));
+    printf("Size of double: %lu bytes\n", sizeof(double));
+    printf("Size of char: %lu bytes\n", sizeof(char));
+    
+    return 0;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 4 -->
+      <div class="topic-section">
+        <h2>4. Input and Output</h2>
+        <p>Learn to read input from user and display output in C.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Output with printf()</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int age = 25;
+    float salary = 50000.50;
+    char grade = 'A';
+    
+    printf("Age: %d\n", age);           // %d for integer
+    printf("Salary: %.2f\n", salary);   // %.2f for float (2 decimals)
+    printf("Grade: %c\n", grade);       // %c for character
+    printf("Multiple: %d, %f, %c\n", age, salary, grade);
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Input with scanf()</h3>
+          <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int age;
+    char name[50];
+    float height;
+    
+    printf("Enter your name: ");
+    scanf("%s", name);      // Read string
+    
+    printf("Enter your age: ");
+    scanf("%d", &age);      // Read integer (& for address)
+    
+    printf("Enter your height: ");
+    scanf("%f", &height);   // Read float
+    
+    printf("\nName: %s\n", name);
+    printf("Age: %d\n", age);
+    printf("Height: %.2f\n", height);
+    
+    return 0;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Practice Exercises -->
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Simple Program</h3>
+          <p>Write a C program that:</p>
+          <ul>
+            <li>Declares variables for name, age, and salary</li>
+            <li>Assigns values to these variables</li>
+            <li>Prints them using printf()</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: User Input</h3>
+          <p>Create a program that:</p>
+          <ul>
+            <li>Asks for user's name and age</li>
+            <li>Reads input using scanf()</li>
+            <li>Displays the information in a formatted way</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Area Calculator</h3>
+          <p>Write a program that calculates the area of a rectangle.</p>
+          <p>Read length and width from user, then calculate and display area.</p>
+          <p>Formula: Area = length × width</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="module-navigation">
+        <a href="{{ url_for('c_course') }}" class="nav-button">← Back to All Modules</a>
+        <a href="{{ url_for('c_course') }}" class="nav-button">Next Module →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,9 +1,0 @@
-1).python
-
-2.django,flask ----------  machine learning
-     flask                    Spam mail ,rock mine 
-     ECHODOCS
-     html,css,flask,
-     mongodb,aws ec-2 
-                  
-3. PHP and MySQL  

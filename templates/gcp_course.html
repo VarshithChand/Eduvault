@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduvalt - Master GCP DevOps</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    /* Back to Home Button - Fixed Top Right */
+    .back-home-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .back-home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      opacity: 0.95;
+    }
+
+    .back-home-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+    }
+
+    .back-home-btn .arrow {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Push nav links slightly left so they don't overlap the button */
+    .navbar .container {
+      padding-right: 160px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Back to Home Button (Fixed Top Right) -->
+  <a href="/welcome" class="back-home-btn" title="Go back to Welcome Page">
+    <span class="arrow">←</span> Home
+  </a>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🌍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#beginner">Beginner</a></li>
+        <li><a href="#intermediate">Intermediate</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Master GCP DevOps</h1>
+        <p class="hero-subtitle">From Beginner to Advanced - Your Complete Learning Journey</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('beginner')">Start Learning</button>
+          <button class="btn btn-secondary" onclick="scrollToSection('about')">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beginner Level -->
+  <section id="beginner" class="level-section beginner-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge beginner">Beginner</span>
+        <h2>Foundation Concepts</h2>
+        <p>Start your GCP journey with foundational cloud concepts</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div class="module-icon">🌍</div>
+          <h3>Introduction to Google Cloud Platform</h3>
+          <p>Understand GCP services, architecture, core concepts, and the global infrastructure.</p>
+          <ul class="topic-list">
+            <li>GCP overview &amp; services</li>
+            <li>Regions &amp; zones</li>
+            <li>GCP projects</li>
+            <li>Infrastructure basics</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='intro-gcp') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div class="module-icon">🖥️</div>
+          <h3>GCP Console Overview</h3>
+          <p>Navigate and manage GCP resources effectively using the Google Cloud Console.</p>
+          <ul class="topic-list">
+            <li>Console navigation</li>
+            <li>Resource management</li>
+            <li>Search &amp; filtering</li>
+            <li>Notifications &amp; alerts</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='gcp-console') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div class="module-icon">⚙️</div>
+          <h3>Compute Engine</h3>
+          <p>Create and manage virtual machines on GCP with disks, networking, and configurations.</p>
+          <ul class="topic-list">
+            <li>VM instances</li>
+            <li>Instance types &amp; sizing</li>
+            <li>Disks &amp; storage</li>
+            <li>Networking setup</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='compute-engine') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card">
+          <div class="module-icon">🗄️</div>
+          <h3>Cloud Storage</h3>
+          <p>Store and manage data with Google Cloud Storage buckets, objects, and lifecycle rules.</p>
+          <ul class="topic-list">
+            <li>Buckets &amp; objects</li>
+            <li>Storage classes</li>
+            <li>Access control</li>
+            <li>Lifecycle management</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='cloud-storage') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module-card">
+          <div class="module-icon">🔐</div>
+          <h3>IAM in GCP</h3>
+          <p>Master identity and access management, service accounts, roles, and permissions on GCP.</p>
+          <ul class="topic-list">
+            <li>Service accounts</li>
+            <li>IAM roles</li>
+            <li>Permissions</li>
+            <li>Security best practices</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='iam-gcp') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="module-card">
+          <div class="module-icon">🌐</div>
+          <h3>VPC Networks</h3>
+          <p>Design and configure VPC networks, subnets, firewalls, and connectivity on GCP.</p>
+          <ul class="topic-list">
+            <li>VPC creation</li>
+            <li>Subnets &amp; routing</li>
+            <li>Firewalls</li>
+            <li>Peering &amp; interconnect</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='vpc-networks') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intermediate Level -->
+  <section id="intermediate" class="level-section intermediate-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge intermediate">Intermediate</span>
+        <h2>Advanced Techniques</h2>
+        <p>Build production-ready DevOps solutions on GCP</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">🐳</div>
+          <h3>Docker Containers</h3>
+          <p>Containerize applications for consistent and portable GCP deployments.</p>
+          <ul class="topic-list">
+            <li>Docker basics and architecture</li>
+            <li>Images &amp; containers</li>
+            <li>Dockerfile creation</li>
+            <li>Docker networking</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='docker-containers') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📦</div>
+          <h3>Google Container Registry</h3>
+          <p>Store and manage Docker container images securely on Google Cloud.</p>
+          <ul class="topic-list">
+            <li>Registry setup</li>
+            <li>Image management</li>
+            <li>Push &amp; pull operations</li>
+            <li>Integration with GKE</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='google-container-registry') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">☸️</div>
+          <h3>Kubernetes with GKE</h3>
+          <p>Deploy and manage Kubernetes clusters on Google Kubernetes Engine.</p>
+          <ul class="topic-list">
+            <li>GKE cluster creation</li>
+            <li>Pod deployments</li>
+            <li>Services &amp; ingress</li>
+            <li>Storage &amp; networking</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='kubernetes-gke') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔨</div>
+          <h3>Cloud Build CI/CD</h3>
+          <p>Automate build and deployment pipelines using Google Cloud Build.</p>
+          <ul class="topic-list">
+            <li>Build configuration</li>
+            <li>Automated builds</li>
+            <li>Deployment automation</li>
+            <li>Integration with GCR</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='cloud-build-cicd') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏗️</div>
+          <h3>Terraform with GCP</h3>
+          <p>Build and manage GCP infrastructure as code reliably with Terraform.</p>
+          <ul class="topic-list">
+            <li>Terraform basics</li>
+            <li>GCP provider setup</li>
+            <li>Resource definitions</li>
+            <li>State management</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='terraform-gcp') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📊</div>
+          <h3>Monitoring with Cloud Monitoring</h3>
+          <p>Monitor applications and infrastructure performance using Google Cloud Monitoring.</p>
+          <ul class="topic-list">
+            <li>Metrics collection</li>
+            <li>Dashboards</li>
+            <li>Alerts &amp; notifications</li>
+            <li>Log analysis</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='cloud-monitoring') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Level -->
+  <section id="advanced" class="level-section advanced-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge advanced">Advanced</span>
+        <h2>Expert Level Topics</h2>
+        <p>Master enterprise-grade DevOps practices on GCP</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">🏃</div>
+          <h3>Cloud Run</h3>
+          <p>Deploy serverless containers on GCP with automatic scaling and traffic management.</p>
+          <ul class="topic-list">
+            <li>Cloud Run basics</li>
+            <li>Container deployment</li>
+            <li>Scaling &amp; traffic splitting</li>
+            <li>Cost optimization</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='cloud-run') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">⚡</div>
+          <h3>Cloud Functions</h3>
+          <p>Build and deploy serverless event-driven functions on Google Cloud.</p>
+          <ul class="topic-list">
+            <li>Function creation</li>
+            <li>Triggers &amp; events</li>
+            <li>Deployment automation</li>
+            <li>Monitoring &amp; logging</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='cloud-functions') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔄</div>
+          <h3>DevOps Automation Pipelines</h3>
+          <p>Create advanced automation pipelines with build, test, and deploy stages on GCP.</p>
+          <ul class="topic-list">
+            <li>Pipeline architecture</li>
+            <li>Build automation</li>
+            <li>Deployment strategies</li>
+            <li>Release management</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='devops-automation') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏗️</div>
+          <h3>Infrastructure Automation</h3>
+          <p>Fully automate GCP infrastructure provisioning with IaC best practices and Terraform modules.</p>
+          <ul class="topic-list">
+            <li>IaC best practices</li>
+            <li>Terraform modules</li>
+            <li>Automation tools</li>
+            <li>Version control</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='infrastructure-automation') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔐</div>
+          <h3>Security & IAM Policies</h3>
+          <p>Implement GCP security best practices, IAM policies, encryption, and compliance management.</p>
+          <ul class="topic-list">
+            <li>Security policies</li>
+            <li>IAM configuration</li>
+            <li>Encryption</li>
+            <li>Compliance management</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='security-iam-policies') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏆</div>
+          <h3>End-to-End DevOps Deployment</h3>
+          <p>Implement a complete real-world DevOps project from architecture to monitoring on GCP.</p>
+          <ul class="topic-list">
+            <li>Project architecture</li>
+            <li>Complete CI/CD pipeline</li>
+            <li>Infrastructure setup</li>
+            <li>Monitoring &amp; security</li>
+          </ul>
+          <a href="{{ url_for('gcp_module', module='devops-deployment') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <h2>About Eduvalt</h2>
+        <p>Eduvalt is your comprehensive learning platform for mastering GCP DevOps. We provide structured,
+          high-quality content that takes you from complete beginner to advanced cloud engineer.</p>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Comprehensive Content</h3>
+            <p>Detailed explanations with practical examples for every concept</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Structured Learning</h3>
+            <p>Progressive curriculum designed for optimal learning outcomes</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">💡</div>
+            <h3>Hands-on Practice</h3>
+            <p>Real-world examples and coding exercises to reinforce learning</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🚀</div>
+            <h3>Career Ready</h3>
+            <p>Industry-relevant skills to prepare you for professional development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+      <p>Master GCP DevOps - From Beginner to Advanced</p>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduvalt - Master AWS DevOps</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    /* Back to Home Button - Fixed Top Right */
+    .back-home-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .back-home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+      opacity: 0.95;
+    }
+
+    .back-home-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+    }
+
+    .back-home-btn .arrow {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Push nav links slightly left so they don't overlap the button */
+    .navbar .container {
+      padding-right: 160px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ Back to Home Button (Fixed Top Right) -->
+  <a href="/welcome" class="back-home-btn" title="Go back to Welcome Page">
+    <span class="arrow">←</span> Home
+  </a>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">☁️</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#beginner">Beginner</a></li>
+        <li><a href="#intermediate">Intermediate</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Master AWS DevOps</h1>
+        <p class="hero-subtitle">From Beginner to Advanced - Your Complete Learning Journey</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('beginner')">Start Learning</button>
+          <button class="btn btn-secondary" onclick="scrollToSection('about')">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beginner Level -->
+  <section id="beginner" class="level-section beginner-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge beginner">Beginner</span>
+        <h2>Foundation Concepts</h2>
+        <p>Start your AWS DevOps journey with foundational concepts</p>
+      </div>
+
+      <div class="modules-grid">
+        <!-- Module 1 -->
+        <div class="module-card">
+          <div class="module-icon">☁️</div>
+          <h3>Introduction to Cloud Computing</h3>
+          <p>Understand cloud computing fundamentals, service models, and deployment types.</p>
+          <ul class="topic-list">
+            <li>Cloud computing overview</li>
+            <li>IaaS, PaaS, SaaS models</li>
+            <li>Cloud deployment models</li>
+            <li>Cloud benefits &amp; challenges</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='intro-cloud-computing') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="module-card">
+          <div class="module-icon">🖥️</div>
+          <h3>Introduction to AWS</h3>
+          <p>Get started with AWS services, regions, availability zones, and the Management Console.</p>
+          <ul class="topic-list">
+            <li>AWS overview &amp; core services</li>
+            <li>Regions &amp; availability zones</li>
+            <li>AWS Management Console</li>
+            <li>AWS CLI basics</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='intro-aws') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="module-card">
+          <div class="module-icon">🔐</div>
+          <h3>IAM (Identity & Access Management)</h3>
+          <p>Master user management, roles, policies, and security best practices in AWS.</p>
+          <ul class="topic-list">
+            <li>Users &amp; groups</li>
+            <li>Roles &amp; policies</li>
+            <li>Access control mechanisms</li>
+            <li>Security best practices</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='iam-basics') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="module-card">
+          <div class="module-icon">⚙️</div>
+          <h3>EC2 Basics</h3>
+          <p>Launch and manage virtual machines on AWS with key pairs and security groups.</p>
+          <ul class="topic-list">
+            <li>EC2 instances</li>
+            <li>Instance types &amp; sizing</li>
+            <li>Key pairs &amp; security groups</li>
+            <li>Elastic IPs &amp; networking</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='ec2-basics') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="module-card">
+          <div class="module-icon">🗄️</div>
+          <h3>S3 Storage</h3>
+          <p>Work with AWS object storage for scalable, durable, and cost-effective data management.</p>
+          <ul class="topic-list">
+            <li>S3 buckets &amp; objects</li>
+            <li>Storage classes</li>
+            <li>Access control &amp; policies</li>
+            <li>Versioning &amp; lifecycle rules</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='s3-storage') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="module-card">
+          <div class="module-icon">🌐</div>
+          <h3>VPC Fundamentals</h3>
+          <p>Design and configure virtual networking in AWS with subnets, gateways, and security.</p>
+          <ul class="topic-list">
+            <li>VPC architecture</li>
+            <li>Subnets &amp; route tables</li>
+            <li>Internet &amp; NAT gateways</li>
+            <li>Security groups &amp; NACLs</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='vpc-fundamentals') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intermediate Level -->
+  <section id="intermediate" class="level-section intermediate-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge intermediate">Intermediate</span>
+        <h2>Advanced Techniques</h2>
+        <p>Build production-ready DevOps solutions on AWS</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">🐳</div>
+          <h3>Docker Containers</h3>
+          <p>Containerize applications for consistent, portable, and scalable deployments.</p>
+          <ul class="topic-list">
+            <li>Docker basics and architecture</li>
+            <li>Images &amp; containers</li>
+            <li>Dockerfile creation</li>
+            <li>Docker networking</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='docker-containers') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🚢</div>
+          <h3>Amazon ECS</h3>
+          <p>Deploy and manage containers at scale with Amazon Elastic Container Service.</p>
+          <ul class="topic-list">
+            <li>ECS clusters</li>
+            <li>Task definitions</li>
+            <li>Services &amp; load balancing</li>
+            <li>Monitoring &amp; logging</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='amazon-ecs') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📦</div>
+          <h3>Amazon ECR</h3>
+          <p>Store, manage, and deploy Docker container images with Amazon Elastic Container Registry.</p>
+          <ul class="topic-list">
+            <li>ECR repository setup</li>
+            <li>Image management</li>
+            <li>Access control</li>
+            <li>Integration with ECS</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='amazon-ecr') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔀</div>
+          <h3>CI/CD with Jenkins</h3>
+          <p>Automate build and deployment pipelines using Jenkins integrated with AWS.</p>
+          <ul class="topic-list">
+            <li>Jenkins setup &amp; configuration</li>
+            <li>Pipeline creation</li>
+            <li>AWS integration</li>
+            <li>Automated testing</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='jenkins-cicd') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏗️</div>
+          <h3>Infrastructure as Code with Terraform</h3>
+          <p>Build and manage AWS infrastructure reliably using Terraform code.</p>
+          <ul class="topic-list">
+            <li>Terraform basics</li>
+            <li>AWS resource provisioning</li>
+            <li>Modules &amp; reusability</li>
+            <li>State management</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='terraform-iac') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📊</div>
+          <h3>Monitoring with CloudWatch</h3>
+          <p>Monitor applications and infrastructure performance using Amazon CloudWatch.</p>
+          <ul class="topic-list">
+            <li>CloudWatch metrics</li>
+            <li>Alarms &amp; notifications</li>
+            <li>Logs &amp; log groups</li>
+            <li>Dashboards</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='cloudwatch-monitoring') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Level -->
+  <section id="advanced" class="level-section advanced-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="level-badge advanced">Advanced</span>
+        <h2>Expert Level Topics</h2>
+        <p>Master enterprise-grade DevOps practices on AWS</p>
+      </div>
+
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">☸️</div>
+          <h3>Kubernetes with EKS</h3>
+          <p>Deploy and manage production Kubernetes clusters on Amazon Elastic Kubernetes Service.</p>
+          <ul class="topic-list">
+            <li>EKS cluster creation</li>
+            <li>Pod deployments</li>
+            <li>Services &amp; ingress</li>
+            <li>Storage &amp; networking</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='kubernetes-eks') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔄</div>
+          <h3>AWS CodePipeline</h3>
+          <p>Build fully managed continuous delivery pipelines to automate release workflows.</p>
+          <ul class="topic-list">
+            <li>Pipeline creation</li>
+            <li>Source &amp; build stages</li>
+            <li>Deploy strategies</li>
+            <li>Integration &amp; automation</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='aws-codepipeline') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🔨</div>
+          <h3>AWS CodeBuild</h3>
+          <p>Build, test, and package application code at scale with fully managed build service.</p>
+          <ul class="topic-list">
+            <li>Build project setup</li>
+            <li>Buildspec files</li>
+            <li>Environment configuration</li>
+            <li>Artifact management</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='aws-codebuild') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🚀</div>
+          <h3>AWS CodeDeploy</h3>
+          <p>Automate application deployments to EC2, Lambda, and on-premises servers.</p>
+          <ul class="topic-list">
+            <li>Deployment groups</li>
+            <li>Appspec configuration</li>
+            <li>Deployment strategies</li>
+            <li>Rollback handling</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='aws-codedeploy') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📈</div>
+          <h3>Auto Scaling</h3>
+          <p>Automatically scale AWS resources up and down based on demand and custom policies.</p>
+          <ul class="topic-list">
+            <li>Auto scaling groups</li>
+            <li>Launch templates</li>
+            <li>Scaling policies</li>
+            <li>Load balancing integration</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='auto-scaling') }}" class="btn btn-module">Explore Module</a>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🏆</div>
+          <h3>DevOps Project Deployment</h3>
+          <p>Implement a complete real-world DevOps project from infrastructure to CI/CD pipeline.</p>
+          <ul class="topic-list">
+            <li>End-to-end project architecture</li>
+            <li>Infrastructure setup</li>
+            <li>Full CI/CD pipeline</li>
+            <li>Monitoring &amp; optimization</li>
+          </ul>
+          <a href="{{ url_for('aws_module', module='devops-project') }}" class="btn btn-module">Explore Module</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <h2>About Eduvalt</h2>
+        <p>Eduvalt is your comprehensive learning platform for mastering AWS DevOps. We provide structured,
+          high-quality content that takes you from complete beginner to advanced cloud engineer.</p>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Comprehensive Content</h3>
+            <p>Detailed explanations with practical examples for every concept</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Structured Learning</h3>
+            <p>Progressive curriculum designed for optimal learning outcomes</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">💡</div>
+            <h3>Hands-on Practice</h3>
+            <p>Real-world examples and coding exercises to reinforce learning</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🚀</div>
+            <h3>Career Ready</h3>
+            <p>Industry-relevant skills to prepare you for professional development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+      <p>Master AWS DevOps - From Beginner to Advanced</p>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+    "varsh": {
+        "username": "varsh",
+        "full_name": "varshith chand",
+        "email": "varshith@gmail.com",
+        "contact_number": "6300706438",
+        "date_of_birth": "2004-07-15",
+        "created_at": "2026-03-12T11:28:57.067087",
+        "updated_at": "2026-03-12T14:24:10.050578"
+    },
+    "moulii": {
+        "username": "moulii",
+        "full_name": "moulika",
+        "email": "mouli123@gmail.com",
+        "contact_number": "82934892183",
+        "date_of_birth": "2005-06-11",
+        "created_at": "2026-03-12T14:31:38.608950",
+        "updated_at": "2026-03-12T14:45:19.485112"
+    }
+}

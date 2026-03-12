@@ -3,20 +3,497 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Module 9: Sets & Advanced Collections</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Sets & Advanced Collections - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
 </head>
 <body>
-  <div class="module-container">
-    <div class="back-btn">
-      <a href="{{ url_for('python_module', module='index') }}">← Back to Python Courses</a>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
     </div>
-    <h1>Module 9: Sets & Advanced Collections</h1>
-    <p>Learn to work with unordered collections and perform set operations.</p>
-    <div class="content">
-      <h2>Coming Soon</h2>
-      <p>This module content is under development. Please check back later!</p>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Sets & Advanced Collections</h1>
+      <p>Work with unordered unique collections, perform powerful set operations, and explore Python's collections module.</p>
     </div>
-  </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+
+      <div class="topic-section">
+        <h2>1. Creating and Accessing Sets</h2>
+        <p>A set is an unordered collection of unique elements. Duplicates are automatically removed, and sets are not indexed.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Creating Sets</h3>
+          <pre><code># Creating a set with curly braces
+numbers = {1, 2, 3, 4, 5}
+print(numbers)  # {1, 2, 3, 4, 5}
+
+# Duplicates are automatically removed
+values = {1, 2, 2, 3, 3, 3, 4}
+print(values)  # {1, 2, 3, 4}
+
+# Creating a set from a list using set()
+letters = set(["a", "b", "c", "a", "b"])
+print(letters)  # {'a', 'b', 'c'}
+
+# Creating a set from a string
+chars = set("hello")
+print(chars)  # {'h', 'e', 'l', 'o'} — duplicates removed
+
+# Creating an empty set — must use set(), not {}
+empty_set = set()
+print(type(empty_set))   # <class 'set'>
+print(type({}))          # <class 'dict'> — this is a dict!
+
+# Sets can hold mixed types (all must be immutable)
+mixed = {1, "hello", 3.14, True}
+print(mixed)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Checking Membership</h3>
+          <pre><code># Use 'in' to check membership — very fast with sets
+fruits = {"apple", "banana", "cherry", "mango"}
+
+print("apple" in fruits)    # True
+print("grape" in fruits)    # False
+print("banana" not in fruits)  # False
+
+# Sets are faster than lists for membership checks
+# Especially useful with large collections
+large_set = set(range(1000000))
+print(999999 in large_set)  # True — near instant
+
+# len() returns the number of elements
+colors = {"red", "green", "blue"}
+print(len(colors))  # 3
+
+# Sets are unordered — no indexing
+# colors[0]  # ❌ TypeError: 'set' object is not subscriptable
+
+# Iterate over a set
+for fruit in fruits:
+    print(fruit)  # order is not guaranteed</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Sets vs Lists vs Tuples</h3>
+          <pre><code># List — ordered, allows duplicates, mutable
+my_list = [1, 2, 2, 3]
+print(my_list)        # [1, 2, 2, 3]
+print(my_list[0])     # 1 — indexing works
+
+# Tuple — ordered, allows duplicates, immutable
+my_tuple = (1, 2, 2, 3)
+print(my_tuple)       # (1, 2, 2, 3)
+print(my_tuple[0])    # 1 — indexing works
+
+# Set — unordered, unique elements only, mutable
+my_set = {1, 2, 2, 3}
+print(my_set)         # {1, 2, 3}
+# my_set[0]  ❌ — no indexing
+
+# When to use a set:
+# - You need unique values
+# - You need fast membership testing
+# - You want to perform set math (union, intersection, etc.)
+
+# Convert between types
+nums = [1, 2, 2, 3, 3, 4]
+unique = list(set(nums))  # Remove duplicates from a list
+print(unique)  # [1, 2, 3, 4]</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. Adding, Removing, and Modifying Sets</h2>
+        <p>Sets are mutable — you can add or remove elements, but you cannot change an existing element directly.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Adding Elements</h3>
+          <pre><code># .add() adds a single element
+fruits = {"apple", "banana"}
+
+fruits.add("orange")
+print(fruits)  # {'apple', 'banana', 'orange'}
+
+# Adding a duplicate has no effect
+fruits.add("apple")
+print(fruits)  # {'apple', 'banana', 'orange'} — unchanged
+
+# .update() adds multiple elements from any iterable
+fruits.update(["mango", "grape"])
+print(fruits)
+
+# .update() can take sets, lists, or tuples
+fruits.update({"kiwi"}, ("pear",))
+print(fruits)
+
+# Adding elements from another set
+new_fruits = {"lemon", "lime"}
+fruits.update(new_fruits)
+print(len(fruits))  # total unique fruits</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Removing Elements</h3>
+          <pre><code># .remove() — raises KeyError if not found
+fruits = {"apple", "banana", "orange", "mango"}
+
+fruits.remove("banana")
+print(fruits)
+
+# fruits.remove("grape")  # ❌ KeyError: 'grape'
+
+# .discard() — safe, no error if element not found
+fruits.discard("mango")
+print(fruits)
+
+fruits.discard("grape")  # ✅ no error
+print(fruits)            # unchanged
+
+# .pop() removes and returns an arbitrary element
+fruits = {"apple", "banana", "cherry"}
+removed = fruits.pop()
+print(f"Removed: {removed}")
+print(f"Remaining: {fruits}")
+
+# .clear() removes all elements
+data = {1, 2, 3, 4, 5}
+data.clear()
+print(data)  # set()</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Copying Sets</h3>
+          <pre><code># .copy() creates a shallow copy
+original = {1, 2, 3, 4}
+copy = original.copy()
+
+copy.add(5)
+print(original)  # {1, 2, 3, 4} — unchanged
+print(copy)      # {1, 2, 3, 4, 5}
+
+# Assignment does NOT copy — it creates a reference
+a = {10, 20, 30}
+b = a           # b points to the same set
+b.add(40)
+print(a)        # {10, 20, 30, 40} — a is also changed!
+
+# Always use .copy() when you want an independent copy
+a = {10, 20, 30}
+b = a.copy()    # independent copy
+b.add(40)
+print(a)        # {10, 20, 30} — unchanged
+print(b)        # {10, 20, 30, 40}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Set Operations</h2>
+        <p>Sets support mathematical operations like union, intersection, difference, and symmetric difference.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Union and Intersection</h3>
+          <pre><code>a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+# Union — all elements from both sets
+print(a | b)           # {1, 2, 3, 4, 5, 6}
+print(a.union(b))      # same result
+
+# Union of multiple sets
+c = {6, 7, 8}
+print(a | b | c)       # {1, 2, 3, 4, 5, 6, 7, 8}
+print(a.union(b, c))   # same result
+
+# Intersection — only elements in both sets
+print(a & b)                  # {3, 4}
+print(a.intersection(b))      # same result
+
+# Intersection of multiple sets
+x = {1, 2, 3}
+y = {2, 3, 4}
+z = {3, 4, 5}
+print(x & y & z)              # {3}
+print(x.intersection(y, z))   # same result</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Difference and Symmetric Difference</h3>
+          <pre><code>a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+# Difference — elements in a but NOT in b
+print(a - b)              # {1, 2}
+print(a.difference(b))    # same result
+
+# Order matters with difference
+print(b - a)              # {5, 6}
+
+# Symmetric difference — elements in either, but NOT both
+print(a ^ b)                          # {1, 2, 5, 6}
+print(a.symmetric_difference(b))      # same result
+
+# Practical use case
+students_math  = {"Alice", "Bob", "Carol", "Dave"}
+students_science = {"Bob", "Carol", "Eve", "Frank"}
+
+only_math    = students_math - students_science
+only_science = students_science - students_math
+both_classes = students_math & students_science
+
+print(f"Only math: {only_math}")
+print(f"Only science: {only_science}")
+print(f"Both classes: {both_classes}")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Subsets, Supersets, and Disjoint Sets</h3>
+          <pre><code># issubset() — all elements of a are in b
+a = {1, 2, 3}
+b = {1, 2, 3, 4, 5}
+
+print(a.issubset(b))    # True
+print(a <= b)           # True (same as issubset)
+print(b.issubset(a))    # False
+
+# issuperset() — b contains all elements of a
+print(b.issuperset(a))  # True
+print(b >= a)           # True (same as issuperset)
+
+# isdisjoint() — no elements in common
+x = {1, 2, 3}
+y = {4, 5, 6}
+z = {3, 4, 5}
+
+print(x.isdisjoint(y))  # True — no shared elements
+print(x.isdisjoint(z))  # False — 3 is in both
+
+# Practical example: permission checking
+required_perms = {"read", "write"}
+user_perms     = {"read", "write", "execute"}
+
+print(required_perms.issubset(user_perms))  # True — user has access</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Frozen Sets & Advanced Collections</h2>
+        <p>Frozen sets are immutable sets. The collections module provides powerful specialized container types.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Frozen Sets</h3>
+          <pre><code># frozenset — immutable version of a set
+numbers = frozenset([1, 2, 3, 4, 5])
+print(numbers)  # frozenset({1, 2, 3, 4, 5})
+
+# numbers.add(6)    # ❌ AttributeError — immutable
+# numbers.remove(1) # ❌ AttributeError — immutable
+
+# Frozen sets support all read operations
+print(3 in numbers)       # True
+print(len(numbers))       # 5
+
+# Frozen sets can be used as dictionary keys (regular sets cannot)
+permissions = {
+    frozenset({"read"}):            "basic",
+    frozenset({"read", "write"}):   "standard",
+    frozenset({"read", "write", "admin"}): "full"
+}
+user_perms = frozenset({"read", "write"})
+print(permissions[user_perms])  # standard
+
+# Frozen set operations work just like regular sets
+a = frozenset({1, 2, 3})
+b = frozenset({2, 3, 4})
+print(a | b)   # frozenset({1, 2, 3, 4})
+print(a & b)   # frozenset({2, 3})</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Counter</h3>
+          <pre><code>from collections import Counter
+
+# Count frequency of items in a list
+data = ["apple", "banana", "apple", "orange", "banana", "apple"]
+count = Counter(data)
+print(count)
+# Output: Counter({'apple': 3, 'banana': 2, 'orange': 1})
+
+# Access count like a dictionary
+print(count["apple"])    # 3
+print(count["grape"])    # 0 — no KeyError for missing items
+
+# Most common elements
+print(count.most_common(2))
+# Output: [('apple', 3), ('banana', 2)]
+
+# Count characters in a string
+letter_count = Counter("mississippi")
+print(letter_count)
+# Counter({'s': 4, 'i': 4, 'p': 2, 'm': 1})
+
+# Arithmetic with Counters
+a = Counter({"x": 3, "y": 2})
+b = Counter({"x": 1, "z": 4})
+print(a + b)   # Counter({'z': 4, 'x': 4, 'y': 2})
+print(a - b)   # Counter({'y': 2, 'x': 2})</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: defaultdict and namedtuple</h3>
+          <pre><code">from collections import defaultdict, namedtuple
+
+# defaultdict — never raises KeyError for missing keys
+# Provide a default type (int, list, set, etc.)
+word_count = defaultdict(int)
+words = ["cat", "dog", "cat", "bird", "dog", "cat"]
+for word in words:
+    word_count[word] += 1   # no KeyError even on first access
+print(dict(word_count))
+# Output: {'cat': 3, 'dog': 2, 'bird': 1}
+
+# defaultdict with list — great for grouping
+groups = defaultdict(list)
+students = [("Math", "Alice"), ("Science", "Bob"), ("Math", "Carol")]
+for subject, student in students:
+    groups[subject].append(student)
+print(dict(groups))
+# Output: {'Math': ['Alice', 'Carol'], 'Science': ['Bob']}
+
+# namedtuple — tuple with named fields, like a lightweight class
+Student = namedtuple("Student", ["name", "age", "grade"])
+
+s1 = Student("Alice", 20, "A")
+s2 = Student(name="Bob", age=22, grade="B")
+
+print(s1.name)    # Alice
+print(s2.grade)   # B
+print(s1[0])      # Alice — index access still works
+
+# Practical: store and display records
+students = [
+    Student("Alice", 20, "A"),
+    Student("Bob",   22, "B"),
+    Student("Carol", 21, "A"),
+]
+for s in students:
+    print(f"{s.name} (age {s.age}): Grade {s.grade}")</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+
+        <div class="exercise">
+          <h3>Exercise 1: Remove Duplicates</h3>
+          <p>Write a program that cleans a list by removing duplicates using sets:</p>
+          <ul>
+            <li>Start with a list containing many repeated values</li>
+            <li>Convert to a set to remove duplicates</li>
+            <li>Convert back to a sorted list</li>
+            <li>Print how many duplicates were removed</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Set Operations on Course Enrollment</h3>
+          <p>You have two sets of students enrolled in different courses. Use set operations to find:</p>
+          <ul>
+            <li>All students across both courses (union)</li>
+            <li>Students enrolled in both courses (intersection)</li>
+            <li>Students only in course A but not course B (difference)</li>
+            <li>Students in exactly one course (symmetric difference)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Word Frequency with Counter</h3>
+          <p>Use Counter from the collections module to analyze a paragraph of text:</p>
+          <ul>
+            <li>Count the frequency of each word (ignore case)</li>
+            <li>Print the 5 most common words</li>
+            <li>Find words that appear only once</li>
+            <li>Compare word frequencies between two texts</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Student Records with namedtuple</h3>
+          <p>Create a student registry using namedtuple and defaultdict:</p>
+          <ul>
+            <li>Define a Student namedtuple with name, age, subject, and score</li>
+            <li>Use defaultdict(list) to group students by subject</li>
+            <li>Calculate average score per subject</li>
+            <li>Find the top student in each subject</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module8-functions') }}" class="nav-button">← Previous: Functions</a>
+        <a href="{{ url_for('python_module', module='module10-file-handling') }}" class="nav-button">Next: File Handling →</a>
+        
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+
+  <script>
+// ==================== MOBILE NAV TOGGLE ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+
+  // ==================== CODE COPY BUTTON ====================
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 2000);
+      });
+    });
+  });
+});
+  </script>
 </body>
 </html>

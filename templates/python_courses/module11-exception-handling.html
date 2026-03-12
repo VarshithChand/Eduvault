@@ -3,19 +3,542 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Module 11: Exception Handling</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Exception Handling - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
 </head>
 <body>
-  <div class="module-container">
-    <div class="back-btn">
-      <a href="{{ url_for('python_module', module='index') }}">← Back to Python Courses</a>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
     </div>
-    <h1>Module 11: Exception Handling</h1>
-    <div class="content">
-      <h2>Coming Soon</h2>
-      <p>This module content is under development. Please check back later!</p>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Exception Handling</h1>
+      <p>Write robust programs that gracefully handle errors using try, except, else, and finally.</p>
     </div>
-  </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+
+      <div class="topic-section">
+        <h2>1. Understanding Exceptions</h2>
+        <p>An exception is an error that occurs during program execution. Unhandled exceptions crash your program — handling them keeps it running.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Common Built-in Exceptions</h3>
+          <pre><code># ZeroDivisionError
+result = 10 / 0       # ❌ ZeroDivisionError: division by zero
+
+# TypeError
+result = "5" + 3      # ❌ TypeError: can only concatenate str to str
+
+# ValueError
+num = int("hello")    # ❌ ValueError: invalid literal for int()
+
+# IndexError
+my_list = [1, 2, 3]
+print(my_list[10])    # ❌ IndexError: list index out of range
+
+# KeyError
+person = {"name": "Alice"}
+print(person["age"])  # ❌ KeyError: 'age'
+
+# NameError
+print(undefined_var)  # ❌ NameError: name 'undefined_var' is not defined
+
+# AttributeError
+num = 42
+num.upper()           # ❌ AttributeError: 'int' object has no attribute 'upper'
+
+# FileNotFoundError
+open("missing.txt")   # ❌ FileNotFoundError: No such file or directory</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: What Happens Without Handling</h3>
+          <pre><code># Without exception handling — program crashes completely
+def get_age(data, name):
+    return data[name]   # KeyError if name not in data
+
+ages = {"Alice": 25, "Bob": 30}
+
+print(get_age(ages, "Alice"))   # 25 — works fine
+print(get_age(ages, "Carol"))   # ❌ KeyError — program stops here
+print("This line never runs")   # never executes
+
+# The traceback tells you:
+# 1. What type of error occurred
+# 2. Which line caused it
+# 3. The call chain leading to it
+
+# Tracebacks look like:
+# Traceback (most recent call last):
+#   File "script.py", line 8, in <module>
+#     print(get_age(ages, "Carol"))
+#   File "script.py", line 2, in get_age
+#     return data[name]
+# KeyError: 'Carol'</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Viewing Exception Details</h3>
+          <pre><code># Catching exception info with 'as'
+try:
+    result = 10 / 0
+except ZeroDivisionError as e:
+    print(f"Error type:    {type(e).__name__}")   # ZeroDivisionError
+    print(f"Error message: {e}")                   # division by zero
+
+# Exception hierarchy — all exceptions inherit from BaseException
+# BaseException
+#   └── Exception
+#         ├── ValueError
+#         ├── TypeError
+#         ├── KeyError (-> LookupError)
+#         ├── IndexError (-> LookupError)
+#         ├── FileNotFoundError (-> OSError)
+#         ├── ZeroDivisionError (-> ArithmeticError)
+#         └── ... and many more
+
+# You can catch a parent class to handle multiple related errors
+try:
+    my_list = [1, 2, 3]
+    print(my_list[10])
+except LookupError as e:
+    print(f"Lookup failed: {e}")   # catches both KeyError and IndexError</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. try, except, else, and finally</h2>
+        <p>Python's full exception handling block has four parts — each serving a distinct purpose.</p>
+
+        <div class="example-box">
+          <h3>Example 1: try and except</h3>
+          <pre><code># Basic try/except
+try:
+    number = int(input("Enter a number: "))
+    result = 100 / number
+    print(f"Result: {result}")
+except ValueError:
+    print("That's not a valid number!")
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+
+# Catching multiple exceptions in one line
+try:
+    data = [1, 2, 3]
+    print(data[5])
+except (IndexError, TypeError) as e:
+    print(f"Something went wrong: {e}")
+
+# Bare except — catches everything (use sparingly)
+try:
+    risky_operation = 1 / 0
+except:
+    print("An error occurred")   # doesn't tell you what kind
+
+# Better: catch Exception to avoid hiding system exits
+try:
+    risky_operation = 1 / 0
+except Exception as e:
+    print(f"Error: {e}")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: else and finally</h3>
+          <pre><code># else — runs only if NO exception was raised
+try:
+    num = int("42")
+    result = 100 / num
+except ValueError:
+    print("Not a number")
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+else:
+    print(f"Success! Result = {result}")   # only runs if no error
+
+# finally — ALWAYS runs, error or not (cleanup code goes here)
+try:
+    file = open("data.txt", "r")
+    content = file.read()
+except FileNotFoundError:
+    print("File not found")
+finally:
+    print("Finished attempting to read file")
+    # file.close() goes here if not using 'with'
+
+# Full pattern: try + except + else + finally
+def safe_divide(a, b):
+    try:
+        result = a / b
+    except ZeroDivisionError:
+        print("Cannot divide by zero")
+        return None
+    else:
+        print("Division successful")
+        return result
+    finally:
+        print("safe_divide() completed")
+
+print(safe_divide(10, 2))
+print(safe_divide(10, 0))</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Nested try/except and Re-raising</h3>
+          <pre><code># Nested try blocks
+def read_config(filename):
+    try:
+        with open(filename, "r") as f:
+            try:
+                data = f.read()
+                value = int(data.strip())
+                return value
+            except ValueError:
+                print("Config file doesn't contain a valid number")
+                return None
+    except FileNotFoundError:
+        print(f"Config file '{filename}' not found")
+        return None
+
+# Re-raising an exception after logging it
+def process_data(data):
+    try:
+        result = 100 / data["value"]
+    except KeyError as e:
+        print(f"Missing key in data: {e}")
+        raise   # re-raises the same exception
+    except ZeroDivisionError:
+        print("Value cannot be zero")
+        raise ValueError("Invalid data: value must not be zero")
+
+# Raising a different exception type
+try:
+    process_data({"value": 0})
+except ValueError as e:
+    print(f"Caught re-raised error: {e}")</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Raising Exceptions</h2>
+        <p>You can raise exceptions intentionally to signal that something went wrong in your own code.</p>
+
+        <div class="example-box">
+          <h3>Example 1: raise Statement</h3>
+          <pre><code># Raise a built-in exception
+def set_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+    if age > 150:
+        raise ValueError("Age is unrealistically large")
+    return age
+
+try:
+    set_age(-5)
+except ValueError as e:
+    print(f"Invalid age: {e}")
+
+# Raise with a message
+def connect(host, port):
+    if not isinstance(port, int):
+        raise TypeError(f"Port must be an integer, got {type(port).__name__}")
+    if port < 1 or port > 65535:
+        raise ValueError(f"Port {port} is out of valid range (1–65535)")
+    print(f"Connecting to {host}:{port}")
+
+try:
+    connect("localhost", 99999)
+except ValueError as e:
+    print(f"Connection error: {e}")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Custom Exceptions</h3>
+          <pre><code># Define your own exception classes
+class InsufficientFundsError(Exception):
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+        super().__init__(
+            f"Cannot withdraw {amount}. Balance is only {balance}."
+        )
+
+class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount <= 0:
+            raise ValueError("Deposit amount must be positive")
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if amount <= 0:
+            raise ValueError("Withdrawal amount must be positive")
+        if amount > self.balance:
+            raise InsufficientFundsError(self.balance, amount)
+        self.balance -= amount
+        return amount
+
+account = BankAccount("Alice", 100)
+try:
+    account.withdraw(200)
+except InsufficientFundsError as e:
+    print(e)  # Cannot withdraw 200. Balance is only 100.</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: assert Statement</h3>
+          <pre><code># assert — raise AssertionError if condition is False
+# Useful for debugging and testing assumptions
+
+def calculate_average(numbers):
+    assert len(numbers) > 0, "List cannot be empty"
+    return sum(numbers) / len(numbers)
+
+try:
+    avg = calculate_average([])
+except AssertionError as e:
+    print(f"Assertion failed: {e}")   # List cannot be empty
+
+# Assert with type checks
+def greet(name):
+    assert isinstance(name, str), f"name must be str, got {type(name).__name__}"
+    print(f"Hello, {name}!")
+
+try:
+    greet(123)
+except AssertionError as e:
+    print(f"Error: {e}")
+
+# Note: assert statements can be disabled with python -O flag
+# Use raise ValueError(...) for production validation
+# Use assert only for debugging/testing assumptions</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Practical Exception Handling Patterns</h2>
+        <p>Learn real-world patterns for writing clean, robust error handling in Python programs.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Input Validation Loop</h3>
+          <pre><code># Keep asking until valid input is given
+def get_positive_integer(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            if value <= 0:
+                raise ValueError("Must be a positive number")
+            return value
+        except ValueError as e:
+            print(f"Invalid input: {e}. Please try again.")
+
+# age = get_positive_integer("Enter your age: ")
+# print(f"Your age is {age}")
+
+# Simulate with a list of inputs
+inputs = ["abc", "-5", "0", "25"]
+idx = 0
+
+def mock_input(prompt):
+    global idx
+    val = inputs[idx]
+    idx += 1
+    print(f"{prompt}{val}")
+    return val
+
+for _ in range(4):
+    try:
+        val = int(mock_input("Enter age: "))
+        if val <= 0:
+            raise ValueError("Must be positive")
+        print(f"Valid age: {val}")
+        break
+    except ValueError as e:
+        print(f"Try again: {e}")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Safe File and Network Operations</h3>
+          <pre><code">import os
+
+# Safe file reader with multiple fallbacks
+def read_file_safe(filename, default=""):
+    try:
+        with open(filename, "r") as f:
+            return f.read()
+    except FileNotFoundError:
+        print(f"Warning: '{filename}' not found. Using default.")
+        return default
+    except PermissionError:
+        print(f"Error: No permission to read '{filename}'.")
+        return default
+    except Exception as e:
+        print(f"Unexpected error reading '{filename}': {e}")
+        return default
+
+content = read_file_safe("config.txt", default="debug=True")
+print(content)
+
+# Safe JSON parsing
+import json
+
+def parse_json_safe(text):
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as e:
+        print(f"Invalid JSON at line {e.lineno}: {e.msg}")
+        return {}
+
+data = parse_json_safe('{"name": "Alice", "age": 25}')
+print(data)
+
+bad = parse_json_safe("not valid json")
+print(bad)   # {}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Exception Chaining and Logging</h3>
+          <pre><code">import logging
+
+# Set up basic logging
+logging.basicConfig(level=logging.ERROR, format="%(levelname)s: %(message)s")
+
+# Exception chaining with 'raise ... from ...'
+def load_user(user_id):
+    try:
+        data = {"1": "Alice", "2": "Bob"}
+        return data[str(user_id)]
+    except KeyError as e:
+        raise ValueError(f"User ID {user_id} not found") from e
+
+try:
+    load_user(99)
+except ValueError as e:
+    print(f"Caught: {e}")
+    print(f"Caused by: {e.__cause__}")
+
+# Logging exceptions properly
+def process_order(order):
+    try:
+        total = order["quantity"] * order["price"]
+        return total
+    except KeyError as e:
+        logging.error(f"Missing field in order: {e}", exc_info=True)
+        return 0
+    except TypeError as e:
+        logging.error(f"Invalid data type in order: {e}")
+        return 0
+
+result = process_order({"quantity": 3, "price": 9.99})
+print(f"Total: {result}")
+
+result = process_order({"quantity": "three", "price": 9.99})
+print(f"Total: {result}")</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+
+        <div class="exercise">
+          <h3>Exercise 1: Safe Calculator</h3>
+          <p>Build a calculator that handles all possible errors gracefully:</p>
+          <ul>
+            <li>Handle division by zero</li>
+            <li>Handle invalid number input (e.g. letters)</li>
+            <li>Handle unsupported operators</li>
+            <li>Always print a result or a clear error message — never crash</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Custom Exception for a Student System</h3>
+          <p>Create custom exceptions for a student management system:</p>
+          <ul>
+            <li>Define <code>InvalidScoreError</code> for scores outside 0–100</li>
+            <li>Define <code>StudentNotFoundError</code> for missing students</li>
+            <li>Use them in add/get/update functions</li>
+            <li>Catch and display meaningful messages</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Robust File Reader</h3>
+          <p>Write a function that safely reads and processes a file:</p>
+          <ul>
+            <li>Handle FileNotFoundError, PermissionError, and UnicodeDecodeError</li>
+            <li>Return a default value when the file can't be read</li>
+            <li>Log each error with a helpful message</li>
+            <li>Use finally to confirm the attempt was made</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Input Retry Loop</h3>
+          <p>Create a validated input system that retries on bad input:</p>
+          <ul>
+            <li>Ask the user for their age (must be 1–120)</li>
+            <li>Ask for a score (must be a float between 0.0 and 100.0)</li>
+            <li>Keep asking until valid input is given</li>
+            <li>Limit retries to 3 attempts before giving up</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module10-file-handling') }}" class="nav-button">← Previous: File Handling </a>
+        <a href="{{ url_for('python_module', module='module12-modules-packages') }}" class="nav-button">Next: Modules & Packages →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+  document.querySelectorAll("pre code").forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+    const btn = document.createElement("button");
+    btn.className = "code-copy";
+    btn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(btn);
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+        btn.innerText = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(() => { btn.innerText = "Copy"; btn.classList.remove("copied"); }, 2000);
+      });
+    });
+  });
+});
+  </script>
 </body>
 </html>

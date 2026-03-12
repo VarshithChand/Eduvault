@@ -1171,3 +1171,241 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+   PROFILE MODAL & FORM STYLES
+   ============================================ */
+
+/* Profile Actions Container */
+.profile-actions {
+    width: 100%;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.edit-profile-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.edit-profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.45);
+}
+
+/* Modal Overlay */
+.profile-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Modal Content Card */
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modal-slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-modal.active .modal-content {
+    animation: modal-slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modal-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.75rem 2rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+}
+
+.modal-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.close-modal-btn:hover {
+    background: rgba(255, 107, 107, 0.1);
+    color: #ee5a24;
+}
+
+/* Profile Form */
+.profile-form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.form-group label i {
+    color: #667eea;
+    font-size: 1rem;
+}
+
+.form-group input {
+    padding: 0.85rem 1rem;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #333;
+    background: rgba(102, 126, 234, 0.02);
+    transition: all 0.3s ease;
+    font-family: inherit;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #aaa;
+}
+
+.form-group input[type="email"]:invalid {
+    border-color: #ff6b6b;
+}
+
+.form-group input[type="date"] {
+    cursor: pointer;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(102, 126, 234, 0.1);
+}
+
+.cancel-btn {
+    background: linear-gradient(135deg, #868e96, #626e7c) !important;
+    color: white !important;
+}
+
+.cancel-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(134, 142, 150, 0.35);
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #51cf66, #2f9e44) !important;
+    color: white !important;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(81, 207, 102, 0.35);
+}
+
+/* Profile Data Display */
+.profile-data {
+    background: rgba(102, 126, 234, 0.08);
+    color: #667eea;
+    padding: 0.2rem 0.7rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Responsive Modal */
+@media (max-width: 640px) {
+    .modal-content {
+        max-width: 90vw;
+        max-height: 85vh;
+    }
+
+    .modal-header {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .modal-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .profile-form {
+        padding: 1.5rem;
+        gap: 1.2rem;
+    }
+
+    .modal-actions {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}

@@ -3,19 +3,540 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Module 12: Modules & Packages</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Modules & Packages - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
 </head>
 <body>
-  <div class="module-container">
-    <div class="back-btn">
-      <a href="{{ url_for('python_module', module='index') }}">← Back to Python Courses</a>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
     </div>
-    <h1>Module 12: Modules & Packages</h1>
-    <div class="content">
-      <h2>Coming Soon</h2>
-      <p>This module content is under development. Please check back later!</p>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Modules & Packages</h1>
+      <p>Organize code into reusable modules, work with Python's standard library, and install third-party packages.</p>
     </div>
-  </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+
+      <div class="topic-section">
+        <h2>1. Importing Modules</h2>
+        <p>A module is a Python file containing functions, classes, and variables. Import it to reuse its code in your program.</p>
+
+        <div class="example-box">
+          <h3>Example 1: import and from...import</h3>
+          <pre><code># Import an entire module
+import math
+
+print(math.pi)            # 3.141592653589793
+print(math.sqrt(16))      # 4.0
+print(math.floor(3.7))    # 3
+print(math.ceil(3.2))     # 4
+
+# from...import — import specific names
+from math import pi, sqrt, factorial
+
+print(pi)           # 3.141592653589793
+print(sqrt(25))     # 5.0
+print(factorial(5)) # 120
+
+# Import everything (use with caution — can cause name conflicts)
+from math import *
+print(cos(0))       # 1.0
+print(sin(pi / 2))  # 1.0
+
+# import with alias (as)
+import math as m
+print(m.pow(2, 10))   # 1024.0
+
+from datetime import datetime as dt
+print(dt.now())       # current date and time</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Commonly Used Standard Library Modules</h3>
+          <pre><code"># math — mathematical functions
+import math
+print(math.gcd(12, 8))       # 4
+print(math.log(100, 10))     # 2.0
+print(math.degrees(math.pi)) # 180.0
+
+# random — random number generation
+import random
+print(random.randint(1, 10))         # random int 1–10
+print(random.choice(["a", "b", "c"])) # random item
+print(random.random())               # float 0.0–1.0
+random.shuffle([1, 2, 3, 4, 5])      # shuffle in place
+
+# datetime — dates and times
+from datetime import datetime, date, timedelta
+now = datetime.now()
+print(now.strftime("%Y-%m-%d %H:%M"))  # formatted string
+today = date.today()
+tomorrow = today + timedelta(days=1)
+print(tomorrow)
+
+# os — operating system interface
+import os
+print(os.getcwd())           # current working directory
+print(os.listdir("."))       # list files in current dir
+os.makedirs("temp", exist_ok=True)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: sys, json, and re Modules</h3>
+          <pre><code># sys — system-specific parameters
+import sys
+print(sys.version)           # Python version string
+print(sys.platform)          # 'win32', 'linux', 'darwin'
+# sys.exit(0)                # exit the program
+
+# json — encode and decode JSON data
+import json
+
+data = {"name": "Alice", "age": 25, "scores": [95, 87, 92]}
+
+# Convert Python dict to JSON string
+json_string = json.dumps(data, indent=2)
+print(json_string)
+
+# Convert JSON string back to Python dict
+parsed = json.loads(json_string)
+print(parsed["name"])   # Alice
+
+# Write JSON to file
+with open("data.json", "w") as f:
+    json.dump(data, f, indent=2)
+
+# Read JSON from file
+with open("data.json", "r") as f:
+    loaded = json.load(f)
+print(loaded)
+
+# re — regular expressions
+import re
+text = "Contact us at hello@example.com or support@test.org"
+emails = re.findall(r'[\w.-]+@[\w.-]+', text)
+print(emails)  # ['hello@example.com', 'support@test.org']</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. Creating Your Own Modules</h2>
+        <p>Any Python file is a module. You can split your code into multiple files and import between them.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Writing and Importing a Module</h3>
+          <pre><code"># --- File: mathutils.py ---
+"""A collection of math utility functions."""
+
+PI = 3.14159265358979
+
+def circle_area(radius):
+    """Return the area of a circle."""
+    return PI * radius ** 2
+
+def circle_circumference(radius):
+    """Return the circumference of a circle."""
+    return 2 * PI * radius
+
+def is_prime(n):
+    """Return True if n is a prime number."""
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+# --- File: main.py ---
+import mathutils
+
+print(mathutils.PI)                       # 3.14159265358979
+print(mathutils.circle_area(5))           # 78.539...
+print(mathutils.is_prime(17))             # True
+print(mathutils.is_prime(10))             # False
+
+# Or import specific items
+from mathutils import circle_area, is_prime
+print(circle_area(3))
+print(is_prime(13))</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: The __name__ Variable</h3>
+          <pre><code"># Every module has a __name__ variable
+# When run directly: __name__ == "__main__"
+# When imported:     __name__ == module filename
+
+# --- File: greetings.py ---
+def say_hello(name):
+    return f"Hello, {name}!"
+
+def say_goodbye(name):
+    return f"Goodbye, {name}!"
+
+# This block only runs when the file is executed directly
+# NOT when it is imported
+if __name__ == "__main__":
+    print(say_hello("Alice"))
+    print(say_goodbye("Alice"))
+    print("Running as main script")
+
+# --- File: main.py ---
+import greetings
+
+# The if __name__ == "__main__" block does NOT run here
+msg = greetings.say_hello("Bob")
+print(msg)  # Hello, Bob!
+
+# Why this matters:
+# Without the guard, test code runs every time you import the module
+# With the guard, it only runs when you execute the file directly</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Module Attributes and dir()</h3>
+          <pre><code># Use dir() to see what a module contains
+import math
+print(dir(math))
+# ['__doc__', '__name__', 'acos', 'asin', 'atan', 'ceil', 'cos', ...]
+
+# Access module documentation
+print(math.__doc__)
+print(math.__name__)    # math
+print(math.__file__)    # path to the math module on your system
+
+# help() for detailed documentation
+help(math.sqrt)
+# Help on built-in function sqrt in module math:
+# sqrt(x, /)
+#     Return the square root of x.
+
+# Check if attribute exists before using it
+import random
+if hasattr(random, "choices"):
+    print(random.choices([1, 2, 3], k=5))  # random.choices added in 3.6+
+
+# List only public attributes (no dunder methods)
+public = [name for name in dir(math) if not name.startswith("_")]
+print(public)</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Packages</h2>
+        <p>A package is a directory of modules. It lets you organize related modules under a common namespace.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Package Structure</h3>
+          <pre><code"># A package is a folder with an __init__.py file
+#
+# my_project/
+# ├── main.py
+# └── mypackage/
+#     ├── __init__.py        ← marks it as a package
+#     ├── mathutils.py
+#     ├── stringutils.py
+#     └── fileutils.py
+
+# --- mypackage/__init__.py ---
+# Can be empty, or expose selected items:
+from .mathutils import circle_area, is_prime
+from .stringutils import capitalize_words
+
+# --- mypackage/mathutils.py ---
+def circle_area(radius):
+    return 3.14159 * radius ** 2
+
+def is_prime(n):
+    if n < 2: return False
+    return all(n % i != 0 for i in range(2, int(n**0.5)+1))
+
+# --- main.py ---
+# Import from the package
+from mypackage import circle_area, is_prime
+from mypackage.stringutils import capitalize_words
+import mypackage.fileutils as fu
+
+print(circle_area(5))
+print(is_prime(17))</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Relative Imports</h3>
+          <pre><code"># Within a package, use relative imports (dot notation)
+#
+# mypackage/
+# ├── __init__.py
+# ├── mathutils.py
+# ├── stringutils.py
+# └── stats.py
+
+# --- mypackage/stats.py ---
+from .mathutils import is_prime          # import from sibling module
+from .stringutils import capitalize_words
+
+def summarize(numbers):
+    primes = [n for n in numbers if is_prime(n)]
+    return {
+        "count":  len(numbers),
+        "primes": primes,
+        "total":  sum(numbers)
+    }
+
+# --- main.py ---
+from mypackage.stats import summarize
+
+result = summarize([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+print(result)
+# {'count': 10, 'primes': [2, 3, 5, 7], 'total': 55}
+
+# Relative imports ONLY work inside packages
+# Use absolute imports in scripts run directly</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Installing and Using Third-Party Packages</h3>
+          <pre><code"># Python Package Index (PyPI) hosts thousands of packages
+# Install with pip from the terminal:
+#   pip install requests
+#   pip install numpy
+#   pip install pandas
+
+# requests — make HTTP requests
+import requests   # pip install requests
+
+response = requests.get("https://api.github.com")
+print(response.status_code)          # 200
+print(response.json()["current_user_url"])
+
+# Check installed packages
+# In terminal: pip list
+# In terminal: pip show requests
+
+# requirements.txt — list your project's dependencies
+# Create: pip freeze > requirements.txt
+# Install: pip install -r requirements.txt
+
+# Virtual environments — isolate project dependencies
+# python -m venv myenv          # create
+# source myenv/bin/activate     # activate (Mac/Linux)
+# myenv\Scripts\activate        # activate (Windows)
+# pip install package_name      # install inside env
+# deactivate                    # exit virtual env</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Useful Standard Library Modules</h2>
+        <p>Python's standard library is huge. Here are some of the most practical modules every Python developer uses.</p>
+
+        <div class="example-box">
+          <h3>Example 1: itertools and functools</h3>
+          <pre><code">import itertools
+
+# Chaining iterables
+combined = list(itertools.chain([1, 2], [3, 4], [5]))
+print(combined)   # [1, 2, 3, 4, 5]
+
+# All combinations
+items = ["A", "B", "C"]
+combos = list(itertools.combinations(items, 2))
+print(combos)     # [('A','B'), ('A','C'), ('B','C')]
+
+# All permutations
+perms = list(itertools.permutations(items, 2))
+print(perms)      # [('A','B'), ('A','C'), ('B','A'), ...]
+
+# Repeat a value
+print(list(itertools.repeat(0, 5)))   # [0, 0, 0, 0, 0]
+
+import functools
+
+# reduce — apply function cumulatively
+total = functools.reduce(lambda x, y: x + y, [1, 2, 3, 4, 5])
+print(total)   # 15
+
+# lru_cache — cache expensive function results
+@functools.lru_cache(maxsize=128)
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+print(fibonacci(50))   # fast because results are cached</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: datetime and time</h3>
+          <pre><code">from datetime import datetime, date, timedelta
+import time
+
+# Current date and time
+now = datetime.now()
+print(now)                             # 2025-01-15 14:30:00.123456
+print(now.year, now.month, now.day)    # 2025 1 15
+
+# Formatting
+print(now.strftime("%d/%m/%Y"))        # 15/01/2025
+print(now.strftime("%A, %B %d %Y"))    # Wednesday, January 15 2025
+
+# Parsing a date string
+birthday = datetime.strptime("1998-06-20", "%Y-%m-%d")
+print(birthday.strftime("%B %d, %Y"))  # June 20, 1998
+
+# Date arithmetic
+today = date.today()
+future = today + timedelta(weeks=4)
+print(f"4 weeks from now: {future}")
+
+age_days = (today - birthday.date()).days
+print(f"Days since birthday: {age_days}")
+
+# time — measure execution time
+start = time.time()
+total = sum(range(1_000_000))
+end = time.time()
+print(f"Sum: {total}, Time: {end - start:.4f}s")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: collections and string Modules</h3>
+          <pre><code">from collections import Counter, defaultdict, deque, OrderedDict
+
+# deque — fast append/pop from both ends
+dq = deque([1, 2, 3])
+dq.appendleft(0)   # add to left
+dq.append(4)       # add to right
+dq.popleft()       # remove from left
+print(dq)          # deque([1, 2, 3, 4])
+
+# deque as a rolling window (fixed max size)
+recent = deque(maxlen=3)
+for i in range(6):
+    recent.append(i)
+print(recent)   # deque([3, 4, 5], maxlen=3)
+
+# OrderedDict — remembers insertion order (useful pre-Python 3.7)
+od = OrderedDict()
+od["first"] = 1
+od["second"] = 2
+od.move_to_end("first")  # move key to end
+print(list(od.keys()))   # ['second', 'first']
+
+# string module — useful constants
+import string
+print(string.ascii_letters)  # abcdefghijklmnopqrstuvwxyzABCDE...
+print(string.digits)         # 0123456789
+print(string.punctuation)    # !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+
+# Generate a random password
+import random
+chars = string.ascii_letters + string.digits + "!@#$"
+password = "".join(random.choices(chars, k=12))
+print(f"Password: {password}")</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+
+        <div class="exercise">
+          <h3>Exercise 1: Build a Math Utilities Module</h3>
+          <p>Create a module called <code>mathutils.py</code> with these functions:</p>
+          <ul>
+            <li><code>is_prime(n)</code> — check if a number is prime</li>
+            <li><code>prime_factors(n)</code> — return list of prime factors</li>
+            <li><code>circle_area(r)</code> and <code>rectangle_area(l, w)</code></li>
+            <li>Import and use each function in a separate <code>main.py</code></li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Date Utilities with datetime</h3>
+          <p>Use the datetime module to build a birthday tracker:</p>
+          <ul>
+            <li>Store a list of names and birthdays</li>
+            <li>Calculate each person's current age in years</li>
+            <li>Find who has a birthday this month</li>
+            <li>Print how many days until each person's next birthday</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: JSON Config System</h3>
+          <p>Build a simple configuration manager using the json module:</p>
+          <ul>
+            <li>Write default settings to a <code>config.json</code> file</li>
+            <li>Read settings back and display them</li>
+            <li>Update a specific setting and save it</li>
+            <li>Handle the case where the config file is missing</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: Mini Package</h3>
+          <p>Create a mini package called <code>toolkit</code> with three modules:</p>
+          <ul>
+            <li><code>mathutils.py</code> — math helper functions</li>
+            <li><code>stringutils.py</code> — string helper functions</li>
+            <li><code>__init__.py</code> — expose key functions at package level</li>
+            <li>Import and test the package from a <code>main.py</code> file</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module11-exception-handling') }}" class="nav-button">← Previous: Exception Handling </a>
+        <a href="{{ url_for('python_module', module='module13-lambda') }}" class="nav-button">Next: Lambda & Higher-Order Functions →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+  document.querySelectorAll("pre code").forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+    const btn = document.createElement("button");
+    btn.className = "code-copy";
+    btn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(btn);
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+        btn.innerText = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(() => { btn.innerText = "Copy"; btn.classList.remove("copied"); }, 2000);
+      });
+    });
+  });
+});
+  </script>
 </body>
 </html>

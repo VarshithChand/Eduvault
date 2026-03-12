@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Basics - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">☕</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('java_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Java Basics & Setup</h1>
+      <p>Learn about Java fundamentals, JDK setup, and write your first program. Understand variables, data types, and basic syntax.</p>
+    </div>
+  </section>
+
+  <!-- Module Content -->
+  <section class="module-content">
+    <div class="container">
+      
+      <!-- Topic 1 -->
+      <div class="topic-section">
+        <h2>1. Java Environment Setup</h2>
+        <p>Java requires the JDK (Java Development Kit) to compile and run programs. Learn how to set up your environment.</p>
+        
+        <div class="example-box">
+          <h3>Installing JDK:</h3>
+          <pre><code>// Step 1: Download JDK from oracle.com
+// Step 2: Install JDK on your system
+// Step 3: Set JAVA_HOME environment variable
+// Step 4: Verify installation
+java -version
+javac -version</code></pre>
+        </div>
+
+        <div class="naming-rules">
+          <h3>Java Naming Conventions:</h3>
+          <ul>
+            <li>✓ Class names: PascalCase (MyClass, HelloWorld)</li>
+            <li>✓ Method names: camelCase (myMethod, printMessage)</li>
+            <li>✓ Variable names: camelCase (age, userName)</li>
+            <li>✓ Constants: UPPER_CASE (MAX_VALUE, PI)</li>
+            <li>✗ Cannot start with numbers or special characters</li>
+            <li>✗ Cannot use Java keywords (class, public, static, etc.)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+      <div class="topic-section">
+        <h2>2. Your First Java Program</h2>
+        <p>Learn the structure of a Java program and write "Hello World".</p>
+
+        <div class="example-box">
+          <h3>Example 1: Hello World Program</h3>
+          <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+// Output: Hello, World!</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Program Structure Explained</h3>
+          <pre><code>public class MyProgram {  // Class declaration (PascalCase)
+    public static void main(String[] args) {  // Main method (entry point)
+        // Your code goes here
+        System.out.println("Java is awesome!");
+    }
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 3 -->
+      <div class="topic-section">
+        <h2>3. Variables and Data Types</h2>
+        <p>Java has eight primitive data types. Learn how to declare and use variables.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Primitive Data Types</h3>
+          <pre><code>// Integer types
+byte age = 25;           // 8-bit
+short population = 30000;  // 16-bit
+int salary = 50000;      // 32-bit
+long nationalGDP = 2000000000L;  // 64-bit (L suffix)
+
+// Floating point types
+float price = 19.99f;    // 32-bit (f suffix)
+double pi = 3.14159;     // 64-bit
+
+// Boolean and Character
+boolean isStudent = true;
+char grade = 'A';
+
+System.out.println("Age: " + age);
+System.out.println("Salary: " + salary);</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: String Type (Reference Type)</h3>
+          <pre><code>// Strings are reference types, not primitive
+String name = "Alice";
+String message = "Hello, " + name;
+
+System.out.println(message);  // Output: Hello, Alice
+
+// String methods
+int length = name.length();      // 5
+String upper = name.toUpperCase();  // ALICE
+String lower = name.toLowerCase();  // alice
+boolean hasA = name.contains("li");  // true</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Type Conversion</h3>
+          <pre><code>// Implicit conversion (widening)
+int integer = 100;
+double decimal = integer;  // Automatically converted to 100.0
+
+// Explicit conversion (narrowing)
+double value = 99.99;
+int rounded = (int) value;  // Explicitly cast to 99
+
+// String conversion
+String numString = "42";
+int number = Integer.parseInt(numString);
+double floatValue = Double.parseDouble("3.14");
+
+System.out.println(number);    // 42
+System.out.println(floatValue);  // 3.14</code></pre>
+        </div>
+      </div>
+
+      <!-- Topic 4 -->
+      <div class="topic-section">
+        <h2>4. Input and Output</h2>
+        <p>Learn how to read user input and display output in Java.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Output with System.out</h3>
+          <pre><code>// Print with line break
+System.out.println("Hello");  // Includes newline
+
+// Print without line break
+System.out.print("Hello ");   // No newline
+System.out.print("World");    // Output: Hello World
+
+// Formatted output
+String name = "Bob";
+int age = 25;
+System.out.printf("Name: %s, Age: %d%n", name, age);
+// Output: Name: Bob, Age: 25</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Reading User Input</h3>
+          <pre><code>import java.util.Scanner;
+
+public class InputExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();
+        
+        System.out.print("Enter your age: ");
+        int age = sc.nextInt();
+        
+        System.out.println("Name: " + name + ", Age: " + age);
+        
+        sc.close();
+    }
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Practice Exercises -->
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Simple Variables</h3>
+          <p>Create a Java program that declares variables for:</p>
+          <ul>
+            <li>Person's name (String)</li>
+            <li>Age (int)</li>
+            <li>Height in meters (double)</li>
+            <li>Is employed (boolean)</li>
+          </ul>
+          <p>Print all variables using System.out.println()</p>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Type Conversion</h3>
+          <p>Write a program that reads a temperature in Celsius and converts it to Fahrenheit.</p>
+          <p>Formula: F = (C × 9/5) + 32</p>
+          <p>Use Scanner to read input and printf to display the result.</p>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Student Information</h3>
+          <p>Create a program that reads:</p>
+          <ul>
+            <li>Student name</li>
+            <li>Roll number (int)</li>
+            <li>GPA (double)</li>
+          </ul>
+          <p>Display the information in a formatted way.</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="module-navigation">
+        <a href="{{ url_for('java_course') }}" class="nav-button">← Back to All Modules</a>
+        <a href="{{ url_for('java_course') }}" class="nav-button">Next Module →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1500);
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>

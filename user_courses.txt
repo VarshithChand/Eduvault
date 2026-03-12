@@ -1,5 +1,10 @@
 user1,Python
-aa,Python
-bb,Java
 manohar,C
 manohar,Python
+varsh,C
+varsh,C++
+varsh,AWS DevOps
+varsh,Azure DevOps
+varsh,GCP DevOps
+moulii,Java
+moulii,Python

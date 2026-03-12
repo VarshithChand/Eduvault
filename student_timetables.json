@@ -1,5 +1,5 @@
 {
-    "manohar": {
+    "varsh": {
         "timetable": {
             "Monday": [
                 {
@@ -10,19 +10,19 @@
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "C++",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "C",
+                    "course": "AWS DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "Azure DevOps",
                     "completed": false,
                     "notes": ""
                 }
@@ -30,25 +30,25 @@
             "Tuesday": [
                 {
                     "time": "9:00 AM",
-                    "course": "C",
+                    "course": "GCP DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
-                    "completed": false,
-                    "notes": ""
-                },
-                {
-                    "time": "2:00 PM",
                     "course": "C",
                     "completed": false,
                     "notes": ""
                 },
                 {
+                    "time": "2:00 PM",
+                    "course": "C++",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "AWS DevOps",
                     "completed": false,
                     "notes": ""
                 }
@@ -56,13 +56,13 @@
             "Wednesday": [
                 {
                     "time": "9:00 AM",
-                    "course": "C",
+                    "course": "Azure DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "GCP DevOps",
                     "completed": false,
                     "notes": ""
                 },
@@ -74,7 +74,7 @@
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "C++",
                     "completed": false,
                     "notes": ""
                 }
@@ -82,25 +82,25 @@
             "Thursday": [
                 {
                     "time": "9:00 AM",
-                    "course": "C",
+                    "course": "AWS DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "Azure DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "C",
+                    "course": "GCP DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "C",
                     "completed": false,
                     "notes": ""
                 }
@@ -108,60 +108,63 @@
             "Friday": [
                 {
                     "time": "9:00 AM",
-                    "course": "C",
+                    "course": "C++",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "AWS DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "C",
+                    "course": "Azure DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "GCP DevOps",
                     "completed": false,
                     "notes": ""
                 }
             ]
         },
-        "generated_date": "2026-03-11T18:47:54.290646",
+        "generated_date": "2026-03-12T15:05:59.555227",
         "courses": [
             "C",
-            "Python"
+            "C++",
+            "AWS DevOps",
+            "Azure DevOps",
+            "GCP DevOps"
         ]
     },
-    "aa": {
+    "moulii": {
         "timetable": {
             "Monday": [
                 {
                     "time": "9:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 }
@@ -169,25 +172,25 @@
             "Tuesday": [
                 {
                     "time": "9:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 }
@@ -195,25 +198,25 @@
             "Wednesday": [
                 {
                     "time": "9:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 }
@@ -221,25 +224,25 @@
             "Thursday": [
                 {
                     "time": "9:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 }
@@ -247,33 +250,33 @@
             "Friday": [
                 {
                     "time": "9:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
-                    "course": "Python",
+                    "course": "Java",
                     "completed": false,
                     "notes": ""
                 }
             ]
         },
-        "generated_date": "2026-03-11T19:01:10.548787",
+        "generated_date": "2026-03-12T15:16:48.509543",
         "courses": [
-            "Python"
+            "Java"
         ]
     }
 }

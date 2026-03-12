@@ -1,17 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Python Course</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<title>Loading Python Course...</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='welcome.css') }}">
+
+<style>
+
+/* Center loader */
+.loader-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:80vh;
+}
+
+/* Spinner */
+.loader{
+    border:6px solid rgba(255,255,255,0.2);
+    border-top:6px solid #667eea;
+    border-radius:50%;
+    width:70px;
+    height:70px;
+    animation:spin 1s linear infinite;
+    margin-bottom:20px;
+}
+
+@keyframes spin{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+.loading-text{
+    font-size:22px;
+    color:white;
+    font-weight:600;
+}
+
+.loading-sub{
+    margin-top:8px;
+    color:white;
+    opacity:0.8;
+}
+
+</style>
+
 </head>
+
 <body>
-  <h1>Python Course</h1>
-  <p>Welcome to your Python learning journey! 🐍</p>
+
+<div class="page-wrapper">
+
+<header class="enhanced-header">
+    <div class="header-content">
+        <h1>
+            <span class="welcome-text">Launching</span>
+            <span class="username-highlight">Python Course</span>
+        </h1>
+    </div>
+    <div class="header-wave"></div>
+</header>
 
 
-  <a href="{{ url_for('python_module', module='index') }}">Go to Python Course</a>
+<div class="loader-container">
 
-  <a href="{{ url_for('courses') }}">⬅ Back to Courses</a>
+<div class="loader"></div>
+
+<div class="loading-text">
+Preparing Python Learning Environment 🐍
+</div>
+
+<div class="loading-sub">
+Please wait while we load the course...
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* Redirect to python module after 3 seconds */
+
+setTimeout(function(){
+    window.location.href = "{{ url_for('python_module', module='index') }}";
+},3);
+
+</script>
+
 </body>
 </html>

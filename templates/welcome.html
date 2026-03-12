@@ -48,16 +48,22 @@
                     <div class="section-badge">Personal</div>
                 </div>
                 <div class="profile-card">
-                    <div class="profile-avatar">
-                        <i class="fas fa-user"></i>
+                    <div class="profile-avatar" id="profileAvatarDisplay">
+                        <img id="profilePhotoImg" src="" alt="Profile Photo" style="display:none; width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                        <i id="profilePhotoIcon" class="fas fa-user"></i>
                     </div>
-                    <ul class="file-list">
-                        <li class="file-item profile-item">
-                            <i class="fas fa-id-badge"></i>
-                            <div class="item-content">
-                                <strong>Username:</strong>
-                                <span class="username-tag">{{ username }}</span>
+                    <ul class="file-list" id="profileList">
+                        <li class="file-item profile-item" style="display:flex; justify-content:space-between; align-items:center;">
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <i class="fas fa-id-badge"></i>
+                                <div class="item-content">
+                                    <strong>Username:</strong>
+                                    <span class="username-tag" id="usernameDisplay">{{ username }}</span>
+                                </div>
                             </div>
+                            <button type="button" class="profile-edit-icon-btn" id="editUsernameBtn" title="Edit username">
+                                <i class="fas fa-edit" style="font-size:0.85rem;"></i>
+                            </button>
                         </li>
                         <li class="file-item profile-item">
                             <i class="fas fa-shield-alt"></i>
@@ -68,7 +74,165 @@
                                 </span>
                             </div>
                         </li>
+                        {% if user_profile.get('full_name') %}
+                        <li class="file-item profile-item">
+                            <i class="fas fa-user-tag"></i>
+                            <div class="item-content">
+                                <strong>Full Name:</strong>
+                                <span class="profile-data">{{ user_profile.get('full_name', 'Not set') }}</span>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% if user_profile.get('email') %}
+                        <li class="file-item profile-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="item-content">
+                                <strong>Email:</strong>
+                                <span class="profile-data">{{ user_profile.get('email', 'Not set') }}</span>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% if user_profile.get('contact_number') %}
+                        <li class="file-item profile-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="item-content">
+                                <strong>Contact:</strong>
+                                <span class="profile-data">{{ user_profile.get('contact_number', 'Not set') }}</span>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% if user_profile.get('date_of_birth') %}
+                        <li class="file-item profile-item">
+                            <i class="fas fa-birthday-cake"></i>
+                            <div class="item-content">
+                                <strong>Date of Birth:</strong>
+                                <span class="profile-data">{{ user_profile.get('date_of_birth', 'Not set') }}</span>
+                            </div>
+                        </li>
+                        {% endif %}
                     </ul>
+                    <div class="profile-actions">
+                        <button type="button" class="show-toggle-btn modern-btn" id="showToggleBtn">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>Show More</span>
+                        </button>
+                        <button class="edit-profile-btn modern-btn" id="editProfileBtn">
+                            <i class="fas fa-pen"></i>
+                            <span>Edit Profile</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Edit Modal -->
+            <div class="profile-modal" id="profileModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Edit Profile</h3>
+                        <button class="close-modal-btn" id="closeModalBtn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-group">
+                            <label for="username">
+                                <i class="fas fa-id-badge"></i>
+                                Username
+                            </label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                placeholder="Enter your username"
+                                value="{{ username }}"
+                                required
+                            >
+                            <small style="color: #888; display:block; margin-top:0.5rem;">Your unique username for login</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profilePhoto">
+                                <i class="fas fa-camera"></i>
+                                Profile Photo
+                            </label>
+                            <input 
+                                type="file" 
+                                id="profilePhoto" 
+                                name="profile_photo" 
+                                accept="image/*"
+                                style="padding:0.5rem; border:2px dashed #4f8cff; border-radius:8px;"
+                            >
+                            <small style="color: #888; display:block; margin-top:0.5rem;">Supported formats: JPG, PNG, GIF (Max 5MB)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fullName">
+                                <i class="fas fa-user-tag"></i>
+                                Full Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="fullName" 
+                                name="full_name" 
+                                placeholder="Enter your full name"
+                                value="{{ user_profile.get('full_name', '') }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>
+                                Email Address
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Enter your email"
+                                value="{{ user_profile.get('email', '') }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact">
+                                <i class="fas fa-phone"></i>
+                                Contact Number
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="contact" 
+                                name="contact_number" 
+                                placeholder="Enter your phone number"
+                                value="{{ user_profile.get('contact_number', '') }}"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dob">
+                                <i class="fas fa-birthday-cake"></i>
+                                Date of Birth
+                            </label>
+                            <input 
+                                type="date" 
+                                id="dob" 
+                                name="date_of_birth"
+                                value="{{ user_profile.get('date_of_birth', '') }}"
+                            >
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="button" class="cancel-btn modern-btn" id="cancelBtn">
+                                <i class="fas fa-times"></i>
+                                <span>Cancel</span>
+                            </button>
+                            <button type="submit" class="save-btn modern-btn" id="saveProfileBtn">
+                                <i class="fas fa-save"></i>
+                                <span id="saveButtonText">Save Profile</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -77,16 +241,16 @@
                 <div class="section-header">
                     <i class="fas fa-graduation-cap section-icon"></i>
                     <h2>Courses</h2>
-                    <div class="section-badge">{{ COURSES|length }} Available</div>
-                </div>
-                <div class="courses-grid">
-                    {# Use the server-side COURSES list if available, otherwise fallback to inline list #}
-                    {% set courses_list = COURSES if (COURSES is defined) else [
+                    {# Set courses_list first to ensure it's properly defined #}
+                    {% set courses_list = COURSES if (COURSES is defined and COURSES) else [
                         {"name": "Python", "icon": "fab fa-python", "color": "#3776ab", "progress": 85},
                         {"name": "Java", "icon": "fab fa-java", "color": "#f89820", "progress": 72},
                         {"name": "C", "icon": "fas fa-code", "color": "#00599c", "progress": 68},
                         {"name": "C++", "icon": "fas fa-code", "color": "#004482", "progress": 75}
                     ] %}
+                    <div class="section-badge">{{ courses_list|length }} Available</div>
+                </div>
+                <div class="courses-grid" id="coursesGrid">
                     
                     {% for c in courses_list %}
                         {# Normalize course into dict if courses_list contains plain strings #}
@@ -104,8 +268,14 @@
                             {% set target = url_for('java_course') %}
                         {% elif 'c++' in cname or 'c#' in cname %}
                             {% set target = url_for('cpp_course') %}
-                        {% elif cname == 'c' %}
+                        {% elif cname == 'c' and 'c++' not in cname %}
                             {% set target = url_for('c_course') %}
+                        {% elif 'aws' in cname %}
+                            {% set target = url_for('aws_course') %}
+                        {% elif 'azure' in cname %}
+                            {% set target = url_for('azure_course') %}
+                        {% elif 'gcp' in cname %}
+                            {% set target = url_for('gcp_course') %}
                         {% else %}
                             {% set target = url_for('courses') %}
                         {% endif %}
@@ -128,6 +298,12 @@
                             </a>
                         </div>
                     {% endfor %}
+                </div>
+                <div class="courses-actions">
+                    <button type="button" class="show-toggle-btn modern-btn" id="coursesToggleBtn">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Show More Courses</span>
+                    </button>
                 </div>
             </div>
 
@@ -165,6 +341,12 @@
                             <p>No updates from superuser.</p>
                         </div>
                     {% endif %}
+                </div>
+                <div class="updates-actions">
+                    <button type="button" class="show-toggle-btn modern-btn" id="updatesToggleBtn">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Show More Updates</span>
+                    </button>
                 </div>
             </div>
 
@@ -466,20 +648,30 @@
                         html: content.innerHTML.includes('code-block') ? content.innerHTML : null,
                     });
                 });
-                localStorage.setItem('chatHistory', JSON.stringify(messages));
+                // Chat history is now saved automatically on the server
+                // No need to save to localStorage anymore
             }
 
             function loadChatHistory() {
-                const history = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-                if (history.length === 0) {
-                    // Keep the initial welcome message
-                } else {
-                    chatMessages.innerHTML = '';
-                    history.forEach((msg) => {
-                        addMessage(msg.html || msg.content, msg.type, false);
+                // Load chat history from server for current user
+                fetch('/api/student/chat-history', {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.messages && data.messages.length > 0) {
+                            chatMessages.innerHTML = '';
+                            data.messages.forEach((msg) => {
+                                addMessage(msg.content, msg.type, false);
+                            });
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }
+                    })
+                    .catch(err => {
+                        console.log('Could not load chat history:', err);
+                        // Keep the initial welcome message if loading fails
                     });
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }
             }
 
             function sendMessage() {
@@ -527,6 +719,280 @@
             chatBox.classList.remove('active');
             chatBubble.style.display = 'flex';
         });
+
+        // Profile Show More/Less Toggle
+        function initializeProfileToggle() {
+            const showToggleBtn = document.getElementById('showToggleBtn');
+            const profileList = document.getElementById('profileList');
+            const profileItems = profileList.querySelectorAll('.profile-item');
+            let isExpanded = false;
+
+            // Hide extra items initially (show first 2)
+            profileItems.forEach((item, index) => {
+                if (index > 1) {
+                    item.style.display = 'none';
+                }
+            });
+
+            showToggleBtn.addEventListener('click', () => {
+                isExpanded = !isExpanded;
+                profileItems.forEach((item, index) => {
+                    if (index > 1) {
+                        item.style.display = isExpanded ? 'flex' : 'none';
+                        if (isExpanded) {
+                            item.style.animation = 'fadeIn 0.3s ease';
+                        }
+                    }
+                });
+                showToggleBtn.innerHTML = isExpanded ? 
+                    '<i class="fas fa-chevron-up"></i><span>Show Less</span>' : 
+                    '<i class="fas fa-chevron-down"></i><span>Show More</span>';
+            });
+        }
+
+        // Initialize Courses Toggle
+        function initializeCoursesToggle() {
+            const coursesToggleBtn = document.getElementById('coursesToggleBtn');
+            const coursesGrid = document.getElementById('coursesGrid');
+            const courseCards = coursesGrid.querySelectorAll('.course-card');
+            let isExpanded = false;
+
+            // Hide extra courses initially (show first 3)
+            courseCards.forEach((card, index) => {
+                if (index > 2) {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide toggle if 3 or fewer courses
+            if (courseCards.length <= 3) {
+                coursesToggleBtn.style.display = 'none';
+                return;
+            }
+
+            coursesToggleBtn.addEventListener('click', () => {
+                isExpanded = !isExpanded;
+                courseCards.forEach((card, index) => {
+                    if (index > 2) {
+                        card.style.display = isExpanded ? 'flex' : 'none';
+                        if (isExpanded) {
+                            card.style.animation = 'fadeIn 0.3s ease';
+                        }
+                    }
+                });
+                coursesToggleBtn.innerHTML = isExpanded ? 
+                    '<i class="fas fa-chevron-up"></i><span>Show Less Courses</span>' : 
+                    '<i class="fas fa-chevron-down"></i><span>Show More Courses</span>';
+            });
+        }
+
+        // Initialize Updates Toggle
+        function initializeUpdatesToggle() {
+            const updatesToggleBtn = document.getElementById('updatesToggleBtn');
+            const updatesList = document.querySelector('.updates-list');
+            
+            // If no updates list, hide toggle
+            if (!updatesList) {
+                updatesToggleBtn.style.display = 'none';
+                return;
+            }
+
+            const updateItems = updatesList.querySelectorAll('.update-item');
+            let isExpanded = false;
+
+            // Hide extra updates initially (show first 3)
+            updateItems.forEach((item, index) => {
+                if (index > 2) {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Hide toggle if 3 or fewer items
+            if (updateItems.length <= 3) {
+                updatesToggleBtn.style.display = 'none';
+                return;
+            }
+
+            updatesToggleBtn.addEventListener('click', () => {
+                isExpanded = !isExpanded;
+                updateItems.forEach((item, index) => {
+                    if (index > 2) {
+                        item.style.display = isExpanded ? 'flex' : 'none';
+                        if (isExpanded) {
+                            item.style.animation = 'fadeIn 0.3s ease';
+                        }
+                    }
+                });
+                updatesToggleBtn.innerHTML = isExpanded ? 
+                    '<i class="fas fa-chevron-up"></i><span>Show Less Updates</span>' : 
+                    '<i class="fas fa-chevron-down"></i><span>Show More Updates</span>';
+            });
+        }
+
+        // Load and display profile photo
+        function loadProfilePhoto() {
+            fetch('/get_profile_photo')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.photo) {
+                        const photoImg = document.getElementById('profilePhotoImg');
+                        const photoIcon = document.getElementById('profilePhotoIcon');
+                        photoImg.src = data.photo;
+                        photoImg.style.display = 'block';
+                        photoIcon.style.display = 'none';
+                    }
+                })
+                .catch(err => console.log('No profile photo found'));
+        }
+
+        // Profile Modal Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeProfileToggle();
+            initializeCoursesToggle();
+            initializeUpdatesToggle();
+            loadProfilePhoto();
+
+            const profileModal = document.getElementById('profileModal');
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const profileForm = document.getElementById('profileForm');
+
+            // Open modal
+            editProfileBtn.addEventListener('click', () => {
+                profileModal.classList.add('active');
+            });
+
+            // Close modal functions
+            function closeModal() {
+                profileModal.classList.remove('active');
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+
+            // Close modal when clicking outside
+            profileModal.addEventListener('click', (e) => {
+                if (e.target === profileModal) {
+                    closeModal();
+                }
+            });
+
+            // Form submission
+            profileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = {
+                    username: document.getElementById('username').value.trim(),
+                    full_name: document.getElementById('fullName').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    contact_number: document.getElementById('contact').value.trim(),
+                    date_of_birth: document.getElementById('dob').value.trim()
+                };
+
+                // Validate required fields
+                if (!formData.full_name || !formData.email) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+
+                // Validate username
+                if (!formData.username || formData.username.length < 3) {
+                    alert('Username must be at least 3 characters');
+                    return;
+                }
+
+                try {
+                    // Handle file upload if present
+                    const photoFile = document.getElementById('profilePhoto').files[0];
+                    
+                    if (photoFile) {
+                        const photoFormData = new FormData();
+                        photoFormData.append('profile_photo', photoFile);
+                        
+                        const photoResponse = await fetch('/upload_profile_photo', {
+                            method: 'POST',
+                            body: photoFormData
+                        });
+                        
+                        if (!photoResponse.ok) {
+                            throw new Error('Failed to upload profile photo');
+                        }
+                    }
+
+                    const response = await fetch('/update_profile', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert('Profile updated successfully!');
+                        closeModal();
+                        
+                        // If username changed, reload after a brief delay to reflect the change
+                        if (data.username_changed) {
+                            setTimeout(() => location.reload(), 500);
+                        } else {
+                            // Otherwise just reload to refresh display
+                            setTimeout(() => location.reload(), 500);
+                        }
+                    } else {
+                        alert('Error: ' + (data.error || 'Failed to update profile'));
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while updating your profile');
+                }
+            });
+
+            // Edit username button
+            const editUsernameBtn = document.getElementById('editUsernameBtn');
+            if (editUsernameBtn) {
+                editUsernameBtn.addEventListener('click', () => {
+                    profileModal.classList.add('active');
+                    document.getElementById('username').focus();
+                });
+            }
+        });
+
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .profile-edit-icon-btn {
+                background: none;
+                border: none;
+                color: #4f8cff;
+                cursor: pointer;
+                font-size: 0.9rem;
+                padding: 0.25rem 0.5rem;
+                transition: all 0.3s ease;
+                border-radius: 4px;
+            }
+            .profile-edit-icon-btn:hover {
+                background: rgba(79, 140, 255, 0.1);
+                transform: scale(1.15);
+            }
+            .show-toggle-btn {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                justify-content: center;
+                font-size: 0.95rem;
+            }
+            #profilePhotoImg {
+                box-shadow: 0 4px 12px rgba(79, 140, 255, 0.3);
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

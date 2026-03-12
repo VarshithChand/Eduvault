@@ -3,20 +3,467 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Module 10: File Handling</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>File Handling - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
 </head>
 <body>
-  <div class="module-container">
-    <div class="back-btn">
-      <a href="{{ url_for('python_module', module='index') }}">← Back to Python Courses</a>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('python_course') }}" class="nav-button">← Back to All Modules</a>
     </div>
-    <h1>Module 10: File Handling</h1>
-    <p>Master reading, writing, and managing files in Python.</p>
-    <div class="content">
-      <h2>Coming Soon</h2>
-      <p>This module content is under development. Please check back later!</p>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>File Handling</h1>
+      <p>Read, write, append, and manage files in Python. Work with file paths and the os module.</p>
     </div>
-  </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+
+      <div class="topic-section">
+        <h2>1. Opening and Closing Files</h2>
+        <p>Python uses the built-in <code>open()</code> function to work with files. Always close files after use — or better, use the <code>with</code> statement.</p>
+
+        <div class="example-box">
+          <h3>Example 1: open() and close()</h3>
+          <pre><code># Basic open and close
+file = open("data.txt", "r")   # open in read mode
+content = file.read()
+print(content)
+file.close()                   # always close manually
+
+# What happens if you forget to close?
+# The file stays locked, changes may not be saved,
+# and you risk running out of file handles.
+
+# Opening a file that doesn't exist in read mode raises an error
+# open("missing.txt", "r")  # ❌ FileNotFoundError
+
+# Check before opening
+import os
+if os.path.exists("data.txt"):
+    file = open("data.txt", "r")
+    print(file.read())
+    file.close()
+else:
+    print("File not found")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: The with Statement (Recommended)</h3>
+          <pre><code># 'with' automatically closes the file — even if an error occurs
+with open("data.txt", "r") as file:
+    content = file.read()
+    print(content)
+# File is closed here automatically
+
+# Verify the file is closed
+with open("data.txt", "r") as file:
+    print(file.closed)   # False — still open inside block
+
+print(file.closed)       # True — closed after block
+
+# Multiple files at once using with
+with open("input.txt", "r") as infile, open("output.txt", "w") as outfile:
+    data = infile.read()
+    outfile.write(data)
+    print("Copied successfully")</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: File Object Attributes</h3>
+          <pre><code># File objects have useful attributes
+with open("data.txt", "r") as file:
+    print(file.name)      # data.txt
+    print(file.mode)      # r
+    print(file.closed)    # False
+
+# After the block
+print(file.closed)        # True
+
+# You can reopen a closed file
+file = open("data.txt", "r")
+file.close()
+print(file.closed)        # True
+file = open("data.txt", "r")  # reopen
+print(file.read())
+file.close()
+
+# File pointer position
+with open("data.txt", "r") as file:
+    print(file.tell())    # 0 — at the start
+    file.read(5)          # read 5 characters
+    print(file.tell())    # 5 — pointer moved
+    file.seek(0)          # go back to start
+    print(file.tell())    # 0</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. File Modes</h2>
+        <p>The mode argument controls how a file is opened — for reading, writing, appending, or binary operations.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Text Modes</h3>
+          <pre><code># "r"  — Read (default). File must exist.
+with open("data.txt", "r") as f:
+    print(f.read())
+
+# "w"  — Write. Creates file if not found. Overwrites existing content!
+with open("output.txt", "w") as f:
+    f.write("This replaces all previous content.")
+
+# "a"  — Append. Creates file if not found. Adds to end.
+with open("log.txt", "a") as f:
+    f.write("New log entry\n")
+
+# "x"  — Create. Fails if file already exists.
+# open("new.txt", "x")  # ❌ FileExistsError if new.txt exists
+
+# "r+" — Read and Write. File must exist.
+with open("data.txt", "r+") as f:
+    content = f.read()
+    f.seek(0)
+    f.write("Updated: " + content)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Binary Modes</h3>
+          <pre><code># "rb" — Read Binary (images, PDFs, audio, etc.)
+with open("image.png", "rb") as f:
+    data = f.read()
+    print(f"File size: {len(data)} bytes")
+
+# "wb" — Write Binary
+with open("copy.png", "wb") as out:
+    out.write(data)
+print("Image copied successfully")
+
+# "ab" — Append Binary
+with open("log.bin", "ab") as f:
+    f.write(b"\x00\x01\x02")
+
+# Binary vs text — key difference
+# Text mode:   reads/writes strings (str)
+# Binary mode: reads/writes bytes (bytes)
+
+# Text
+with open("data.txt", "r") as f:
+    content = f.read()
+    print(type(content))   # <class 'str'>
+
+# Binary
+with open("data.txt", "rb") as f:
+    content = f.read()
+    print(type(content))   # <class 'bytes'></code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Mode Summary and Safe Patterns</h3>
+          <pre><code"># Mode quick reference
+# ┌──────┬───────────────────────────────────┐
+# │ Mode │ Description                        │
+# ├──────┼───────────────────────────────────┤
+# │  r   │ Read text (default)                │
+# │  w   │ Write text (overwrites!)           │
+# │  a   │ Append text                        │
+# │  x   │ Create new (error if exists)       │
+# │  r+  │ Read + write                       │
+# │  rb  │ Read binary                        │
+# │  wb  │ Write binary                       │
+# └──────┴───────────────────────────────────┘
+
+# Safe write — only write if file doesn't already exist
+import os
+
+filename = "config.txt"
+if not os.path.exists(filename):
+    with open(filename, "w") as f:
+        f.write("default_settings=True\n")
+    print("Config created")
+else:
+    print("Config already exists — skipping")
+
+# Safe read with fallback
+try:
+    with open("settings.txt", "r") as f:
+        print(f.read())
+except FileNotFoundError:
+    print("Settings file missing — using defaults")</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Reading Files</h2>
+        <p>Python provides multiple methods to read file content — all at once, line by line, or into a list.</p>
+
+        <div class="example-box">
+          <h3>Example 1: read() and readline()</h3>
+          <pre><code># .read() — reads entire file as one string
+with open("data.txt", "r") as file:
+    content = file.read()
+    print(content)
+
+# .read(n) — reads n characters
+with open("data.txt", "r") as file:
+    chunk = file.read(10)   # first 10 characters
+    print(chunk)
+
+# .readline() — reads one line at a time
+with open("data.txt", "r") as file:
+    line1 = file.readline()   # first line
+    line2 = file.readline()   # second line
+    print(line1)
+    print(line2)
+
+# Loop with readline
+with open("data.txt", "r") as file:
+    line = file.readline()
+    while line:
+        print(line.strip())   # .strip() removes \n
+        line = file.readline()</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: readlines() and Iterating</h3>
+          <pre><code># .readlines() — returns all lines as a list
+with open("data.txt", "r") as file:
+    lines = file.readlines()
+
+print(lines)          # ['line1\n', 'line2\n', 'line3\n']
+print(len(lines))     # number of lines
+
+# Process each line
+for line in lines:
+    print(line.strip())
+
+# Best way — iterate directly over file object (memory efficient)
+with open("data.txt", "r") as file:
+    for line in file:
+        print(line.strip())
+
+# Read into a clean list (no newline characters)
+with open("data.txt", "r") as file:
+    clean_lines = [line.strip() for line in file]
+print(clean_lines)</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Reading and Processing Data</h3>
+          <pre><code># Practical: read a CSV-like file and parse it
+# Assume scores.txt contains:
+# Alice,95
+# Bob,83
+# Carol,91
+
+with open("scores.txt", "r") as file:
+    students = {}
+    for line in file:
+        line = line.strip()
+        if line:                         # skip empty lines
+            name, score = line.split(",")
+            students[name] = int(score)
+
+print(students)
+# {'Alice': 95, 'Bob': 83, 'Carol': 91}
+
+# Find top student
+top = max(students, key=students.get)
+print(f"Top student: {top} with {students[top]}")
+
+# Calculate average
+avg = sum(students.values()) / len(students)
+print(f"Class average: {avg:.1f}")</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Writing, Appending, and File Paths</h2>
+        <p>Write new content or add to existing files. Use the os and pathlib modules to manage file paths safely.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Writing Files</h3>
+          <pre><code># .write() — writes a string (no automatic newline)
+with open("notes.txt", "w") as file:
+    file.write("Line one\n")
+    file.write("Line two\n")
+    file.write("Line three\n")
+
+# .writelines() — writes a list of strings
+lines = ["Alice,95\n", "Bob,83\n", "Carol,91\n"]
+with open("scores.txt", "w") as file:
+    file.writelines(lines)
+
+# Write with newline join
+students = ["Alice", "Bob", "Carol", "Dave"]
+with open("students.txt", "w") as file:
+    file.write("\n".join(students))
+
+# Overwrite warning — "w" erases existing content
+with open("important.txt", "w") as f:
+    f.write("First write\n")
+with open("important.txt", "w") as f:
+    f.write("Second write\n")   # First write is gone!</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Appending to Files</h3>
+          <pre><code># "a" mode adds to end without deleting existing content
+with open("log.txt", "a") as file:
+    file.write("User logged in\n")
+
+# Append multiple entries
+import datetime
+
+def log_event(event):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open("log.txt", "a") as file:
+        file.write(f"[{timestamp}] {event}\n")
+
+log_event("App started")
+log_event("User Alice logged in")
+log_event("File uploaded")
+
+# Read back the log
+with open("log.txt", "r") as file:
+    print(file.read())</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Working with File Paths (os and pathlib)</h3>
+          <pre><code">import os
+from pathlib import Path
+
+# Check if file or directory exists
+print(os.path.exists("data.txt"))       # True or False
+print(os.path.isfile("data.txt"))       # True if it's a file
+print(os.path.isdir("my_folder"))       # True if it's a folder
+
+# Get file info
+print(os.path.getsize("data.txt"))      # size in bytes
+print(os.path.abspath("data.txt"))      # absolute path
+
+# Create and remove directories
+os.makedirs("output/reports", exist_ok=True)  # create nested dirs
+os.remove("old_file.txt")               # delete a file
+
+# List files in a directory
+for filename in os.listdir("."):
+    if filename.endswith(".txt"):
+        print(filename)
+
+# Modern approach — pathlib (Python 3.4+)
+path = Path("data.txt")
+print(path.exists())          # True/False
+print(path.suffix)            # .txt
+print(path.stem)              # data
+print(path.parent)            # current directory
+
+# Safe read with pathlib
+if path.exists():
+    content = path.read_text()
+    print(content)</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+
+        <div class="exercise">
+          <h3>Exercise 1: Student File Manager</h3>
+          <p>Create a program that manages student data in a text file:</p>
+          <ul>
+            <li>Write a list of student names and scores to <code>students.txt</code></li>
+            <li>Read the file back and parse each line</li>
+            <li>Calculate and print the class average</li>
+            <li>Append a new student entry to the file</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Simple Logger</h3>
+          <p>Build a logging function that records events with timestamps:</p>
+          <ul>
+            <li>Each log entry should include date, time, and message</li>
+            <li>Append new entries without overwriting old ones</li>
+            <li>Add a function to read and display the last N log entries</li>
+            <li>Add a function to clear the log file</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: File Word Counter</h3>
+          <p>Write a program that analyzes a text file:</p>
+          <ul>
+            <li>Count total number of lines, words, and characters</li>
+            <li>Find the most frequent word (ignore case)</li>
+            <li>Write the results to a new file called <code>stats.txt</code></li>
+            <li>Handle the case where the input file doesn't exist</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: File Backup Utility</h3>
+          <p>Create a utility that backs up a text file:</p>
+          <ul>
+            <li>Read content from an original file</li>
+            <li>Write a copy with a timestamp in the filename (e.g. <code>backup_2025-01-01.txt</code>)</li>
+            <li>Check if a backup already exists before creating one</li>
+            <li>List all backup files in the current directory</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('python_module', module='module9-sets') }}" class="nav-button">← Previous: Sets & Advanced Collections</a>
+        <a href="{{ url_for('python_module', module='module11-exception-handling') }}" class="nav-button"> Next: Exception Handling →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("mobile-show");
+      navToggle.classList.toggle("active");
+    });
+  }
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => { copyBtn.innerText = "Copy"; copyBtn.classList.remove("copied"); }, 2000);
+      });
+    });
+  });
+});
+  </script>
 </body>
 </html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functions - Eduvalt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='module-styles.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">☕</span>
+        <span class="logo-text">Eduvalt</span>
+      </div>
+      <a href="{{ url_for('java_course') }}" class="nav-button">← Back to All Modules</a>
+    </div>
+  </nav>
+
+  <section class="module-header">
+    <div class="container">
+      <span class="level-badge beginner">Beginner</span>
+      <h1>Functions & Methods</h1>
+      <p>Create reusable code blocks with methods. Understand parameters, return values, and scope.</p>
+    </div>
+  </section>
+
+  <section class="module-content">
+    <div class="container">
+      
+      <div class="topic-section">
+        <h2>1. Method Definition and Calling</h2>
+        <p>Methods are reusable blocks of code that perform specific tasks. In Java, all functions are methods of a class.</p>
+        
+        <div class="example-box">
+          <h3>Example 1: Basic Method Definition</h3>
+          <pre><code>public class MethodDemo {
+    // Define a simple method
+    public static void greet() {
+        System.out.println("Hello, World!");
+    }
+    
+    public static void main(String[] args) {
+        // Call the method
+        greet();  // Output: Hello, World!
+    }
+}
+
+// Output: Hello, World!</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Method with Multiple Statements</h3>
+          <pre><code>public class Calculator {
+    public static void displayInfo() {
+        System.out.println("Welcome to Java methods!");
+        System.out.println("Methods help organize code.");
+        System.out.println("They make code reusable.");
+    }
+    
+    public static void calculateSquare() {
+        int number = 5;
+        int square = number * number;
+        System.out.println("Square of " + number + " is " + square);
+    }
+    
+    public static void main(String[] args) {
+        displayInfo();
+        calculateSquare();  // Output: Square of 5 is 25
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Method Naming Conventions</h3>
+          <pre><code>public class BestPractices {
+    // Method names should be descriptive and in camelCase
+    public static void calculateArea() {
+        int length = 10;
+        int width = 5;
+        int area = length * width;
+        System.out.println("Area: " + area);
+    }
+    
+    // Method can be called multiple times
+    public static void sayHello() {
+        System.out.println("Hello!");
+    }
+    
+    // Methods can call other methods
+    public static void morningRoutine() {
+        sayHello();
+        System.out.println("Time for breakfast!");
+    }
+    
+    public static void main(String[] args) {
+        calculateArea();      // Area: 50
+        morningRoutine();
+    }
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>2. Parameters and Arguments</h2>
+        <p>Parameters are variables in method definition. Arguments are values passed when calling the method.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Method with Parameters</h3>
+          <pre><code>public class ParameterDemo {
+    public static void greetPerson(String name, int age) {
+        System.out.println("Hello, " + name + "! You are " + age + " years old.");
+    }
+    
+    public static void calculateRectangleArea(int length, int width) {
+        int area = length * width;
+        System.out.println("Area: " + area);
+    }
+    
+    public static void main(String[] args) {
+        greetPerson("Alice", 25);  
+        // Output: Hello, Alice! You are 25 years old.
+        
+        greetPerson("Bob", 30);
+        // Output: Hello, Bob! You are 30 years old.
+        
+        calculateRectangleArea(10, 5);  // Area: 50
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Order of Parameters Matters</h3>
+          <pre><code>public class DivisionDemo {
+    public static void divide(double a, double b) {
+        double result = a / b;
+        System.out.println(a + " divided by " + b + " is " + result);
+    }
+    
+    public static void main(String[] args) {
+        divide(10, 2);   // 10 divided by 2 is 5.0
+        divide(2, 10);   // 2 divided by 10 is 0.2
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Variable Number of Arguments (Varargs)</h3>
+          <pre><code>public class VarargsDemo {
+    // ... int (varargs - variable arguments)
+    public static int sumAll(int... numbers) {
+        int total = 0;
+        for (int num : numbers) {
+            total += num;
+        }
+        return total;
+    }
+    
+    public static void printItems(String... items) {
+        for (String item : items) {
+            System.out.println("- " + item);
+        }
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(sumAll(1, 2, 3));           // 6
+        System.out.println(sumAll(10, 20, 30, 40));   // 100
+        System.out.println(sumAll());                  // 0
+        
+        printItems("Apple", "Banana", "Orange");
+    }
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>3. Return Statements</h2>
+        <p>Methods can return values using the return statement. Return ends method execution.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Returning Values</h3>
+          <pre><code>public class ReturnDemo {
+    public static int addNumbers(int a, int b) {
+        return a + b;
+    }
+    
+    public static String getUserInfo() {
+        return "Alice, 25, Engineer";
+    }
+    
+    public static double calculateAverage(double a, double b, double c) {
+        return (a + b + c) / 3;
+    }
+    
+    public static void main(String[] args) {
+        int result = addNumbers(5, 3);
+        System.out.println("Sum: " + result);  // Sum: 8
+        
+        String info = getUserInfo();
+        System.out.println(info);
+        
+        double avg = calculateAverage(10, 20, 30);
+        System.out.println("Average: " + avg);  // Average: 20.0
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Multiple Return Points</h3>
+          <pre><code>public class ConditionalReturn {
+    public static String checkNumber(int num) {
+        if (num > 0) {
+            return "Positive";
+        } else if (num < 0) {
+            return "Negative";
+        } else {
+            return "Zero";
+        }
+    }
+    
+    public static String validateAge(int age) {
+        if (age < 0) {
+            return "Invalid age";
+        }
+        if (age < 18) {
+            return "Minor";
+        }
+        return "Adult";
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(checkNumber(5));    // Positive
+        System.out.println(checkNumber(-3));   // Negative
+        System.out.println(checkNumber(0));    // Zero
+        
+        System.out.println(validateAge(25));   // Adult
+        System.out.println(validateAge(15));   // Minor
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Methods that Return Nothing (void)</h3>
+          <pre><code>public class VoidMethodDemo {
+    // void means method doesn't return a value
+    public static void printSquare(int num) {
+        System.out.println(num * num);
+    }
+    
+    // Returns a value
+    public static int calculateSquare(int num) {
+        return num * num;
+    }
+    
+    // Practical calculator function
+    public static double calculator(double a, double b, String operation) {
+        switch(operation) {
+            case "add":
+                return a + b;
+            case "subtract":
+                return a - b;
+            case "multiply":
+                return a * b;
+            case "divide":
+                if (b != 0) {
+                    return a / b;
+                } else {
+                    return Double.NaN;  // Not a Number
+                }
+            default:
+                return 0;
+        }
+    }
+    
+    public static void main(String[] args) {
+        printSquare(4);  // Output: 16
+        
+        int result = calculateSquare(4);
+        System.out.println("Square: " + result);  // Square: 16
+        
+        System.out.println(calculator(10, 5, "add"));      // 15.0
+        System.out.println(calculator(10, 5, "divide"));   // 2.0
+    }
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="topic-section">
+        <h2>4. Local and Static Variables</h2>
+        <p>Local variables exist within methods. Static variables belong to the class and are shared across all instances.</p>
+
+        <div class="example-box">
+          <h3>Example 1: Local Variables</h3>
+          <pre><code>public class LocalVariableDemo {
+    public static void myMethod() {
+        int localVar = 10;  // Local variable
+        System.out.println("Local: " + localVar);
+    }
+    
+    // This would cause an error:
+    // System.out.println(localVar);  // Error: localVar not defined
+    
+    public static void function1() {
+        int x = 10;
+        System.out.println("function1 x: " + x);
+    }
+    
+    public static void function2() {
+        int x = 20;  // Different x in function2
+        System.out.println("function2 x: " + x);
+    }
+    
+    public static void main(String[] args) {
+        myMethod();      // Local: 10
+        function1();     // function1 x: 10
+        function2();     // function2 x: 20
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 2: Static Variables</h3>
+          <pre><code>public class StaticVariableDemo {
+    // Static variable - shared across all instances
+    static int count = 0;
+    
+    public static void increment() {
+        count++;
+        System.out.println("Count: " + count);
+    }
+    
+    public static void main(String[] args) {
+        increment();  // Count: 1
+        increment();  // Count: 2
+        increment();  // Count: 3
+        
+        System.out.println("Final count: " + count);  // Final count: 3
+    }
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h3>Example 3: Instance Variables vs Static Variables</h3>
+          <pre><code>public class Counter {
+    int instanceCount = 0;  // Each object has its own
+    static int staticCount = 0;   // Shared by all objects
+    
+    public void incrementBoth() {
+        instanceCount++;
+        staticCount++;
+    }
+    
+    public void display() {
+        System.out.println("Instance: " + instanceCount + ", Static: " + staticCount);
+    }
+    
+    public static void main(String[] args) {
+        Counter c1 = new Counter();
+        Counter c2 = new Counter();
+        
+        c1.incrementBoth();
+        System.out.println("After c1.increment():");
+        c1.display();  // Instance: 1, Static: 1
+        c2.display();  // Instance: 0, Static: 1
+        
+        c2.incrementBoth();
+        System.out.println("After c2.increment():");
+        c1.display();  // Instance: 1, Static: 2
+        c2.display();  // Instance: 1, Static: 2
+    }
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="practice-section">
+        <h2>Practice Exercises</h2>
+        
+        <div class="exercise">
+          <h3>Exercise 1: Temperature Converter</h3>
+          <p>Create methods to convert between Celsius, Fahrenheit, and Kelvin:</p>
+          <ul>
+            <li>celsiusToFahrenheit(double celsius)</li>
+            <li>fahrenheitToCelsius(double fahrenheit)</li>
+            <li>celsiusToKelvin(double celsius)</li>
+            <li>kelvinToCelsius(double kelvin)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 2: Calculator Application</h3>
+          <p>Write a calculator method that takes three parameters:</p>
+          <ul>
+            <li>Two numbers and an operation string</li>
+            <li>Support add, subtract, multiply, divide</li>
+            <li>Handle division by zero</li>
+            <li>Use switch statement for operations</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 3: Array Statistics</h3>
+          <p>Create methods to calculate statistics on an array:</p>
+          <ul>
+            <li>calculateMean(int[] numbers)</li>
+            <li>findMinMax(int[] numbers)</li>
+            <li>countOccurrences(int[] numbers, int target)</li>
+            <li>reverseArray(int[] numbers)</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <h3>Exercise 4: String Utilities</h3>
+          <p>Create utility methods for string operations:</p>
+          <ul>
+            <li>isPalindrome(String word)</li>
+            <li>reverseString(String str)</li>
+            <li>countVowels(String text)</li>
+            <li>capitalizeWords(String text)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-navigation">
+        <a href="{{ url_for('java_course') }}" class="nav-button">← Back to All Modules</a>
+        <a href="{{ url_for('java_course') }}" class="nav-button">Next Module →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Eduvalt. Made with 💙 by Varshu</p>
+    </div>
+  </footer>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const codeBlocks = document.querySelectorAll("pre code");
+  codeBlocks.forEach((codeBlock) => {
+    const wrapper = codeBlock.closest("pre");
+    if (!wrapper) return;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "code-copy";
+    copyBtn.innerText = "Copy";
+    wrapper.style.position = "relative";
+    wrapper.appendChild(copyBtn);
+
+    copyBtn.addEventListener("click", () => {
+      const text = codeBlock.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.innerText = "Copy";
+          copyBtn.classList.remove("copied");   
+        }, 2000);
+      });
+    });
+  });
+});
+  </script>
+</body>
+</html>

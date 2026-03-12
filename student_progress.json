@@ -20,5 +20,85 @@
             "total_modules": 5,
             "last_updated": "2026-03-11T19:01:10.542347"
         }
+    },
+    "varshu": {
+        "C": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:23:19.927087"
+        },
+        "C++": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:23:19.927118"
+        },
+        "AWS DevOps": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:23:19.927123"
+        },
+        "Azure DevOps": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:23:19.927124"
+        },
+        "GCP DevOps": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:23:19.927126"
+        }
+    },
+    "varsh": {
+        "C": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:24:11.985728"
+        },
+        "C++": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:24:11.985744"
+        },
+        "AWS DevOps": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:24:11.985748"
+        },
+        "Azure DevOps": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:24:11.985750"
+        },
+        "GCP DevOps": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:24:11.985752"
+        }
+    },
+    "bb": {
+        "Java": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:31:38.550824"
+        }
+    },
+    "moulii": {
+        "Java": {
+            "percentage": 0,
+            "modules_completed": 0,
+            "total_modules": 5,
+            "last_updated": "2026-03-12T14:40:16.343578"
+        }
     }
 }
