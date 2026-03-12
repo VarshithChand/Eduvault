@@ -14,6 +14,8 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx', 
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+
 # Initialize Gemini AI
 genai.configure(api_key='AIzaSyCEiqlCAi8xNchk9Gn-VBJ0o_JvN8MMQoE')
 model = genai.GenerativeModel('gemini-2.0-flash')
