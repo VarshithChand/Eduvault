@@ -1,4 +1,5 @@
 user1,Python
+<<<<<<< HEAD
 manohar,C
 manohar,Python
 varsh,C
@@ -8,3 +9,9 @@ varsh,Azure DevOps
 varsh,GCP DevOps
 moulii,Java
 moulii,Python
+=======
+aa,Python
+bb,Java
+manohar,C
+manohar,Python
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8

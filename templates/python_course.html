@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
 <meta charset="UTF-8">
 <title>Loading Python Course...</title>
 
@@ -93,3 +94,19 @@ setTimeout(function(){
 
 </body>
 </html>
+=======
+  <meta charset="UTF-8">
+  <title>Python Course</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Python Course</h1>
+  <p>Welcome to your Python learning journey! 🐍</p>
+
+
+  <a href="{{ url_for('python_module', module='index') }}">Go to Python Course</a>
+
+  <a href="{{ url_for('courses') }}">⬅ Back to Courses</a>
+</body>
+</html>
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8

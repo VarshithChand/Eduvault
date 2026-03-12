@@ -1,0 +1,560 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - EDUVAULT{% endblock %}
+
+{% block extra_css %}
+<style>
+    .analytics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .analytics-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        padding: 1.5rem;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .analytics-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .analytics-card h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .progress-container {
+        margin-bottom: 2rem;
+    }
+
+    .progress-item {
+        margin-bottom: 1.5rem;
+    }
+
+    .progress-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4ade80, #22c55e);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
+
+    .insights-card {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 12px;
+        padding: 1.5rem;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .insight-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .insight-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-box {
+        background: rgba(255,255,255,0.1);
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: block;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+        margin-bottom: 2rem;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .timetable-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+    }
+
+    .timetable-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .day-schedule {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #fff;
+    }
+
+    .day-name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .class-slot {
+        background: rgba(255,255,255,0.1);
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .class-time {
+        font-weight: bold;
+        font-size: 0.85rem;
+    }
+
+    .class-course {
+        font-size: 0.9rem;
+    }
+
+    .dashboard-section {
+        margin-bottom: 3rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .section-icon {
+        color: #667eea;
+        font-size: 1.8rem;
+    }
+
+    .weak-areas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .area-badge {
+        background: rgba(255,255,255,0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .quick-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    .action-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        .analytics-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .timetable-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-container {
+            height: 250px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Welcome Header -->
+    <div class="dashboard-section">
+        <div class="section-title">
+            <i class="section-icon fas fa-wave-square"></i>
+            Welcome Back, {{ username }}!
+        </div>
+        <p style="color: #666; margin-bottom: 1rem;">
+            You're enrolled in <strong>{{ assigned_courses|length }}</strong> course(s). Keep up your learning journey!
+        </p>
+    </div>
+
+    <!-- Progress Tracking Section -->
+    <div class="dashboard-section">
+        <div class="section-title">
+            <i class="section-icon fas fa-chart-line"></i>
+            Your Learning Progress
+        </div>
+        
+        <div class="analytics-grid">
+            {% for course in assigned_courses %}
+                {% set course_progress = progress.get(course, {}) %}
+                <div class="analytics-card">
+                    <h3>
+                        <i class="fas fa-book"></i>
+                        {{ course }}
+                    </h3>
+                    <div class="progress-container">
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>Completion</span>
+                                <span id="progress-{{ course }}">{{ course_progress.get('percentage', 0)|int }}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: {{ course_progress.get('percentage', 0) }}%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem;">
+                            <strong>{{ course_progress.get('modules_completed', 0) }} / {{ course_progress.get('total_modules', 5) }}</strong> modules completed
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- AI Tutor Analytics -->
+    <div class="dashboard-section">
+        <div class="section-title">
+            <i class="section-icon fas fa-brain"></i>
+            AI Tutor Insights
+        </div>
+        
+        <div class="insights-card">
+            <div class="insight-text">
+                <strong>📌 AI Recommendation:</strong>
+                <p>{{ insights }}</p>
+            </div>
+            
+            <div class="insight-stats">
+                <div class="stat-box">
+                    <span class="stat-number" id="questions-count">0</span>
+                    <span class="stat-label">Questions Asked</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="topics-count">0</span>
+                    <span class="stat-label">Topics Explored</span>
+                </div>
+            </div>
+
+            <div class="weak-areas" id="weak-areas-container" style="margin-top: 1rem;">
+                <strong style="width: 100;">Focus Areas:</strong>
+            </div>
+
+            <div class="quick-actions">
+                <button class="action-btn" onclick="openChatbot()">
+                    <i class="fas fa-comments"></i>
+                    Ask AI Tutor
+                </button>
+                <button class="action-btn" onclick="updateProgress()">
+                    <i class="fas fa-redo"></i>
+                    Update Progress
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Charts -->
+    <div class="dashboard-section">
+        <div class="section-title">
+            <i class="section-icon fas fa-chart-pie"></i>
+            Performance Analytics
+        </div>
+
+        <!-- Progress Chart -->
+        <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+        </div>
+
+        <!-- Performance Trend Chart -->
+        <div class="chart-container">
+            <canvas id="trendChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Automatic Timetable -->
+    <div class="dashboard-section">
+        <div class="timetable-card">
+            <div class="section-title">
+                <i class="section-icon fas fa-calendar-alt"></i>
+                Your Weekly Learning Schedule
+            </div>
+            
+            <div class="timetable-grid" id="timetable-container">
+                <!-- Timetable will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Study Resources -->
+    <div class="dashboard-section">
+        <div class="section-title">
+            <i class="section-icon fas fa-book-open"></i>
+            Study Resources
+        </div>
+
+        <div class="analytics-grid">
+            <div class="analytics-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h3>
+                    <i class="fas fa-file-pdf"></i>
+                    Superuser Resources
+                </h3>
+                <p>{{ superuser_files|length }} files uploaded</p>
+                <a href="{{ url_for('uploads') }}" style="color: white; text-decoration: underline;">
+                    Browse Resources →
+                </a>
+            </div>
+
+            <div class="analytics-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h3>
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    My Uploads
+                </h3>
+                <p>{{ files|length }} files uploaded</p>
+                <a href="{{ url_for('uploads') }}" style="color: white; text-decoration: underline;">
+                    Manage Files →
+                </a>
+            </div>
+
+            <div class="analytics-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <h3>
+                    <i class="fas fa-graduation-cap"></i>
+                    Explore Courses
+                </h3>
+                <p>{{ assigned_courses|length }} enrolled</p>
+                <a href="{{ url_for('courses') }}" style="color: white; text-decoration: underline;">
+                    View Courses →
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+<script>
+    // Load timetable data
+    const timetableData = {{ timetable_json | safe }};
+    
+    // Populate timetable
+    function populateTimetable() {
+        const container = document.getElementById('timetable-container');
+        container.innerHTML = '';
+        
+        for (let day in timetableData) {
+            const daySchedule = document.createElement('div');
+            daySchedule.className = 'day-schedule';
+            
+            const dayName = document.createElement('div');
+            dayName.className = 'day-name';
+            dayName.textContent = day;
+            daySchedule.appendChild(dayName);
+            
+            timetableData[day].forEach(slot => {
+                const classSlot = document.createElement('div');
+                classSlot.className = 'class-slot';
+                classSlot.innerHTML = `
+                    <span class="class-time">${slot.time}</span>
+                    <span class="class-course">${slot.course}</span>
+                `;
+                daySchedule.appendChild(classSlot);
+            });
+            
+            container.appendChild(daySchedule);
+        }
+    }
+    
+    // Fetch and display AI insights
+    async function loadAIInsights() {
+        try {
+            const response = await fetch('/api/student/ai-insights');
+            const data = await response.json();
+            
+            document.getElementById('questions-count').textContent = data.total_questions;
+            document.getElementById('topics-count').textContent = Object.keys(data.topics).length;
+            
+            // Display weak areas
+            const container = document.getElementById('weak-areas-container');
+            container.innerHTML = '<strong style="width: 100%;">Focus Areas:</strong>';
+            data.weak_areas.forEach(area => {
+                const badge = document.createElement('div');
+                badge.className = 'area-badge';
+                badge.textContent = area.toUpperCase();
+                container.appendChild(badge);
+            });
+        } catch (error) {
+            console.error('Error loading AI insights:', error);
+        }
+    }
+    
+    // Initialize progress charts
+    async function loadCharts() {
+        try {
+            const response = await fetch('/api/student/performance-data');
+            const data = await response.json();
+            
+            // Progress Chart
+            const progressCtx = document.getElementById('progressChart').getContext('2d');
+            new Chart(progressCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.courses,
+                    datasets: [{
+                        data: data.progress,
+                        backgroundColor: [
+                            '#667eea',
+                            '#764ba2',
+                            '#f093fb',
+                            '#f5576c'
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Course Completion Status'
+                        }
+                    }
+                }
+            });
+            
+            // Trend Chart
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: data.trend_labels,
+                    datasets: data.courses.map((course, idx) => ({
+                        label: course,
+                        data: data.trend_data[idx],
+                        borderColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c'][idx],
+                        backgroundColor: ['rgba(102,126,234,0.1)', 'rgba(118,75,162,0.1)', 'rgba(240,147,251,0.1)', 'rgba(245,87,108,0.1)'][idx],
+                        tension: 0.4,
+                        fill: true
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Learning Progress Trend'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading charts:', error);
+        }
+    }
+    
+    // Update progress (demo function)
+    function updateProgress() {
+        alert('Click on a course from the Courses page to update your progress!');
+    }
+    
+    // Open chatbot (you can integrate with your chat interface)
+    function openChatbot() {
+        // This would open your chat interface
+        alert('Chat functionality would be integrated here!');
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        populateTimetable();
+        loadAIInsights();
+        loadCharts();
+    });
+</script>
+{% endblock %}

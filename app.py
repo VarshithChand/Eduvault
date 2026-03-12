@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory, jsonify, make_response
 import os
+<<<<<<< HEAD
 import shutil
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 from werkzeug.utils import secure_filename
 import google.generativeai as genai
 import re
@@ -8,7 +11,10 @@ from functools import wraps
 import json
 from datetime import datetime, timedelta
 import random
+<<<<<<< HEAD
 import base64
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -21,21 +27,32 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx', 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Initialize Gemini AI
+<<<<<<< HEAD
 genai.configure(api_key='AIzaSyCJKz6YT-B45rGQye78GfVuDi1WNFwWvW0')
+=======
+genai.configure(api_key='AIzaSyBU_eVtXDDT6OB8hRO_RYOuv_qwQVAa-mk')
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 model = genai.GenerativeModel('gemini-2.0-flash')
 
 # Data storage
 USER_DATA = {}
 SUPERUSER_DATA = {"varshith": "1234"}
+<<<<<<< HEAD
 COURSES = ["Python", "Java", "C", "C++", "AWS DevOps", "Azure DevOps", "GCP DevOps"]
+=======
+COURSES = ["Python", "Java", "C", "C++"]
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 USER_COURSES = {}
 USER_COURSES_FILE = 'user_courses.txt'
 PROGRESS_FILE = 'student_progress.json'
 AI_ANALYTICS_FILE = 'ai_analytics.json'
 TIMETABLE_FILE = 'student_timetables.json'
 USER_TIMETABLE_FILE = 'user_custom_timetables.json'  # NEW: For user-editable timetables
+<<<<<<< HEAD
 USER_PROFILE_FILE = 'user_profiles.json'  # NEW: For user profile data
 USER_CHAT_HISTORY_DIR = 'user_chat_histories'  # NEW: For per-user chat histories
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 
 # Days and time slots
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -55,6 +72,7 @@ def save_user_data():
         for username, password in USER_DATA.items():
             f.write(f"{username},{password}\n")
 
+<<<<<<< HEAD
 def cleanup_orphaned_user_folders():
     """
     Delete user folders in uploads directory if the user doesn't exist in users.txt.
@@ -160,6 +178,8 @@ def delete_user_data(username):
     except Exception as e:
         print(f"Error during complete user data deletion for {username}: {str(e)}")
 
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 def load_user_courses():
     """Load user course assignments from file"""
     global USER_COURSES
@@ -460,6 +480,7 @@ def delete_timetable_entry(username, entry_id):
     save_user_timetables(timetables)
     return True
 
+<<<<<<< HEAD
 # ==================== USER PROFILE MANAGEMENT FUNCTIONS ====================
 def load_user_profiles():
     """Load user profiles from JSON file"""
@@ -512,6 +533,8 @@ def update_user_profile(username, full_name, email, contact_number, date_of_birt
     save_user_profiles(profiles)
     return profiles[username]
 
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 def format_response(response):
     formatted_response = response.text
     formatted_response = re.sub(
@@ -522,6 +545,7 @@ def format_response(response):
     )
     return formatted_response
 
+<<<<<<< HEAD
 # ==================== PER-USER CHAT HISTORY FUNCTIONS ====================
 def get_user_chat_file(username):
     """Get the chat history file path for a user"""
@@ -572,6 +596,10 @@ def add_chat_message(username, message, message_type, bot_response=None):
 # Load user data on startup
 load_user_data()
 cleanup_orphaned_user_folders()  # Clean up any orphaned folders from deleted users
+=======
+# Load user data on startup
+load_user_data()
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 load_user_courses()
 
 # ==================== AUTHENTICATION MIDDLEWARE ====================
@@ -670,25 +698,37 @@ def welcome():
     if "username" in session and not session.get("is_superuser"):
         username = session["username"]
         user_folder = get_user_folder(username)
+<<<<<<< HEAD
         uploaded_files = os.listdir(user_folder) if os.path.exists(user_folder) else []
+=======
+        uploaded_files = os.listdir(user_folder)
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 
         # Include superuser uploads in updates
         superuser_folder = get_user_folder("varshith")
         superuser_files = os.listdir(superuser_folder) if os.path.exists(superuser_folder) else []
 
+<<<<<<< HEAD
         # Get assigned courses for this user - ensure it's a list
         assigned_courses = USER_COURSES.get(username, []) if USER_COURSES else []
         if not isinstance(assigned_courses, list):
             assigned_courses = []
+=======
+        # Get assigned courses for this user
+        assigned_courses = USER_COURSES.get(username, [])
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
         
         # Get student analytics data
         progress = get_student_progress(username)
         insights = get_ai_insights(username)
         timetable = get_student_timetable(username)
         
+<<<<<<< HEAD
         # Get user profile
         user_profile = get_user_profile(username) or {}
         
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
         # Initialize timetable if empty
         if not timetable:
             timetable = generate_timetable(username)
@@ -698,12 +738,20 @@ def welcome():
                                files=uploaded_files,
                                superuser_files=superuser_files,
                                assigned_courses=assigned_courses,
+<<<<<<< HEAD
                                COURSES=assigned_courses if assigned_courses else [],
                                progress=progress,
                                insights=insights,
                                timetable=timetable,
                                timetable_json=json.dumps(timetable),
                                user_profile=user_profile)
+=======
+                               COURSES=assigned_courses,
+                               progress=progress,
+                               insights=insights,
+                               timetable=timetable,
+                               timetable_json=json.dumps(timetable))
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
     return redirect(url_for("login"))
 
 @app.route("/courses", methods=["GET", "POST"])
@@ -790,6 +838,7 @@ def custom_timetable():
     username = session["username"]
     return render_template("custom_timetable.html", username=username)
 
+<<<<<<< HEAD
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
     """Update user profile information"""
@@ -1038,6 +1087,8 @@ def get_profile_photo():
         print(f"Get profile photo error: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 # Superuser routes
 @app.route("/superuser_dashboard")
 def superuser_dashboard():
@@ -1072,6 +1123,7 @@ def manage_users():
             USER_DATA[username] = password
             save_user_data()
         elif action == "delete" and username in USER_DATA:
+<<<<<<< HEAD
             # Perform complete user data deletion
             delete_user_data(username)
             
@@ -1079,6 +1131,10 @@ def manage_users():
             del USER_DATA[username]
             save_user_data()
             cleanup_orphaned_user_folders()  # Clean up the deleted user's folder from uploads
+=======
+            del USER_DATA[username]
+            save_user_data()
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
     return redirect(url_for("superuser_dashboard"))
 
 @app.route("/assign_course", methods=["POST"])
@@ -1145,6 +1201,7 @@ def cpp_course():
         return redirect(url_for("login"))
     return render_template("cpp_course.html")
 
+<<<<<<< HEAD
 @app.route("/courses/java/<module>")
 def java_module(module):
     if "username" not in session:
@@ -1220,6 +1277,8 @@ def gcp_module(module):
     except Exception:
         return render_template("module_placeholder.html")
 
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 # Chat functionality
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -1246,17 +1305,21 @@ User: {user_message}
 """
         response = model.generate_content(context)
         formatted_response = format_response(response)
+<<<<<<< HEAD
         
         # Save chat message to user's chat history (only for students, not superusers)
         if not is_superuser:
             add_chat_message(username, user_message, 'user', formatted_response)
         
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
         return jsonify({'response': formatted_response})
         
     except Exception as e:
         print(f"Chat error: {str(e)}")
         return jsonify({'response': 'Sorry, I encountered an error.'}), 500
 
+<<<<<<< HEAD
 # ==================== PER-USER CHAT HISTORY API ROUTES ====================
 
 @app.route('/api/student/chat-history', methods=['GET'])
@@ -1287,6 +1350,8 @@ def clear_chat_history():
         'message': 'Chat history cleared'
     }), 200
 
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 # ==================== ANALYTICS & PROGRESS ROUTES ====================
 
 @app.route('/api/student/progress')
@@ -1486,4 +1551,8 @@ def delete_custom_timetable_entry(entry_id):
 
 if __name__ == "__main__":
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    app.run(debug=True,host='0.0.0.0')
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8

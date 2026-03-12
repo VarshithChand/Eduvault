@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
   <head>
@@ -294,4 +295,148 @@
       });
     </script>
   </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Welcome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+      .page-inner { max-width: 1100px; margin: 30px auto; padding: 16px; }
+      .top-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+      .back-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; text-decoration:none; background:#f4f6fb; color:#222; box-shadow:0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s ease; }
+      .courses-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:22px; }
+      .course-card { background:#fff; padding:30px 20px; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.05); text-align:center; position:relative; cursor:pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+      .course-card:hover { transform: translateY(-6px) scale(1.02); box-shadow:0 12px 28px rgba(0,0,0,0.12); }
+      .course-icon { font-size:60px; margin-bottom:10px; }
+      .course-info h3 { font-size:18px; color:#333; margin-bottom:10px; }
+      .progress-bar { height:8px; width:100%; background:#f2f4f7; border-radius:6px; overflow:hidden; margin:10px 0; }
+      .progress-fill { height:100%; border-radius:6px; transition:width 0.4s ease; background: linear-gradient(90deg, #4f8cff, #3bb37f); }
+      .progress-text { font-size:13px; color:#6b7280; }
+      .admin-panel { margin-top:30px; background:#fff; padding:15px; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,0.05); }
+      .small-btn { padding:6px 10px; border:none; border-radius:8px; background:#edf2ff; color:#2d3a94; cursor:pointer; transition: all 0.2s ease; }
+      .small-btn.danger { background:#ffe5e5; color:#a70000; }
+      .course-card form { position: absolute; bottom: 12px; left: 12px; }
+    </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="page-inner">
+      <div class="top-row">
+        <div>
+          <h1 style="margin:0;">Courses</h1>
+          <small style="color:#6b7280;">Explore your available learning modules</small>
+        </div>
+        <a class="back-btn" href="{{ url_for('welcome') }}">
+          <i class="fas fa-arrow-left"></i> Back
+        </a>
+      </div>
+
+      {% if courses %}
+        <div class="courses-grid" id="coursesGrid">
+          {% for course in courses %}
+            {% set cname = course.lower() %}
+            {% if 'python' in cname %}
+              {% set target_url = url_for('python_module', module='index') %}
+            {% elif 'java' in cname %}
+              {% set target_url = url_for('java_course') %}
+            {% elif 'c++' in cname or 'cpp' in cname %}
+              {% set target_url = url_for('cpp_course') %}
+            {% elif cname == 'c' %}
+              {% set target_url = url_for('c_course') %}
+            {% else %}
+              {% set target_url = url_for('courses') + '?course=' + course|urlencode %}
+            {% endif %}
+
+            <div
+              class="course-card"
+              role="button"
+              tabindex="0"
+              data-course="{{ course }}"
+              aria-label="{{ course }}"
+              data-target-url="{{ target_url }}"
+            >
+              <div class="course-icon">
+                {% if 'python' in cname %}
+                  <i class="fab fa-python" style="color:#3776ab"></i>
+                {% elif 'java' in cname %}
+                  <i class="fab fa-java" style="color:#f89820"></i>
+                {% elif 'c++' in cname or 'cpp' in cname %}
+                  <i class="fas fa-code" style="color:#004482"></i>
+                {% elif cname == 'c' %}
+                  <i class="fas fa-code" style="color:#00599c"></i>
+                {% else %}
+                  <i class="fas fa-laptop-code" style="color:#28a745"></i>
+                {% endif %}
+              </div>
+
+              <div class="course-info">
+                <h3>{{ course }}</h3>
+                <div class="progress-bar">
+                  {% set p = (loop.index * 13) % 100 %}
+                  <div class="progress-fill" style="width:{{ p }}%;"></div>
+                </div>
+                <span class="progress-text">{{ p }}% Complete</span>
+              </div>
+
+              {% if session.get('is_superuser') %}
+                <form method="post" action="{{ url_for('courses') }}" onsubmit="return confirm('Delete {{ course }}?');">
+                  <input type="hidden" name="action" value="delete">
+                  <input type="hidden" name="course_name" value="{{ course }}">
+                  <button class="small-btn danger" type="submit" title="Delete {{ course }}">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div style="color:#6b7280; text-align:center; margin-top:40px;">No courses available yet.</div>
+      {% endif %}
+
+      {% if session.get('is_superuser') %}
+        <div class="admin-panel">
+          <h3>Superuser Controls</h3>
+          <form method="post" action="{{ url_for('courses') }}">
+            <input type="hidden" name="action" value="add">
+            <input name="course_name" type="text" placeholder="Enter new course name" required>
+            <button class="small-btn" type="submit"><i class="fas fa-plus"></i> Add Course</button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    // Full-card navigation
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('coursesGrid');
+      if (!grid) return;
+
+      grid.addEventListener('click', (e) => {
+        const card = e.target.closest('.course-card');
+        if (!card) return;
+        if (e.target.closest('form')) return; // ignore clicks on delete button
+        const url = card.dataset.targetUrl || '{{ url_for("courses") }}';
+        window.location.href = url;
+      });
+
+      grid.addEventListener('keydown', (e) => {
+        const card = e.target.closest('.course-card');
+        if (!card) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const url = card.dataset.targetUrl || '{{ url_for("courses") }}';
+          window.location.href = url;
+        }
+      });
+    });
+  </script>
+</body>
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 </html>

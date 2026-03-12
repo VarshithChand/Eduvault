@@ -6,6 +6,7 @@
         "insights": ""
     },
     "manohar": {
+<<<<<<< HEAD
         "total_questions": 1,
         "topics": {},
         "weak_areas": [],
@@ -13,8 +14,15 @@
     },
     "varsh": {
         "total_questions": 1,
+=======
+
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
         "topics": {},
         "weak_areas": [],
         "insights": ""
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8

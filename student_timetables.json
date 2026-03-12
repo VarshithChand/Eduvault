@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "varsh": {
+=======
+    "manohar": {
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
         "timetable": {
             "Monday": [
                 {
@@ -10,19 +14,31 @@
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "C++",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "AWS DevOps",
+=======
+                    "course": "C",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "Azure DevOps",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -30,25 +46,43 @@
             "Tuesday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "GCP DevOps",
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "course": "C",
                     "completed": false,
                     "notes": ""
                 },
                 {
+<<<<<<< HEAD
                     "time": "2:00 PM",
                     "course": "C++",
+=======
+                    "time": "11:00 AM",
+                    "course": "Python",
+                    "completed": false,
+                    "notes": ""
+                },
+                {
+                    "time": "2:00 PM",
+                    "course": "C",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "AWS DevOps",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -56,13 +90,21 @@
             "Wednesday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "Azure DevOps",
+=======
+                    "course": "C",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "GCP DevOps",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
@@ -74,7 +116,11 @@
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "C++",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -82,25 +128,41 @@
             "Thursday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "AWS DevOps",
+=======
+                    "course": "C",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "Azure DevOps",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "GCP DevOps",
+=======
+                    "course": "C",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "C",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -108,30 +170,47 @@
             "Friday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "C++",
+=======
+                    "course": "C",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "AWS DevOps",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "Azure DevOps",
+=======
+                    "course": "C",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "GCP DevOps",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
             ]
         },
+<<<<<<< HEAD
         "generated_date": "2026-03-12T15:05:59.555227",
         "courses": [
             "C",
@@ -142,29 +221,54 @@
         ]
     },
     "moulii": {
+=======
+        "generated_date": "2026-03-11T18:47:54.290646",
+        "courses": [
+            "C",
+            "Python"
+        ]
+    },
+    "aa": {
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
         "timetable": {
             "Monday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -172,25 +276,41 @@
             "Tuesday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -198,25 +318,41 @@
             "Wednesday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -224,25 +360,41 @@
             "Thursday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
@@ -250,33 +402,55 @@
             "Friday": [
                 {
                     "time": "9:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "11:00 AM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "2:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 },
                 {
                     "time": "4:00 PM",
+<<<<<<< HEAD
                     "course": "Java",
+=======
+                    "course": "Python",
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
                     "completed": false,
                     "notes": ""
                 }
             ]
         },
+<<<<<<< HEAD
         "generated_date": "2026-03-12T15:16:48.509543",
         "courses": [
             "Java"
+=======
+        "generated_date": "2026-03-11T19:01:10.548787",
+        "courses": [
+            "Python"
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
         ]
     }
 }

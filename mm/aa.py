@@ -14,6 +14,11 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx', 
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 # Initialize Gemini AI
 genai.configure(api_key='AIzaSyCEiqlCAi8xNchk9Gn-VBJ0o_JvN8MMQoE')
 model = genai.GenerativeModel('gemini-2.0-flash')
@@ -270,4 +275,8 @@ Guidelines:
 
 if __name__ == "__main__":
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    app.run(debug=True)
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8

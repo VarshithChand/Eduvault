@@ -1170,6 +1170,7 @@ body {
     .results-grid {
         grid-template-columns: 1fr;
     }
+<<<<<<< HEAD
 }
 
 /* ============================================
@@ -1408,4 +1409,6 @@ body {
         flex: 1;
         min-width: 120px;
     }
+=======
+>>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
 }
