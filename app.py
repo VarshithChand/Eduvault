@@ -1551,8 +1551,4 @@ def delete_custom_timetable_entry(entry_id):
 
 if __name__ == "__main__":
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-<<<<<<< HEAD
-    app.run(debug=True)
-=======
     app.run(debug=True,host='0.0.0.0')
->>>>>>> ae1db3d3d0b71c96d28bcb4baa4648e43a753bb8
